@@ -1,0 +1,19 @@
+# Blueprint template for Forge v2
+# Copy this file and fill in the values for a new agent blueprint.
+
+id: ""                    # Unique blueprint ID (kebab-case)
+name: ""                  # Human-readable name
+version: "0.1.0"
+description: ""           # What this agent does
+
+threshold: 85             # Minimum score for production approval (0-100)
+max_iterations: 5         # Hard cap on improve loops per spawn
+
+model:
+  provider: "openai"      # openai | anthropic
+  model: "gpt-4o"         # Model identifier
+
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []     # List of case file paths under benchmarks/cases/

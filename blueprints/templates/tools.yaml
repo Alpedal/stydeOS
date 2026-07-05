@@ -1,0 +1,14 @@
+# Tool definitions for {{AGENT_NAME}}
+# List the APIs and tools this agent can use.
+
+tools: []
+# Example:
+# tools:
+#   - name: read_file
+#     description: Read a file from the workspace
+#     parameters:
+#       path: string
+#   - name: web_search
+#     description: Search the web
+#     parameters:
+#       query: string

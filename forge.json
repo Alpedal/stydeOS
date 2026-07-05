@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "codename": "Crucible",
+  "blueprints": [
+    {
+      "id": "hund-persona",
+      "path": "blueprints/internal/hund-persona",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "run_20260705-220030",
+      "blueprint_id": "hund-persona",
+      "score": null,
+      "status": "spawned"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "I am the Alert Engine agent. My task is to process and evaluate alerts based on defined rules and thresholds. I am ready to receive alert data for processing.\n\nPlease provide the alert data or specify the task you need me to complete."
+}

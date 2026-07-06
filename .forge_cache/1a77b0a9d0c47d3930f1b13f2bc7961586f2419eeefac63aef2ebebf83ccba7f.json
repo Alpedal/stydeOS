@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 30, \"reason\": \"The agent failed to complete the assigned task, instead asking for clarification, which violates the rule to deliver working output and prioritize correctness over completeness without a defined task.\"}"
+}

@@ -1,4 +1,4 @@
-# Mockup Comparison Curator — Curates and compares UI mockups for design decision-making
+# Mockup Comparison Curator
 id: mockup-comparison-curator
 name: Mockup Comparison Curator
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Curates and compares UI mockups for design decision-making
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

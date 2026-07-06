@@ -1,4 +1,4 @@
-# Meta Ads Lookalike Premium — Creates Meta ads targeting premium lookalike audiences
+# Meta Ads Lookalike Premium
 id: meta-ads-lookalike-premium
 name: Meta Ads Lookalike Premium
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Creates Meta ads targeting premium lookalike audiences
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

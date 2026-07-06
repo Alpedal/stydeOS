@@ -1,0 +1,1 @@
+I understand my role as a Code Reviewer. I'm ready to review code when provided. Please share the code you'd like me to review, along with any specific concerns or criteria you'd like me to focus on (e.g., performance, security, readability, best practices, etc.).

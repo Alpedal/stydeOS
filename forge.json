@@ -1255,6 +1255,132 @@
       "blueprint_id": "animation-design-engineer",
       "score": null,
       "status": "running"
+    },
+    {
+      "run_id": "run_20260706-035158",
+      "blueprint_id": "alert-engine",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-035159",
+      "blueprint_id": "code-reviewer",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-035200",
+      "blueprint_id": "meta-ads-brand-story",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-035201",
+      "blueprint_id": "caching-strategist",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-035202",
+      "blueprint_id": "animation-design-engineer",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-035257",
+      "blueprint_id": "alert-engine",
+      "score": 62.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035258",
+      "blueprint_id": "code-reviewer",
+      "score": 79.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035259",
+      "blueprint_id": "meta-ads-brand-story",
+      "score": 100.0,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-035300",
+      "blueprint_id": "caching-strategist",
+      "score": 61.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035301",
+      "blueprint_id": "animation-design-engineer",
+      "score": 94.0,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-035310",
+      "blueprint_id": "code-reviewer",
+      "score": 61.4,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035311",
+      "blueprint_id": "caching-strategist",
+      "score": 59.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035319",
+      "blueprint_id": "alert-engine",
+      "score": 48.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035322",
+      "blueprint_id": "caching-strategist",
+      "score": 83.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035327",
+      "blueprint_id": "alert-engine",
+      "score": 71.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035332",
+      "blueprint_id": "caching-strategist",
+      "score": 30.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035338",
+      "blueprint_id": "alert-engine",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-035342",
+      "blueprint_id": "caching-strategist",
+      "score": 86.0,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-035424",
+      "blueprint_id": "alert-engine",
+      "score": 27.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-035425",
+      "blueprint_id": "code-reviewer",
+      "score": 100.0,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-035435",
+      "blueprint_id": "alert-engine",
+      "score": 93.0,
+      "status": "completed"
     }
   ]
 }

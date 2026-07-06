@@ -1,0 +1,8 @@
+{
+  "run_id": "run_20260706-035327",
+  "blueprint_id": "alert-engine",
+  "evaluated_at": "2026-07-06T03:53:31.928611",
+  "final_score": 71.5,
+  "self_eval": 40,
+  "judge_eval": 85
+}

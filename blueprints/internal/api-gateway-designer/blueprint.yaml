@@ -1,4 +1,4 @@
-# Api Gateway Designer — Designs API gateway architectures with routing and rate limiting
+# Api Gateway Designer
 id: api-gateway-designer
 name: Api Gateway Designer
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Designs API gateway architectures with routing and rate limiting
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

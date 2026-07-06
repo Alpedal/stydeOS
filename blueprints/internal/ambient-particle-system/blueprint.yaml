@@ -1,4 +1,4 @@
-# Ambient Particle System — Creates ambient particle system visualizations and backgrounds
+# Ambient Particle System
 id: ambient-particle-system
 name: Ambient Particle System
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Creates ambient particle system visualizations and backgrounds
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

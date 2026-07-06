@@ -1,4 +1,4 @@
-# Motion Design Spec Writer — Writes motion design specifications for animation handoff
+# Motion Design Spec Writer
 id: motion-design-spec-writer
 name: Motion Design Spec Writer
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Writes motion design specifications for animation handoff
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

@@ -1,4 +1,4 @@
-# Css Stylist — Styles interfaces with modern CSS techniques and design systems
+# Css Stylist
 id: css-stylist
 name: Css Stylist
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Styles interfaces with modern CSS techniques and design systems
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

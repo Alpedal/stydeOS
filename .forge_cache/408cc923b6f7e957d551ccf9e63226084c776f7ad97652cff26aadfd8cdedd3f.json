@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 10, \"reason\": \"The agent correctly identified its persona rules and asked for clarification, but failed to produce any working output or make progress on an unspecified task, which violates the core directive to deliver output rather than descriptions.\"}"
+}

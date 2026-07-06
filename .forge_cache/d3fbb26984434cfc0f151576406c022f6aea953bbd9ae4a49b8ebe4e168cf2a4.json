@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 45, \"reason\": \"The agent correctly identified the need for clarification per its behavior rules, but it failed to deliver working output as required, instead only asking a question without completing any task.\"}"
+}

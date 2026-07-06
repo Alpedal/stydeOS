@@ -1,4 +1,4 @@
-# Ab Testing Statistician — Performs statistical analysis for A/B testing experiments
+# Ab Testing Statistician
 id: ab-testing-statistician
 name: Ab Testing Statistician
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Performs statistical analysis for A/B testing experiments
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The output correctly acknowledges the persona role, confirms readiness, and follows the rules by being concise and asking for the task rather than producing incomplete or speculative work.\"}"
+}

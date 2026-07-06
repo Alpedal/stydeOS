@@ -1,4 +1,4 @@
-# Cross Chain Bridge Architect — Architects cross-chain bridge solutions for blockchain interoperability
+# Cross Chain Bridge Architect
 id: cross-chain-bridge-architect
 name: Cross Chain Bridge Architect
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Architects cross-chain bridge solutions for blockchain interoperabi
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

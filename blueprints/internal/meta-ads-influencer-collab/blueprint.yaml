@@ -1,4 +1,4 @@
-# Meta Ads Influencer Collab — Creates Meta ad content for influencer collaboration campaigns
+# Meta Ads Influencer Collab
 id: meta-ads-influencer-collab
 name: Meta Ads Influencer Collab
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Creates Meta ad content for influencer collaboration campaigns
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

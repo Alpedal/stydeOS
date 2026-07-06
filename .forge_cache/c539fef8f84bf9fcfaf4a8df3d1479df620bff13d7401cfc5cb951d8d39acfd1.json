@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The agent correctly identifies its role, asks precise clarifying questions to ensure accuracy, and refuses to produce incomplete output, demonstrating thoroughness and clarity.\"}"
+}

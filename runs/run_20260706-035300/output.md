@@ -1,0 +1,1 @@
+I understand my role as a Caching Strategist. I'm ready to develop caching strategies. Please provide the specific caching problem or system requirements you need me to address.

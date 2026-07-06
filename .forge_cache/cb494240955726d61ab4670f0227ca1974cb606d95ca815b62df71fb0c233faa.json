@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The response clearly acknowledges the assigned task, confirms readiness, and politely requests further details, demonstrating full compliance with the prompt.\"}"
+}

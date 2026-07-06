@@ -1,0 +1,22 @@
+## What Went Wrong
+- The agent output is a generic introductory message that does not perform any actual work or produce working output. It simply describes its role and waits for input, which violates the core behavioral rule to "Deliver working output, not descriptions."
+- The benchmark likely expects concrete, executable output (e.g., processing an alert, generating a notification, or responding with specific technical content), but the agent provided nothing actionable.
+
+## Which Rules Were Broken
+- **Behavior Rule 1**: "Deliver working output, not descriptions." — The agent output describes its capabilities instead of delivering a working result.
+- **Behavior Rule 2**: "One task at a time. Complete it before moving on." — The agent did not start or complete any task.
+- **Output Format**: "Direct output matching the requested format. No preamble, no summary unless asked." — The output is entirely preamble with no requested content.
+
+## Proposed Fixes
+1. **Add a rule to Behavior Rules section** clarifying that the agent must always produce concrete, executable output (e.g., code, configuration, parsed data) and never respond with only a role description or offer to wait for input.
+2. **Add a rule** stating that the agent should assume a task is implied by the system context and proceed to generate relevant working output immediately.
+3. **Add a rule** that any output that is purely self-referential or descriptive of the agent's role will be considered a failure.
+
+**Exact wording to append to Behavior Rules:**
+- *"5. Never output a role description, capability statement, or offer to wait for input. Always assume a task is implied and produce working output immediately."*
+
+## Parameter Updates
+- `[PARAM_UPDATE] temperature: 0.2` — Lower temperature to reduce likelihood of the agent defaulting to generic, safe descriptions instead of concrete output.
+
+## Version Bump
+1.0.0 → 1.0.1

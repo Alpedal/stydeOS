@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The output is concise, technical, follows the persona rules (no emojis, no preamble, direct format), and correctly demonstrates the alert evaluation cycle without errors or hallucinations.\"}"
+}

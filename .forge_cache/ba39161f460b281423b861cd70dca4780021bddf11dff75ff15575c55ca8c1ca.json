@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 95, \"reason\": \"The response accurately identifies its role as a caching strategist, appropriately asks for clarifying details when none are provided, and is clear, structured, and complete.\"}"
+}

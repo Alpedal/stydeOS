@@ -6,9 +6,11 @@ Forge v2 = closed-loop agent training. Spawna agent från blueprint → evaluera
 ```
 .
 ├── benchmarks/        # Testfall i JSON för evaluering
-├── blueprints/        # Agent-blueprints och mallar
+├── blueprints/        # Original-blueprints och mallar
+├── done-blueprints/   # Arkiverade blueprints som är redo för produktion
 ├── forge/             # Core logik och CLI wrappers
-├── products/          # Sparade slutprodukter från Forge
+├── production/        # Sparade slutprodukter från Forge
+├── refinery/          # Blueprints under aktiv förbättring
 ├── runs/              # Automatiska körningar (runs)
 └── workspace/         # Temporära arbetsytor och scratch
 ```

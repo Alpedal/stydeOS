@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 50, \"reason\": \"The agent acknowledges its role but does not complete any specific task or respond to the user's request for action, leaving the task unfulfilled.\"}"
+}

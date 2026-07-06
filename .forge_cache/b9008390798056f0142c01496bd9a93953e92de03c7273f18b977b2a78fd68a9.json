@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 88, \"reason\": \"The response is concise, technical, and correctly asks for clarification before proceeding, but it does not deliver a completed task output as required by the persona rules.\"}"
+}

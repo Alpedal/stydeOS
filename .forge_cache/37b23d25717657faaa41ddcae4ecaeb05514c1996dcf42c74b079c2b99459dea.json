@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The response is clear, complete, and accurately acknowledges the assigned persona while requesting further details to proceed with the task.\"}"
+}

@@ -1,9 +1,1 @@
-default_tool: null
-tools:
-- web_search
-- web_extract
-- read_file
-- write_file
-- terminal
-- search_files
-- patch
+tools: []

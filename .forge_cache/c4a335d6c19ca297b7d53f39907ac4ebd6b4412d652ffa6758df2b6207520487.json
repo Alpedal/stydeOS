@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The output correctly establishes the code reviewer role, requests necessary context, and follows all persona rules with concise, technical language and no preamble or emojis.\"}"
+}

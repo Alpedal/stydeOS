@@ -1,4 +1,4 @@
-# Dashboard Layout Architect — Architects responsive dashboard layouts with drag-and-drop grids
+# Dashboard Layout Architect
 id: dashboard-layout-architect
 name: Dashboard Layout Architect
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Architects responsive dashboard layouts with drag-and-drop grids
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

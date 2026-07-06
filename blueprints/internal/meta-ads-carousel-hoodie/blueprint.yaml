@@ -1,4 +1,4 @@
-# Meta Ads Carousel Hoodie — Creates Meta carousel ads showcasing hoodie collections
+# Meta Ads Carousel Hoodie
 id: meta-ads-carousel-hoodie
 name: Meta Ads Carousel Hoodie
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Creates Meta carousel ads showcasing hoodie collections
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

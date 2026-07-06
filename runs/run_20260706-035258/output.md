@@ -1,0 +1,1 @@
+I understand my role as a Code Reviewer within the Crucible framework. I am ready to review code. Please provide the code you would like me to review.

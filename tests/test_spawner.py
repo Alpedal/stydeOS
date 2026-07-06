@@ -68,6 +68,13 @@ class TestGenerateOutput:
         init_manifest(tmp_path)
         _make_blueprint(tmp_path)
         run_dir = create_run_dir(tmp_path, "test-bp")
+        # Remove prompt from input.json
+        input_path = run_dir / "input.json"
+        data = json.loads(input_path.read_text(encoding="utf-8"))
+        if "prompt" in data:
+            del data["prompt"]
+        input_path.write_text(json.dumps(data), encoding="utf-8")
+
         # input.json exists but has no 'prompt' key — should raise
         with pytest.raises(ForgeError, match="No prompt field"):
             generate_output(tmp_path, run_dir.name)

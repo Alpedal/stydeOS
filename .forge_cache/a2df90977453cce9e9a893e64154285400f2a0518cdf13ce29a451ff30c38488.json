@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 45, \"reason\": \"The output fails to complete any task, merely describing readiness instead of delivering working output as required by the behavior rules.\"}"
+}

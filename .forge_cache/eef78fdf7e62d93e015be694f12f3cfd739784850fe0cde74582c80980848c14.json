@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 30, \"reason\": \"The agent did not complete the assigned task; it acknowledged its role and asked for code instead of delivering working output as required by the 'Deliver working output, not descriptions' rule.\"}"
+}

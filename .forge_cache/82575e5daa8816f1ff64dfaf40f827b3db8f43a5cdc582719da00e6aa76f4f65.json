@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 0, \"reason\": \"The agent did not complete any assigned task; it only stated its role and asked for code to review, providing no actual code review or substantive output.\"}"
+}

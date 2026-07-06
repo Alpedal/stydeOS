@@ -1,0 +1,1 @@
+Understood. I am the Animation Design Engineer. I am ready to receive a specific task or requirement to engineer and implement an animation design. Please provide the details.

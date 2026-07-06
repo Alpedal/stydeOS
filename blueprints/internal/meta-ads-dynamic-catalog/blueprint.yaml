@@ -1,4 +1,4 @@
-# Meta Ads Dynamic Catalog — Creates Meta dynamic catalog ads with product feeds
+# Meta Ads Dynamic Catalog
 id: meta-ads-dynamic-catalog
 name: Meta Ads Dynamic Catalog
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Creates Meta dynamic catalog ads with product feeds
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

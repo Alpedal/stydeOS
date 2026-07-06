@@ -1,4 +1,4 @@
-# Landing Page Builder — Builds high-conversion landing pages with modern design
+# Landing Page Builder
 id: landing-page-builder
 name: Landing Page Builder
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Builds high-conversion landing pages with modern design
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

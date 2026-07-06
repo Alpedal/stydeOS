@@ -32,13 +32,22 @@ def load_manifest(root: Path) -> dict:
 
 
 def save_manifest(root: Path, data: dict) -> None:
-    """Atomic write to forge.json: write to temp, then rename."""
+    """Atomic write to forge.json: write to per-pid temp, then rename. Retries on Windows lock."""
+    import time
     path = root / "forge.json"
-    tmp_path = path.with_suffix(".tmp")
-    with open(tmp_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-        f.write("\n")
-    os.replace(tmp_path, path)
+    tmp_path = path.with_suffix(f".tmp.{os.getpid()}")
+    for attempt in range(3):
+        try:
+            with open(tmp_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+                f.write("\n")
+            os.replace(tmp_path, path)
+            return
+        except PermissionError:
+            if attempt < 2:
+                time.sleep(0.2 * (attempt + 1))
+            else:
+                raise
 
 
 def init_manifest(root: Path) -> dict:

@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 40, \"reason\": \"The output fails to complete the assigned task, instead asking for clarification, which violates the behavior rule 'One task at a time. Complete it before moving on' and the requirement to deliver working output, not descriptions.\"}"
+}

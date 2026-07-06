@@ -1,4 +1,4 @@
-# Algo Execution Engine — Builds algorithmic execution engines for automated trading strategies
+# Algo Execution Engine
 id: algo-execution-engine
 name: Algo Execution Engine
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Builds algorithmic execution engines for automated trading strategi
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

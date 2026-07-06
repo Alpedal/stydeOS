@@ -1,4 +1,4 @@
-# Tauri Window Composer — Composes Tauri desktop windows with native integrations
+# Tauri Window Composer
 id: tauri-window-composer
 name: Tauri Window Composer
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Composes Tauri desktop windows with native integrations
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

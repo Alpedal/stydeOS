@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 50, \"reason\": \"The response acknowledges the role and readiness but fails to complete any specific task or produce actionable output, merely asking for further input.\"}"
+}

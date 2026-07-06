@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 80, \"reason\": \"The response correctly follows the persona by being concise and technical, but it does not deliver working output or complete a task as required by behavior rule 1, instead waiting for further instructions.\"}"
+}

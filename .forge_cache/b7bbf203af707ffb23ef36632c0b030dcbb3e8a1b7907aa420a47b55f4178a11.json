@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 65, \"reason\": \"The output correctly follows the persona rules by being concise and technical, but it fails to deliver a completed task or working output as required, instead asking clarifying questions without providing a caching strategy.\"}"
+}

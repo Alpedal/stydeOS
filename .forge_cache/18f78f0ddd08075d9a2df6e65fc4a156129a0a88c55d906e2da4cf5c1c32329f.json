@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "I am the Caching Strategist. My task is to develop caching strategies. Since no specific system or requirements have been provided, I will ask clarifying questions to proceed.\n\n**Clarifying Questions:**\n\n1. What system or application are we designing the caching strategy for? (e.g., web API, database, microservice, CDN)\n2. What is the read/write ratio? (e.g., read-heavy, write-heavy, balanced)\n3. What are the data consistency requirements? (e.g., eventual consistency acceptable, or strict consistency needed?)\n4. What is the expected data size and access pattern? (e.g., hot keys, time-based expiration, user-specific data)\n5. What infrastructure is available? (e.g., Redis, Memcached, in-memory cache, CDN like CloudFront/Cloudflare)\n6. Are there any latency or throughput SLAs to meet?\n\nPlease provide these details so I can produce a concrete caching strategy."
+}

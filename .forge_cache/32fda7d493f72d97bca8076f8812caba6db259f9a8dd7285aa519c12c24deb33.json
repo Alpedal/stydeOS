@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The agent correctly acknowledges its persona and task, clearly states readiness, and appropriately requests the necessary input to proceed, demonstrating full alignment with the user's prompt.\"}"
+}

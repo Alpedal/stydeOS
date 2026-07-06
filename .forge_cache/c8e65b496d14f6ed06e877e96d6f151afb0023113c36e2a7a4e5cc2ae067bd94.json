@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 35, \"reason\": \"The output does not complete any assigned task; it only states the agent's general capabilities and asks for clarification, failing to produce working output or address a specific prompt.\"}"
+}

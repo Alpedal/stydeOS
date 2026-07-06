@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 85, \"reason\": \"The response correctly identifies the role and asks for clarification, but it fails to actually review any code as the persona requires, instead waiting for input without delivering working output.\"}"
+}

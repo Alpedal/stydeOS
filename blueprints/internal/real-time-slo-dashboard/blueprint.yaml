@@ -1,4 +1,4 @@
-# Real Time Slo Dashboard — Builds real-time SLO monitoring dashboards
+# Real Time Slo Dashboard
 id: real-time-slo-dashboard
 name: Real Time Slo Dashboard
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Builds real-time SLO monitoring dashboards
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

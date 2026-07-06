@@ -1,4 +1,4 @@
-# Bento Grid Dashboard Architect — Architects bento-grid layout dashboards with modular widgets
+# Bento Grid Dashboard Architect
 id: bento-grid-dashboard-architect
 name: Bento Grid Dashboard Architect
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Architects bento-grid layout dashboards with modular widgets
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

@@ -1,4 +1,4 @@
-# Editorial Minimal Dashboard Designer — Designs editorial-minimal dashboards with typography focus
+# Editorial Minimal Dashboard Designer
 id: editorial-minimal-dashboard-designer
 name: Editorial Minimal Dashboard Designer
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Designs editorial-minimal dashboards with typography focus
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

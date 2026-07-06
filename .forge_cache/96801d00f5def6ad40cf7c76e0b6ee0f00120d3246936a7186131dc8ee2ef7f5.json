@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 0, \"reason\": \"The output failed to deliver a working caching strategy, instead asking for clarification, which violates the 'One task at a time. Complete it before moving on' and 'Deliver working output, not descriptions' rules.\"}"
+}

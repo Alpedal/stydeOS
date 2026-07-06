@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 85, \"reason\": \"The agent correctly identifies its role and asks relevant, structured questions to tailor a caching strategy, but it doesn't actually complete a specific task since no task details were provided.\"}"
+}

@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 85, \"reason\": \"The agent correctly identifies its role and readiness, but the response is generic and lacks specific task completion or actionable output.\"}"
+}

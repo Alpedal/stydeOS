@@ -1,4 +1,4 @@
-# Meta Ads Seasonal Drop — Creates Meta ad content for seasonal collection drops
+# Meta Ads Seasonal Drop
 id: meta-ads-seasonal-drop
 name: Meta Ads Seasonal Drop
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Creates Meta ad content for seasonal collection drops
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

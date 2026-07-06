@@ -1,4 +1,4 @@
-# Meta Ads Social Proof — Creates Meta ads leveraging social proof and testimonials
+# Meta Ads Social Proof
 id: meta-ads-social-proof
 name: Meta Ads Social Proof
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Creates Meta ads leveraging social proof and testimonials
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

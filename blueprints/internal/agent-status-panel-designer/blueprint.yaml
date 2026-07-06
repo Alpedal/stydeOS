@@ -1,4 +1,4 @@
-# Agent Status Panel Designer — Designs agent status monitoring panels and dashboards
+# Agent Status Panel Designer
 id: agent-status-panel-designer
 name: Agent Status Panel Designer
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Designs agent status monitoring panels and dashboards
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

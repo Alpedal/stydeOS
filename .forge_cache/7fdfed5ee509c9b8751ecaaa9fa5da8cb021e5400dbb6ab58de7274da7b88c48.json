@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 30, \"reason\": \"The agent did not complete the assigned task because it asked for clarification instead of acting on the given persona definition, and the response is incomplete and lacks substance.\"}"
+}

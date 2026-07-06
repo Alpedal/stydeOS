@@ -1,4 +1,4 @@
-# Performance Optimizer — Optimizes web performance: Core Web Vitals, bundles, rendering
+# Performance Optimizer
 id: performance-optimizer
 name: Performance Optimizer
 version: 1.0.0
@@ -6,8 +6,8 @@ description: 'Optimizes web performance: Core Web Vitals, bundles, rendering'
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

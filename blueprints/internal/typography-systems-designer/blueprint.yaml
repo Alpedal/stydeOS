@@ -1,4 +1,4 @@
-# Typography Systems Designer — Designs comprehensive typography systems with type scales
+# Typography Systems Designer
 id: typography-systems-designer
 name: Typography Systems Designer
 version: 1.0.0
@@ -6,8 +6,8 @@ description: Designs comprehensive typography systems with type scales
 threshold: 85
 max_iterations: 5
 model:
-  provider: google
-  model: gemini-2.5-flash
+  provider: deepseek
+  model: deepseek-chat
   max_tokens: 512
   temperature: 0.2
 evaluation:

@@ -1,0 +1,16 @@
+```
+CRITICAL
+1. Line 3: SQL injection via string concatenation with user_id. Fix: `user = db.query("SELECT * FROM users WHERE id = %s", (user_id,))`
+2. Line 7: SQL injection via string formatting in INSERT. Fix: `db.execute("INSERT INTO payments (user_id, amount, status) VALUES (%s, %s, 'paid')", (user_id, amount))`
+
+MAJOR
+1. Line 2: Database connection not closed and no context manager used. Fix: `with connect_db() as db:` (if connect_db supports context manager) or `db = connect_db(); ...; db.close()` in a finally block.
+2. Line 6: Stripe charge lacks error handling; failure will leave DB state inconsistent if DB insert already happened (but insert is after). Fix: wrap in try-except, rollback DB transaction if charge fails.
+3. Line 5: Return type inconsistency (string for error vs charge.id for success). Fix: raise a custom exception (e.g., `UserNotFoundError`) on error, or return a uniform result object.
+4. Line 8: No error handling for email send; failure after DB insert creates orphan payment without email. Fix: either catch and log email error, or move email sending before DB insert (but handle rollback on email failure).
+
+MINOR
+1. Line 2: Missing input validation for `user_id` and `amount`. Fix: validate `user_id` is a positive integer, `amount` is a positive number (e.g., `if not isinstance(amount, (int, float)) or amount <= 0: raise ValueError`).
+2. Line 6: Hardcoded currency string "usd". Fix: make currency a parameter with default `currency="usd"`.
+3. No docstring or type hints. Fix: add docstring and annotations, e.g., `def process_payment(user_id: int, amount: Decimal, card_token: str) -> str:`
+```

@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "created_at": null
+  },
+  "response": "{\"score\": 95, \"reason\": \"Follows all rules with precise Swedish copy, correct format, and brand voice; minor deduction for using English 'story' instead of Swedish 'berättelse' in primary text.\"}"
+}

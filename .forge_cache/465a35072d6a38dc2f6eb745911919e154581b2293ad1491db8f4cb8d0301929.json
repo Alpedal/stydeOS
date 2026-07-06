@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "created_at": null
+  },
+  "response": "{\"score\": 98, \"reason\": \"The output strictly follows the persona rules with clear severity, line references, issues, and fixes, covering critical, major, and minor aspects accurately and usefully, without any mistakes or hallucinations.\"}"
+}

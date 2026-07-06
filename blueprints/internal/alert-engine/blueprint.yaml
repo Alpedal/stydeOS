@@ -1,0 +1,24 @@
+# Alert Engine
+id: alert-engine
+name: Alert Engine
+version: 1.0.0
+description: Monitors telemetry against configurable alert rules with real-time notifications
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Design an alert monitoring system for the Forge dashboard. Include:
+
+  1. Alert rule schema (metric, threshold, severity, cooldown)
+
+  2. Three states: Normal, Alerting, Cooldown, Recovered
+
+  3. Notification payload JSON schema
+
+  4. Cooldown reset matrix (LOW/MEDIUM/HIGH severity escalation rules)'

@@ -3,13 +3,6 @@
   "codename": "Crucible",
   "blueprints": [
     {
-      "id": "hund-persona",
-      "path": "blueprints/internal/hund-persona",
-      "version": "1.0.0",
-      "last_score": null,
-      "status": "development"
-    },
-    {
       "id": "3d-data-terrain-explorer",
       "path": "blueprints/internal/3d-data-terrain-explorer",
       "version": "1.0.0",
@@ -59,13 +52,6 @@
       "status": "development"
     },
     {
-      "id": "alert-engine",
-      "path": "blueprints/internal/alert-engine",
-      "version": "1.0.0",
-      "last_score": null,
-      "status": "development"
-    },
-    {
       "id": "algo-execution-engine",
       "path": "blueprints/internal/algo-execution-engine",
       "version": "1.0.0",
@@ -75,13 +61,6 @@
     {
       "id": "ambient-particle-system",
       "path": "blueprints/internal/ambient-particle-system",
-      "version": "1.0.0",
-      "last_score": null,
-      "status": "development"
-    },
-    {
-      "id": "animation-design-engineer",
-      "path": "blueprints/internal/animation-design-engineer",
       "version": "1.0.0",
       "last_score": null,
       "status": "development"
@@ -143,13 +122,6 @@
       "status": "development"
     },
     {
-      "id": "caching-strategist",
-      "path": "blueprints/internal/caching-strategist",
-      "version": "1.0.0",
-      "last_score": null,
-      "status": "development"
-    },
-    {
       "id": "calendar-assistant",
       "path": "blueprints/internal/calendar-assistant",
       "version": "1.0.0",
@@ -159,13 +131,6 @@
     {
       "id": "caveman-mode-enforcer",
       "path": "blueprints/internal/caveman-mode-enforcer",
-      "version": "1.0.0",
-      "last_score": null,
-      "status": "development"
-    },
-    {
-      "id": "code-reviewer",
-      "path": "blueprints/internal/code-reviewer",
       "version": "1.0.0",
       "last_score": null,
       "status": "development"
@@ -348,13 +313,6 @@
     {
       "id": "magazine-cover-dashboard-designer",
       "path": "blueprints/internal/magazine-cover-dashboard-designer",
-      "version": "1.0.0",
-      "last_score": null,
-      "status": "development"
-    },
-    {
-      "id": "meta-ads-brand-story",
-      "path": "blueprints/internal/meta-ads-brand-story",
       "version": "1.0.0",
       "last_score": null,
       "status": "development"
@@ -617,81 +575,51 @@
       "version": "1.0.0",
       "last_score": null,
       "status": "development"
+    },
+    {
+      "id": "meta-ads-brand-story",
+      "path": "blueprints/internal/meta-ads-brand-story",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "code-reviewer",
+      "path": "blueprints/internal/code-reviewer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "alert-engine",
+      "path": "blueprints/internal/alert-engine",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "animation-design-engineer",
+      "path": "blueprints/internal/animation-design-engineer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "caching-strategist",
+      "path": "blueprints/internal/caching-strategist",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "hund-persona",
+      "path": "blueprints/internal/hund-persona",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
     }
   ],
   "runs": [
-    {
-      "run_id": "run_20260705-220030",
-      "blueprint_id": "hund-persona",
-      "score": null,
-      "status": "spawned"
-    },
-    {
-      "run_id": "run_20260705-233101",
-      "blueprint_id": "hund-persona",
-      "score": 88.5,
-      "status": "completed"
-    },
-    {
-      "run_id": "run_20260705-235841",
-      "blueprint_id": "hund-persona",
-      "score": 0.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260705-235849",
-      "blueprint_id": "hund-persona",
-      "score": 0.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260705-235855",
-      "blueprint_id": "hund-persona",
-      "score": 0.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260705-235900",
-      "blueprint_id": "hund-persona",
-      "score": 0.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260705-235906",
-      "blueprint_id": "hund-persona",
-      "score": 0.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260705-235956",
-      "blueprint_id": "hund-persona",
-      "score": 55.7,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-000241",
-      "blueprint_id": "hund-persona",
-      "score": 50.8,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-000432",
-      "blueprint_id": "hund-persona",
-      "score": 64.2,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-000615",
-      "blueprint_id": "hund-persona",
-      "score": 63.7,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-000800",
-      "blueprint_id": "hund-persona",
-      "score": 66.7,
-      "status": "needs_improvement"
-    },
     {
       "run_id": "run_20260706-014013",
       "blueprint_id": "dashboard-architect",
@@ -939,34 +867,10 @@
       "status": "needs_improvement"
     },
     {
-      "run_id": "run_20260706-025832",
-      "blueprint_id": "hund-persona",
-      "score": 68.6,
-      "status": "needs_improvement"
-    },
-    {
       "run_id": "run_20260706-025857",
       "blueprint_id": "dashboard-data",
       "score": 46.0,
       "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-025936",
-      "blueprint_id": "hund-persona",
-      "score": 68.6,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-025955",
-      "blueprint_id": "hund-persona",
-      "score": 52.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-030011",
-      "blueprint_id": "hund-persona",
-      "score": 88.2,
-      "status": "completed"
     },
     {
       "run_id": "run_20260706-030224",
@@ -1197,310 +1101,22 @@
       "status": "completed"
     },
     {
-      "run_id": "run_20260706-034853",
-      "blueprint_id": "alert-engine",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-034854",
+      "run_id": "run_20260706-044010",
       "blueprint_id": "code-reviewer",
-      "score": null,
-      "status": "running"
+      "score": 98.0,
+      "status": "completed",
+      "prompt_tokens": 689,
+      "completion_tokens": 316,
+      "estimated_usd_cost": 0.000534
     },
     {
-      "run_id": "run_20260706-034855",
+      "run_id": "run_20260706-044011",
       "blueprint_id": "meta-ads-brand-story",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-034856",
-      "blueprint_id": "caching-strategist",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-034858",
-      "blueprint_id": "animation-design-engineer",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-034945",
-      "blueprint_id": "alert-engine",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-034946",
-      "blueprint_id": "code-reviewer",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-034947",
-      "blueprint_id": "meta-ads-brand-story",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-034948",
-      "blueprint_id": "caching-strategist",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-034949",
-      "blueprint_id": "animation-design-engineer",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-035158",
-      "blueprint_id": "alert-engine",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-035159",
-      "blueprint_id": "code-reviewer",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-035200",
-      "blueprint_id": "meta-ads-brand-story",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-035201",
-      "blueprint_id": "caching-strategist",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-035202",
-      "blueprint_id": "animation-design-engineer",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-035257",
-      "blueprint_id": "alert-engine",
-      "score": 62.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035258",
-      "blueprint_id": "code-reviewer",
-      "score": 79.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035259",
-      "blueprint_id": "meta-ads-brand-story",
-      "score": 100.0,
-      "status": "completed"
-    },
-    {
-      "run_id": "run_20260706-035300",
-      "blueprint_id": "caching-strategist",
-      "score": 61.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035301",
-      "blueprint_id": "animation-design-engineer",
-      "score": 94.0,
-      "status": "completed"
-    },
-    {
-      "run_id": "run_20260706-035310",
-      "blueprint_id": "code-reviewer",
-      "score": 61.4,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035311",
-      "blueprint_id": "caching-strategist",
-      "score": 59.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035319",
-      "blueprint_id": "alert-engine",
-      "score": 48.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035322",
-      "blueprint_id": "caching-strategist",
-      "score": 83.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035327",
-      "blueprint_id": "alert-engine",
-      "score": 71.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035332",
-      "blueprint_id": "caching-strategist",
-      "score": 30.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035338",
-      "blueprint_id": "alert-engine",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-035342",
-      "blueprint_id": "caching-strategist",
-      "score": 86.0,
-      "status": "completed"
-    },
-    {
-      "run_id": "run_20260706-035424",
-      "blueprint_id": "alert-engine",
-      "score": 27.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-035425",
-      "blueprint_id": "code-reviewer",
-      "score": 100.0,
-      "status": "completed"
-    },
-    {
-      "run_id": "run_20260706-035435",
-      "blueprint_id": "alert-engine",
-      "score": 93.0,
-      "status": "completed"
-    },
-    {
-      "run_id": "run_20260706-040520",
-      "blueprint_id": "code-reviewer",
-      "score": 25.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040535",
-      "blueprint_id": "code-reviewer",
-      "score": 35.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040551",
-      "blueprint_id": "code-reviewer",
-      "score": 56.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040602",
-      "blueprint_id": "code-reviewer",
-      "score": 35.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040615",
-      "blueprint_id": "code-reviewer",
-      "score": 38.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040712",
-      "blueprint_id": "code-reviewer",
-      "score": 0.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040728",
-      "blueprint_id": "code-reviewer",
-      "score": 70.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040742",
-      "blueprint_id": "code-reviewer",
-      "score": 35.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040753",
-      "blueprint_id": "code-reviewer",
-      "score": 47.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040808",
-      "blueprint_id": "code-reviewer",
-      "score": 39.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040920",
-      "blueprint_id": "code-reviewer",
-      "score": 36.5,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040934",
-      "blueprint_id": "code-reviewer",
-      "score": 35.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-040950",
-      "blueprint_id": "code-reviewer",
-      "score": 37.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-041005",
-      "blueprint_id": "code-reviewer",
-      "score": 37.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-041016",
-      "blueprint_id": "code-reviewer",
-      "score": 35.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-041054",
-      "blueprint_id": "code-reviewer",
-      "score": 44.0,
-      "status": "needs_improvement"
-    },
-    {
-      "run_id": "run_20260706-041133",
-      "blueprint_id": "code-reviewer",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-041218",
-      "blueprint_id": "code-reviewer",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-041332",
-      "blueprint_id": "code-reviewer",
-      "score": null,
-      "status": "running"
-    },
-    {
-      "run_id": "run_20260706-041457",
-      "blueprint_id": "code-reviewer",
-      "score": 99.1,
-      "status": "completed"
+      "score": 98.5,
+      "status": "completed",
+      "prompt_tokens": 320,
+      "completion_tokens": 1084,
+      "estimated_usd_cost": 0.001279
     }
   ]
 }

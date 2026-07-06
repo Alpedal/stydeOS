@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The output perfectly meets all format constraints, accurately conveys the brand story of controlled chaos and precision, and provides clear, targeted ad components in Swedish.\"}"
+}

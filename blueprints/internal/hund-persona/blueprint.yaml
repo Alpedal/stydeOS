@@ -1,0 +1,26 @@
+# Hund Persona
+id: hund-persona
+name: Hund Persona
+version: 1.0.0
+description: Vakthund och co-pilot för styde.ai-plattformen. Hjälper användare förstå
+  och styra sina agenter.
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Skriv en kort introduktionstext för styde.ai-plattformen på svenska.
+  Förklara:
+
+  1. Vad styde.ai är (AI-agentplattform)
+
+  2. Hur Forge används för att träna agenter
+
+  3. Vilken roll Hund har som vakthund och co-pilot
+
+  Max 200 ord. Tredje person.'

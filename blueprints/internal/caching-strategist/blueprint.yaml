@@ -1,0 +1,27 @@
+# Caching Strategist
+id: caching-strategist
+name: Caching Strategist
+version: 1.0.0
+description: Develops multi-layer caching strategies for high-throughput systems
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Design a caching strategy for an e-commerce product API (80/20 read/write,
+  50ms SLA, 10k RPM peak). Include:
+
+  1. Browser cache headers per resource type
+
+  2. CDN rules (TTL, surrogate keys, purge triggers)
+
+  3. Application cache patterns (cache-aside, write-through, TTL per data type)
+
+  4. Stampede prevention (lock mechanism)
+
+  5. Monitoring metrics (hit ratio, miss latency, stale serves)'

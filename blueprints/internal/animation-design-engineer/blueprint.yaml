@@ -1,0 +1,24 @@
+# Animation Design Engineer
+id: animation-design-engineer
+name: Animation Design Engineer
+version: 1.0.0
+description: Engineers performant CSS/JS animations with accessibility support
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Create a pulse animation button component with:
+
+  1. CSS @keyframes using only transform and opacity (GPU-composited)
+
+  2. prefers-reduced-motion media query fallback (static button)
+
+  3. JavaScript play/pause/stop controls
+
+  4. Validation that both animated and fallback buttons render correctly'

@@ -184,6 +184,18 @@
       "blueprint_id": "dashboard-api",
       "score": 63.0,
       "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-015933",
+      "blueprint_id": "dashboard-api",
+      "score": 39.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-020116",
+      "blueprint_id": "dashboard-ui",
+      "score": 14.0,
+      "status": "needs_improvement"
     }
   ]
 }

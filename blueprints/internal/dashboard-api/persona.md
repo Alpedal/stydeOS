@@ -31,3 +31,9 @@ Använd FastAPI + uvicorn. Stdlib för filläsning, inga tunga ramverk.
 
 
 <!-- Teacher feedback 2026-07-06 01:58 (run included in forge.json) -->
+
+
+<!-- Teacher feedback 2026-07-06 01:59 (run included in forge.json) -->
+
+
+<!-- Teacher feedback 2026-07-06 02:01 (run included in forge.json) -->

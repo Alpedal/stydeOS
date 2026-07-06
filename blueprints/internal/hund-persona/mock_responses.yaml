@@ -1,0 +1,29 @@
+# mock_responses.yaml — Statiska svar för verktygsmockning under benchmark-körningar
+# Format: verktygsnamn: lista av svar (används round-robin eller på default-nyckel)
+
+list_active_agents:
+  default: |
+    Aktiva agenter:
+    - invoice-reviewer-agent (status: nere, senast aktiv: 2026-07-05 14:32)
+    - data-processor-agent (status: aktiv, KPI: 99.2% framgång)
+    - customer-support-agent (status: aktiv, KPI: 4.8/5 kundnöjdhet)
+
+get_agent_status:
+  invoice-reviewer-agent: |
+    Status: nere. Senaste krasch: 2026-07-05 14:32. Felkod: SIGTERM.
+    KPI: 0/100 (inaktiv). Senaste framgångsrika körning: 2026-07-04.
+  data-processor-agent: |
+    Status: aktiv. Drifttid: 48h. KPI: 99.2% framgång (last 1000 jobb).
+  default: |
+    Status: okänd. Ingen statusinformation tillgänglig för angiven agent.
+
+search_knowledge_base:
+  default: |
+    Hittade relevant dokumentation:
+    - Forge v2 agent training guide (docs/forge-v2.md)
+    - Blueprint schema reference (docs/blueprint-schema.md)
+    - styde.ai platform overview (docs/platform.md)
+
+file_read:
+  default: |
+    (Filen läst — innehållet är inte tillgängligt i testmiljön.)

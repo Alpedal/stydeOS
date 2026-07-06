@@ -1,0 +1,94 @@
+{
+  "run_id": "run_20260705-233101",
+  "blueprint_id": "hund-persona",
+  "evaluated_at": "2026-07-06T00:19:03.205693",
+  "final_score": 88.5,
+  "self_eval": 65,
+  "judge_eval": 95,
+  "benchmark": {
+    "blueprint_id": "hund-persona",
+    "cases_run": 5,
+    "score": 90.2,
+    "results": [
+      {
+        "id": "stressad-william",
+        "score": 92.5,
+        "keyword_score": 100.0,
+        "llm_rules_score": 85.0,
+        "expected_found": [
+          "Hund ser",
+          "Hund foreslar",
+          "konkret",
+          "atgard"
+        ],
+        "expected_missing": [],
+        "forbidden_found": [],
+        "reason": "Svaret använder korrekta nyckelord ('Hund ser', 'foreslar', 'konkret', 'atgard') och är kortfattat och konstruktivt, men innehåller svenska tecken ('är', 'läs', 'för', 'och') istället för exakt ASCII som krävs.",
+        "output": "Hund ser att William är stressad. Hund foreslar konkret atgard: pausa agenten, las loggen for felorsak, och starta om med enkel konfiguration."
+      },
+      {
+        "id": "server-crash",
+        "score": 80.0,
+        "keyword_score": 75.0,
+        "llm_rules_score": 85.0,
+        "expected_found": [
+          "Hund",
+          "kraschat",
+          "nere"
+        ],
+        "expected_missing": [
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "Svarar i tredje person och använder 'Hund', men använder svenska tecken i 'föreslår' och 'åtgärd' istället för de exakta ASCII-nyckelorden 'foreslar' och 'atgard'.",
+        "output": "Hund ser att servern har kraschat. Två agenter är nere. Hund föreslår konkret åtgärd: starta om servern och kontrollera agenternas status i Forge v2."
+      },
+      {
+        "id": "osaker-fraga",
+        "score": 100.0,
+        "keyword_score": 100.0,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "Hund ar osaker",
+          "William",
+          "kolla"
+        ],
+        "expected_missing": [],
+        "forbidden_found": [],
+        "reason": "The response correctly uses the exact ASCII phrase 'Hund ar osaker — William bor kolla pa detta' when uncertain, follows the rule of not speculating, and maintains the proper tone and format.",
+        "output": "Hund saknar data om framtida GPU-priser. Hund ar osaker — William bor kolla pa detta."
+      },
+      {
+        "id": "upprepad-fraga",
+        "score": 83.3,
+        "keyword_score": 66.66666666666666,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "fortfarande",
+          "Hund har svarat"
+        ],
+        "expected_missing": [
+          "igen"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret uppfyller alla regler: anvander 'Hund har svarat', 'fortfarande', 'igen' (underforstatt), foreslar atgard, och haller sig till tredje person och kortfattat sprak.",
+        "output": "Hund har svarat pa detta tva ganger tidigare. Agenten ar fortfarande inte igang. Hund foreslar konkret atgard: kontrollera Forge v2 for status."
+      },
+      {
+        "id": "agent-rekommendation",
+        "score": 95.0,
+        "keyword_score": 100.0,
+        "llm_rules_score": 90.0,
+        "expected_found": [
+          "Hund rekommenderar",
+          "invoice",
+          "blueprint"
+        ],
+        "expected_missing": [],
+        "forbidden_found": [],
+        "reason": "The response uses 'Hund rekommenderar' and includes both 'invoice' and 'blueprint' as required, but is very brief and could include a more concrete recommendation ('atgard') for full rule adherence.",
+        "output": "Hund rekommenderar invoice blueprints for fakturahantering."
+      }
+    ]
+  }
+}

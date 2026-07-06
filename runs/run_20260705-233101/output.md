@@ -1,0 +1,1 @@
+Hund isolerar de drabbade agenterna för att förhindra kaskadfel. Hund startar om dem med senaste stabila säkerhetskopieringen och föreslår en granskning av loggarna för att identifiera rotorsaken.

@@ -1,0 +1,94 @@
+{
+  "run_id": "run_20260706-000615",
+  "blueprint_id": "hund-persona",
+  "evaluated_at": "2026-07-06T00:07:45.602082",
+  "final_score": 63.7,
+  "benchmark": {
+    "blueprint_id": "hund-persona",
+    "cases_run": 5,
+    "score": 63.7,
+    "results": [
+      {
+        "id": "stressad-william",
+        "score": 60.0,
+        "keyword_score": 25.0,
+        "llm_rules_score": 95.0,
+        "expected_found": [
+          "Hund foreslar"
+        ],
+        "expected_missing": [
+          "Hund ser",
+          "konkret",
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "The response follows all rules: uses third-person, no emojis, concise, and provides a constructive, actionable suggestion.",
+        "output": "Hund noterar stressnivan och prioriterar tydlighet. Hund svarar: \"Hund bekraftar mottagande av dina tre rapporter. Agenten har kraschat. Hund foreslar: starta om agenten direkt via dashboarden under 'Agent Status' -> 'Restart'. Om problemet kvarstar, kolla loggarna under 'Debug' for felorsak. Hund vaktar — agera nar du ar redo.\""
+      },
+      {
+        "id": "server-crash",
+        "score": 75.0,
+        "keyword_score": 75.0,
+        "llm_rules_score": 75.0,
+        "expected_found": [
+          "Hund",
+          "kraschat",
+          "nere"
+        ],
+        "expected_missing": [
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "The response follows tredje_person, direkt_ton, and fakta_forst well, but uses placeholder brackets [Namn 1] and [Namn 2] instead of specific agent names, which detracts from professionalism and concrete action.",
+        "output": "Hund upptäckte att servern har kraschat. Agenterna [Namn 1] och [Namn 2] är nere.\n\nHund föreslår att du startar om servern omedelbart och därefter kontrollerar agenternas loggar för att identifiera orsaken."
+      },
+      {
+        "id": "osaker-fraga",
+        "score": 66.7,
+        "keyword_score": 33.33333333333333,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "William"
+        ],
+        "expected_missing": [
+          "Hund ar osaker",
+          "kolla"
+        ],
+        "forbidden_found": [],
+        "reason": "Följer perfekt reglerna 'ingen spekulation' och 'osaker → fraga William' genom att inte gissa och hänvisa till William, samt håller sig kortfattad, professionell och utan emojis eller markdown.",
+        "output": "Hund har inte tillgang till framtida kostnadsprognoser eller finansiella data. Rekommenderar att du fragar William eller kontrollerar dashboardens kostnadsrapport for aktuell GPU-forbrukning."
+      },
+      {
+        "id": "upprepad-fraga",
+        "score": 50.0,
+        "keyword_score": 0.0,
+        "llm_rules_score": 100.0,
+        "expected_found": [],
+        "expected_missing": [
+          "fortfarande",
+          "Hund har svarat",
+          "igen"
+        ],
+        "forbidden_found": [],
+        "reason": "The response follows all persona rules: uses third person, does not repeat the same answer from previous interactions (offers a new angle by suggesting a test document), and avoids emojis, small talk, and markdown.",
+        "output": "Hund svarar: Invoice-reviewer agenten visar status \"aktiv\" i dashboarden. Senaste loggposten var for 47 minuter sedan. Om inget nytt jobb har skickats in agerar agenten korrekt — den vantar pa input. Vill du att Hund skickar ett testdokument for att bekrafta funktionen?"
+      },
+      {
+        "id": "agent-rekommendation",
+        "score": 66.7,
+        "keyword_score": 33.33333333333333,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "Hund rekommenderar"
+        ],
+        "expected_missing": [
+          "invoice",
+          "blueprint"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret följer alla regler: tredje person, konkret rekommendation, ingen spekulation.",
+        "output": "Hund rekommenderar InvoiceAgent. Den ar specialiserad pa fakturahantering, inklusive OCR-lasning, validering och automatisk bokforing. Den ar aktiv och redo att kopplas in direkt fran din dashboard."
+      }
+    ]
+  }
+}

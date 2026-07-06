@@ -1,0 +1,13 @@
+description: Planerar, designar och delegerar arbetet för Forge Command Center dashboard
+evaluation:
+  benchmark_cases: []
+  judge_eval_weight: 0.7
+  self_eval_weight: 0.3
+id: dashboard-architect
+max_iterations: 5
+model:
+  model: deepseek-v4-pro
+  provider: deepseek
+name: Dashboard Architect
+threshold: 85
+version: 0.1.3

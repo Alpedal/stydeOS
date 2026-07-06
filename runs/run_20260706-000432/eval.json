@@ -1,0 +1,94 @@
+{
+  "run_id": "run_20260706-000432",
+  "blueprint_id": "hund-persona",
+  "evaluated_at": "2026-07-06T00:06:02.144206",
+  "final_score": 64.2,
+  "benchmark": {
+    "blueprint_id": "hund-persona",
+    "cases_run": 5,
+    "score": 64.2,
+    "results": [
+      {
+        "id": "stressad-william",
+        "score": 62.5,
+        "keyword_score": 25.0,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "Hund foreslar"
+        ],
+        "expected_missing": [
+          "Hund ser",
+          "konkret",
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret är på svenska, använder tredje person ('Hund'), är kortfattat, ger ett konstruktivt förslag och innehåller inga emojis eller onödiga artighetsfraser.",
+        "output": "Hund noterar tre meddelanden pa en minut angaende kraschad agent. Hund foreslar: stoppa och granska agentens senaste loggar innan du agerar vidare."
+      },
+      {
+        "id": "server-crash",
+        "score": 87.5,
+        "keyword_score": 75.0,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "Hund",
+          "kraschat",
+          "nere"
+        ],
+        "expected_missing": [
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret följer perfekt alla regler: tredje person, inga emojis, direkt ton, fokuserar på fakta och handling.",
+        "output": "Hund upptäckte att servern \"prod-node-3\" har kraschat. Agenterna \"OrderHandler\" och \"FraudCheck\" är nere. Föreslår omedelbar omstart och felanalys av loggarna."
+      },
+      {
+        "id": "osaker-fraga",
+        "score": 64.2,
+        "keyword_score": 33.33333333333333,
+        "llm_rules_score": 95.0,
+        "expected_found": [
+          "William"
+        ],
+        "expected_missing": [
+          "Hund ar osaker",
+          "kolla"
+        ],
+        "forbidden_found": [],
+        "reason": "Hund följer regeln 'Ingen spekulation' genom att direkt påpeka att data saknas och hänvisar till William, utan att gissa eller lägga till onödig information.",
+        "output": "Hund ser ingen data om framtida GPU-kostnader i plattformen. William bor konsultera Azure- eller leverantorsportalen for aktuella priser och prognoser."
+      },
+      {
+        "id": "upprepad-fraga",
+        "score": 42.5,
+        "keyword_score": 0.0,
+        "llm_rules_score": 85.0,
+        "expected_found": [],
+        "expected_missing": [
+          "fortfarande",
+          "Hund har svarat",
+          "igen"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret är kortfattat, direkt, på svenska, använder tredje person ('Status: invoice-reviewer') och upprepar inte användarens fråga, men ger en annan vinkel genom att lägga till tidsinformation istället för att bara bekräfta att agenten är igång.",
+        "output": "Status: invoice-reviewer ar aktiv. Inga avvikelser rapporterade de senaste 24 timmarna."
+      },
+      {
+        "id": "agent-rekommendation",
+        "score": 64.2,
+        "keyword_score": 33.33333333333333,
+        "llm_rules_score": 95.0,
+        "expected_found": [
+          "Hund rekommenderar"
+        ],
+        "expected_missing": [
+          "invoice",
+          "blueprint"
+        ],
+        "forbidden_found": [],
+        "reason": "The response follows all persona rules: uses third-person 'Hund', gives a concrete recommendation (InvoiceAgent), and avoids speculation by stating the agent's status.",
+        "output": "Hund rekommenderar **InvoiceAgent** for fakturahantering. Den ar aktiv och trapad pa svenska fakturaformat, inklusive OCR och momsberakning.\n\nStatus: InvoiceAgent ar redo. Har du redan kopplat din bokforingstjanst?"
+      }
+    ]
+  }
+}

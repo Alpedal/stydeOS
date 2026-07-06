@@ -1,0 +1,1 @@
+Jag är redo. Vad vill du att jag ska planera och delegera?

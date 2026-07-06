@@ -4,11 +4,15 @@ ponytail: single-file teacher, split if >300 lines.
 """
 
 import json
-from pathlib import Path
+import logging
+import re
 from datetime import datetime
+from pathlib import Path
 from typing import Optional
 
 from forge.core.engine import load_run_data, call_llm, ForgeError
+
+logger = logging.getLogger("forge.core.teacher")
 
 
 def propose_improvements(root: Path, run_id: str,
@@ -50,8 +54,11 @@ def propose_improvements(root: Path, run_id: str,
     output = data.get("output") or ""
     persona = _load_persona(root, blueprint_id)
 
+    # Gather prior feedback history to give Teacher context
+    prior_feedback = _load_prior_feedback(root, blueprint_id, exclude_run=run_id)
+
     # Generate feedback
-    feedback = _generate_feedback(output, eval_data, persona, provider, model)
+    feedback = _generate_feedback(output, eval_data, persona, provider, model, prior_feedback)
     (run_dir / "feedback.md").write_text(feedback, encoding="utf-8")
 
     # Try to patch blueprint files
@@ -75,25 +82,66 @@ def _load_persona(root: Path, blueprint_id: str) -> str:
     return ""
 
 
+def _load_prior_feedback(root: Path, blueprint_id: str, exclude_run: str) -> str:
+    """Load the most recent feedback.md files from runs of this blueprint (last 3)."""
+    runs_dir = root / "runs"
+    if not runs_dir.exists():
+        return ""
+
+    prior: list[str] = []
+    # Sort descending so we get newest first
+    for run_folder in sorted(runs_dir.iterdir(), reverse=True):
+        if not run_folder.is_dir() or run_folder.name == exclude_run:
+            continue
+        input_path = run_folder / "input.json"
+        feedback_path = run_folder / "feedback.md"
+        if not input_path.exists() or not feedback_path.exists():
+            continue
+        try:
+            input_json = json.loads(input_path.read_text(encoding="utf-8"))
+            if input_json.get("blueprint_id") != blueprint_id:
+                continue
+        except Exception:
+            continue
+        prior.append(f"### Run: {run_folder.name}\n{feedback_path.read_text(encoding='utf-8')}")
+        if len(prior) >= 3:
+            break
+
+    return "\n\n---\n\n".join(reversed(prior))  # chronological order
+
+
 def _generate_feedback(output: str, eval_data: dict, persona: str,
-                       provider: str, model: str) -> str:
+                       provider: str, model: str,
+                       prior_feedback: str = "") -> str:
     """Ask Teacher LLM to analyze what went wrong and suggest concrete fixes."""
+    prior_section = ""
+    if prior_feedback:
+        prior_section = f"""
+## Prior Improvement Attempts (for context — do NOT repeat the same fixes)
+{prior_feedback[:4000]}
+"""
+
     system = f"""You are a Teacher agent for the Forge training system.
-Your job: analyze failed agent outputs and propose concrete, actionable improvements.
+Your job: analyze failed agent outputs and benchmark results, and propose concrete, actionable improvements.
 
 Current persona rules:
 {persona if persona else '(no persona rules defined)'}
+{prior_section}
+If there is a 'benchmark' key in the evaluation results:
+- Carefully inspect all benchmark case results.
+- Focus heavily on failed cases, looking at 'expected_missing' keywords, 'forbidden_found' keywords, and the 'reason' from the judge.
+- Propose specific updates to the persona.md behavior or output format rules to ensure future runs include expected keywords, avoid forbidden keywords, and satisfy all rules.
 
 Output format (markdown):
 
 ## What Went Wrong
-- Specific issues found (be precise)
+- Specific issues found in the run output or benchmark cases (list the failing benchmark case IDs and exactly what went wrong, e.g. missing or forbidden words).
 
 ## Which Rules Were Broken
-- Reference specific persona sections
+- Reference specific persona sections or rules from the benchmark (e.g. inga_emojis, tredje_person, etc.).
 
 ## Proposed Fixes
-- Concrete changes to persona.md, blueprint.yaml, or tools.yaml
+- Concrete changes to persona.md to fix these failures (e.g. 'Add a rule to section X to state...'). Propose the exact wording to append or modify.
 
 ## Version Bump
 - Suggest new version number (patch bump: x.y.z -> x.y.z+1)"""
@@ -117,14 +165,27 @@ Analyze the failure and propose improvements."""
         return f"## Teacher Error\n\nFailed to generate feedback: {e}"
 
 
+def _bump_version(version_str: str) -> str:
+    """Bump the patch segment of a semantic version, preserving pre-release suffixes.
+    
+    Examples:
+      '1.0.2'       -> '1.0.3'
+      '1.0.2-beta'  -> '1.0.3-beta'
+      '1.0.2-beta.1'-> '1.0.3-beta.1'
+    """
+    # Match: major.minor.patch with an optional pre-release suffix
+    m = re.match(r'^(\d+\.\d+\.)(\d+)(.*)', version_str)
+    if not m:
+        raise ValueError(f"Cannot parse version: {version_str!r}")
+    prefix, patch, suffix = m.group(1), m.group(2), m.group(3)
+    return f"{prefix}{int(patch) + 1}{suffix}"
+
+
 def _apply_blueprint_patches(root: Path, blueprint_id: str, feedback: str) -> list[str]:
     """Attempt to extract and apply version bumps + content patches from feedback.
     ponytail: naive extraction — full auto-patch is dangerous, keep it simple.
     Returns list of what was changed.
     """
-    import yaml
-    import re
-
     patches = []
 
     for sub in ["internal", "customer"]:
@@ -132,22 +193,26 @@ def _apply_blueprint_patches(root: Path, blueprint_id: str, feedback: str) -> li
         if not bp_yaml.exists():
             continue
 
-        # Bump version
-        with open(bp_yaml, "r", encoding="utf-8") as f:
-            yaml_data = yaml.safe_load(f)
-
-        version = yaml_data.get("version", "0.1.0")
-        parts = version.split(".")
-        if len(parts) == 3:
+        # Bump version in a comment-preserving way using regex
+        content = bp_yaml.read_text(encoding="utf-8")
+        # Match version line — handles optional quotes and any pre-release suffix
+        match = re.search(
+            r'^(version:\s*["\']?)(\d+\.\d+\.\d+[^"\'\s]*?)(["\']?\s*)$',
+            content,
+            re.MULTILINE
+        )
+        if match:
+            version = match.group(2)
             try:
-                parts[2] = str(int(parts[2]) + 1)
-                new_version = ".".join(parts)
-                yaml_data["version"] = new_version
-                with open(bp_yaml, "w", encoding="utf-8") as f:
-                    yaml.dump(yaml_data, f, default_flow_style=False, allow_unicode=True)
+                new_version = _bump_version(version)
+                old_line = match.group(0)
+                new_line = match.group(1) + new_version + match.group(3)
+                content = content.replace(old_line, new_line, 1)
+                bp_yaml.write_text(content, encoding="utf-8")
                 patches.append(f"Bumped {blueprint_id} version: {version} -> {new_version}")
-            except ValueError:
-                pass
+                logger.info("Bumped %s version: %s -> %s", blueprint_id, version, new_version)
+            except ValueError as e:
+                logger.warning("Could not bump version for %s: %s", blueprint_id, e)
 
         # Append feedback reference to persona.md
         persona_md = bp_yaml.parent / "persona.md"
@@ -156,7 +221,7 @@ def _apply_blueprint_patches(root: Path, blueprint_id: str, feedback: str) -> li
             note = f"\n\n<!-- Teacher feedback {timestamp} (run included in forge.json) -->\n"
             with open(persona_md, "a", encoding="utf-8") as f:
                 f.write(note)
-            patches.append(f"Annotated persona.md with feedback timestamp")
+            patches.append("Annotated persona.md with feedback timestamp")
 
         break  # ponytail: first match only
 

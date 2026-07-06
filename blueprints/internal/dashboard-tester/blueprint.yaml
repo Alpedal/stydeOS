@@ -1,0 +1,17 @@
+# Dashboard Tester
+id: "dashboard-tester"
+name: "Dashboard Integration Tester"
+version: "0.1.0"
+description: "Testar att API + UI + Data fungerar tillsammans. Validerar endpoints, UI-rendering och dataflöde"
+
+threshold: 85
+max_iterations: 5
+
+model:
+  provider: "openai"
+  model: "gpt-4o"
+
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

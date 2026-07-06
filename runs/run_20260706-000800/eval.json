@@ -1,0 +1,94 @@
+{
+  "run_id": "run_20260706-000800",
+  "blueprint_id": "hund-persona",
+  "evaluated_at": "2026-07-06T00:09:31.115773",
+  "final_score": 66.7,
+  "benchmark": {
+    "blueprint_id": "hund-persona",
+    "cases_run": 5,
+    "score": 66.7,
+    "results": [
+      {
+        "id": "stressad-william",
+        "score": 87.5,
+        "keyword_score": 75.0,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "Hund ser",
+          "Hund foreslar",
+          "atgard"
+        ],
+        "expected_missing": [
+          "konkret"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret följer alla regler: tredje person, inga emojis, kortfattat, konstruktivt förslag och prioriterar handling.",
+        "output": "Hund ser att William har skickat tre meddelanden om en kraschad agent pa kort tid. Hund prioriterar att agera snarare an att svara pa varje meddelande.\n\nHund foreslar: Undersok agentens senaste loggar och kraschorsak, meddela William med en status och en foreslagen atgard — till exempel omstart eller justering. Om orsaken ar oklar, direktiv: \"Hund ar osaker — William bor kolla pa detta.\""
+      },
+      {
+        "id": "server-crash",
+        "score": 87.5,
+        "keyword_score": 75.0,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "Hund",
+          "kraschat",
+          "nere"
+        ],
+        "expected_missing": [
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret följer alla regler: tredje person, inga emojis, direkt ton, fakta först, kortfattat och med en konkret åtgärd.",
+        "output": "Hund upptäckte att servern har kraschat. Agenterna Alpha och Beta är nere. Status: kritiskt. Föreslår omedelbar omstart via Forge v2."
+      },
+      {
+        "id": "osaker-fraga",
+        "score": 66.7,
+        "keyword_score": 33.33333333333333,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "William"
+        ],
+        "expected_missing": [
+          "Hund ar osaker",
+          "kolla"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret följer alla regler perfekt: använder tredje person, spekulerar inte, hänvisar till William vid osäkerhet, är kortfattad och professionell på svenska.",
+        "output": "Hund har inte tillgang till framtida prissattning eller prognoser for GPU-kostnader.\n\nHund foreslar att du kontrollerar aktuella priser i dashboarden under \"Infrastructure\" -> \"Cost Overview\", eller fragar William om budgetprognos."
+      },
+      {
+        "id": "upprepad-fraga",
+        "score": 25.0,
+        "keyword_score": 0.0,
+        "llm_rules_score": 50.0,
+        "expected_found": [],
+        "expected_missing": [
+          "fortfarande",
+          "Hund har svarat",
+          "igen"
+        ],
+        "forbidden_found": [],
+        "reason": "Hund svarar korrekt men upprepar samma information som tidigare istället för att ge en annan vinkel eller säga till användaren, vilket bryter mot regeln 'upprepa_inte'.",
+        "output": "Hund svarar: Invoice-reviewer-agenten ar inte aktiv. Status visas som avstangd sedan tva dagar. Hund foreslar att du kontrollerar agentens konfiguration i dashboarden och startar om den via knappen \"Starta agent\"."
+      },
+      {
+        "id": "agent-rekommendation",
+        "score": 66.7,
+        "keyword_score": 33.33333333333333,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "Hund rekommenderar"
+        ],
+        "expected_missing": [
+          "invoice",
+          "blueprint"
+        ],
+        "forbidden_found": [],
+        "reason": "The response follows all rules perfectly: uses tredje person ('Hund'), gives a konkret rekommendation ('InvoiceAgent'), and avoids ingen_spekulation by providing specific, actionable information.",
+        "output": "Hund rekommenderar InvoiceAgent. Den ar specialiserad pa att extrahera data fran PDF-fakturor, validera mot leverantor, och skicka till bokforing. Status: aktiv och redo."
+      }
+    ]
+  }
+}

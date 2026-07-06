@@ -1,15 +1,19 @@
-"""Forge v2 core engine — manifest I/O, LLM calls, run directory management.
+"""Forge v2 core engine — manifest I/O and run directory management.
 
-ponytail: single-file core, split if >500 lines.
+ponytail: this module is intentionally narrow. LLM logic lives in forge.core.llm,
+blueprint logic lives in forge.core.blueprint. Re-exports are provided for
+backwards compatibility so existing imports keep working.
 """
 
 import json
+import logging
 import os
-import shutil
-import tempfile
+import subprocess
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
+
+logger = logging.getLogger("forge.core.engine")
 
 
 class ForgeError(Exception):
@@ -49,39 +53,6 @@ def init_manifest(root: Path) -> dict:
     return data
 
 
-# --- Blueprints ---
-
-def load_blueprint(root: Path, blueprint_id: str) -> dict:
-    """Find and load a blueprint by ID from blueprints/ tree."""
-    import yaml  # ponytail: lazy import, only needed for blueprints
-
-    bp_dir = _find_blueprint_dir(root, blueprint_id)
-    if not bp_dir:
-        raise ForgeError(f"Blueprint '{blueprint_id}' not found under blueprints/")
-
-    bp_yaml = bp_dir / "blueprint.yaml"
-    if not bp_yaml.exists():
-        raise ForgeError(f"{bp_yaml} missing for blueprint '{blueprint_id}'")
-
-    with open(bp_yaml, "r", encoding="utf-8") as f:
-        data = yaml.safe_load(f)
-
-    data["_dir"] = str(bp_dir)
-    return data
-
-
-def _find_blueprint_dir(root: Path, blueprint_id: str) -> Optional[Path]:
-    """Walk blueprints/{templates,internal,customer}/ for matching dir name."""
-    bp_root = root / "blueprints"
-    if not bp_root.exists():
-        return None
-    for sub in ["internal", "customer"]:  # ponytail: skip templates
-        for entry in (bp_root / sub).iterdir():
-            if entry.is_dir() and entry.name == blueprint_id:
-                return entry
-    return None
-
-
 # --- Runs ---
 
 def create_run_dir(root: Path, blueprint_id: str) -> Path:
@@ -90,10 +61,13 @@ def create_run_dir(root: Path, blueprint_id: str) -> Path:
     run_dir = root / "runs" / f"run_{run_id}"
     run_dir.mkdir(parents=True, exist_ok=True)
 
+    git_info = _get_git_info(root)
+
     skeleton = {
         "run_id": run_id,
         "blueprint_id": blueprint_id,
         "started_at": datetime.utcnow().isoformat(),
+        **git_info,
     }
     with open(run_dir / "input.json", "w", encoding="utf-8") as f:
         json.dump(skeleton, f, indent=2)
@@ -128,69 +102,61 @@ def list_runs(root: Path) -> list[dict]:
 
 def add_run_to_manifest(root: Path, run_id: str, blueprint_id: str,
                         score: Optional[float] = None,
-                        status: str = "running") -> None:
+                        status: str = "running",
+                        git_commit: Optional[str] = None,
+                        git_dirty: Optional[bool] = None) -> None:
     """Append or update a run entry in forge.json."""
     manifest = load_manifest(root)
     runs = manifest.setdefault("runs", [])
 
-    # Update existing or append
+    entry: dict = {
+        "run_id": run_id,
+        "blueprint_id": blueprint_id,
+        "score": score,
+        "status": status,
+    }
+    if git_commit:
+        entry["git_commit"] = git_commit
+    if git_dirty is not None:
+        entry["git_dirty"] = git_dirty
+
     for r in runs:
         if r["run_id"] == run_id:
-            r["score"] = score
-            r["status"] = status
+            r.update(entry)
             break
     else:
-        runs.append({
-            "run_id": run_id,
-            "blueprint_id": blueprint_id,
-            "score": score,
-            "status": status,
-        })
+        runs.append(entry)
 
     save_manifest(root, manifest)
 
 
-# --- LLM ---
+# --- Git integration ---
 
-def call_llm(system_prompt: str, user_prompt: str,
-             provider: str = "openai", model: str = "gpt-4o",
-             api_key: Optional[str] = None) -> str:
-    """Call an LLM and return the response text.
-
-    Provider: 'openai' or 'anthropic'. API key from env if not passed:
-      OPENAI_API_KEY / ANTHROPIC_API_KEY.
-    """
-    if provider == "openai":
-        return _call_openai(system_prompt, user_prompt, model, api_key)
-    elif provider == "anthropic":
-        return _call_anthropic(system_prompt, user_prompt, model, api_key)
-    else:
-        raise ForgeError(f"Unknown provider: {provider}")
-
-
-def _call_openai(system: str, user: str, model: str, api_key: Optional[str]) -> str:
-    import openai
-
-    client = openai.OpenAI(api_key=api_key or os.environ.get("OPENAI_API_KEY"))
-    resp = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ],
-        temperature=0.7,
-    )
-    return resp.choices[0].message.content
+def _get_git_info(root: Path) -> dict:
+    """Return current git commit hash and dirty status. Returns empty dict on failure."""
+    try:
+        commit = subprocess.check_output(
+            ["git", "rev-parse", "--short", "HEAD"],
+            cwd=str(root), stderr=subprocess.DEVNULL, text=True
+        ).strip()
+        dirty_out = subprocess.check_output(
+            ["git", "status", "--porcelain"],
+            cwd=str(root), stderr=subprocess.DEVNULL, text=True
+        ).strip()
+        return {"git_commit": commit, "git_dirty": bool(dirty_out)}
+    except Exception:
+        return {}
 
 
-def _call_anthropic(system: str, user: str, model: str, api_key: Optional[str]) -> str:
-    import anthropic
+# --- Backwards-compatibility re-exports ---
+# Keep these so existing code that does `from forge.core.engine import call_llm`
+# or `from forge.core.engine import load_blueprint` continues to work.
 
-    client = anthropic.Anthropic(api_key=api_key or os.environ.get("ANTHROPIC_API_KEY"))
-    resp = client.messages.create(
-        model=model,
-        max_tokens=4096,
-        system=system,
-        messages=[{"role": "user", "content": user}],
-    )
-    return resp.content[0].text
+from forge.core.llm import call_llm                           # noqa: E402, F401
+from forge.core.blueprint import load_blueprint, validate_blueprint  # noqa: E402, F401
+
+
+def _find_blueprint_dir(root: Path, blueprint_id: str):  # noqa: F811
+    """Backwards-compat shim — use forge.core.blueprint.find_blueprint_dir instead."""
+    from forge.core.blueprint import find_blueprint_dir
+    return find_blueprint_dir(root, blueprint_id)

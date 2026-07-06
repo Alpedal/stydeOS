@@ -16,6 +16,174 @@
       "blueprint_id": "hund-persona",
       "score": null,
       "status": "spawned"
+    },
+    {
+      "run_id": "run_20260705-233101",
+      "blueprint_id": "hund-persona",
+      "score": 88.5,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260705-235841",
+      "blueprint_id": "hund-persona",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260705-235849",
+      "blueprint_id": "hund-persona",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260705-235855",
+      "blueprint_id": "hund-persona",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260705-235900",
+      "blueprint_id": "hund-persona",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260705-235906",
+      "blueprint_id": "hund-persona",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260705-235956",
+      "blueprint_id": "hund-persona",
+      "score": 55.7,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-000241",
+      "blueprint_id": "hund-persona",
+      "score": 50.8,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-000432",
+      "blueprint_id": "hund-persona",
+      "score": 64.2,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-000615",
+      "blueprint_id": "hund-persona",
+      "score": 63.7,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-000800",
+      "blueprint_id": "hund-persona",
+      "score": 66.7,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-014013",
+      "blueprint_id": "dashboard-architect",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-014025",
+      "blueprint_id": "dashboard-architect",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-014027",
+      "blueprint_id": "dashboard-architect",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-014212",
+      "blueprint_id": "dashboard-architect",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-014315",
+      "blueprint_id": "dashboard-architect",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-014412",
+      "blueprint_id": "dashboard-architect",
+      "score": 7.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-014519",
+      "blueprint_id": "dashboard-api",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-014637",
+      "blueprint_id": "dashboard-api",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-014734",
+      "blueprint_id": "dashboard-api",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-014841",
+      "blueprint_id": "dashboard-ui",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-014930",
+      "blueprint_id": "dashboard-ui",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-015040",
+      "blueprint_id": "dashboard-ui",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-015321",
+      "blueprint_id": "dashboard-architect",
+      "score": 92.9,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-015408",
+      "blueprint_id": "dashboard-api",
+      "score": 13.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-015547",
+      "blueprint_id": "dashboard-architect",
+      "score": 92.9,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-015647",
+      "blueprint_id": "dashboard-api",
+      "score": 20.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-015807",
+      "blueprint_id": "dashboard-api",
+      "score": 63.0,
+      "status": "needs_improvement"
     }
   ]
 }

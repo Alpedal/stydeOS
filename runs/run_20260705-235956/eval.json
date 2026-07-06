@@ -1,0 +1,92 @@
+{
+  "run_id": "run_20260705-235956",
+  "blueprint_id": "hund-persona",
+  "evaluated_at": "2026-07-06T00:02:25.827357",
+  "final_score": 55.7,
+  "benchmark": {
+    "blueprint_id": "hund-persona",
+    "cases_run": 5,
+    "score": 55.7,
+    "results": [
+      {
+        "id": "stressad-william",
+        "score": 83.5,
+        "keyword_score": 75.0,
+        "llm_rules_score": 92.0,
+        "expected_found": [
+          "Hund ser",
+          "konkret",
+          "atgard"
+        ],
+        "expected_missing": [
+          "Hund foreslar"
+        ],
+        "forbidden_found": [],
+        "reason": "Följer tredje person, undviker emojis, är kortfattad och ger ett konstruktivt förslag på åtgärd.",
+        "output": "Hund ser att William har skickat tre upprepade meddelanden om en kraschad agent. Hund prioriterar att agera direkt: undersoker agentens status i plattformen och aterkommer med en konkret atgard inom 30 sekunder. Under tiden rekommenderar Hund att William andas och invantar en strukturerad rapport."
+      },
+      {
+        "id": "server-crash",
+        "score": 87.5,
+        "keyword_score": 75.0,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "Hund",
+          "kraschat",
+          "nere"
+        ],
+        "expected_missing": [
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret använder tredje person ('Hund'), är direkt och faktaorienterat, utan emojis eller onödiga fraser, och följer alla angivna regler.",
+        "output": "Hund upptäckte att en server har kraschat. Två agenter är nere: Agent Alpha och Agent Beta. Föreslår omedelbar omstart via dashboard eller kontakt med William för vidare felsökning."
+      },
+      {
+        "id": "osaker-fraga",
+        "score": 47.5,
+        "keyword_score": 0.0,
+        "llm_rules_score": 95.0,
+        "expected_found": [],
+        "expected_missing": [
+          "Hund ar osaker",
+          "William",
+          "kolla"
+        ],
+        "forbidden_found": [],
+        "reason": "Hund svarar direkt på svenska, använder tredje person ('Hund svarar'), är kortfattad, spekulerar inte om data som saknas, och föreslår en konkret åtgärd istället för att gissa.",
+        "output": "Hund svarar: GPU-kostnader prognostiseras inte automatiskt i plattformen. For att fa en siffra behover anvandaren aktivera Forge v2:s prediktionsmodul under fliken \"Kostnadsanalys\" i dashboarden."
+      },
+      {
+        "id": "upprepad-fraga",
+        "score": 25.0,
+        "keyword_score": 0.0,
+        "llm_rules_score": 50.0,
+        "expected_found": [],
+        "expected_missing": [
+          "fortfarande",
+          "Hund har svarat",
+          "igen"
+        ],
+        "forbidden_found": [],
+        "reason": "Hund upprepar samma svar som tidigare istället för att ge en ny vinkel eller säga till användaren, vilket bryter mot regeln 'upprepa_inte'.",
+        "output": "Hund svarar: Ja, invoice-reviewer agenten ar igang. Status: aktiv. Senaste faktura granskades for 2 minuter sedan."
+      },
+      {
+        "id": "agent-rekommendation",
+        "score": 35.0,
+        "keyword_score": 0.0,
+        "llm_rules_score": 70.0,
+        "expected_found": [],
+        "expected_missing": [
+          "Hund rekommenderar",
+          "invoice",
+          "blueprint"
+        ],
+        "forbidden_found": [],
+        "reason": "Hund använder tredje person korrekt men efterfrågar mer information istället för att ge en konkret rekommendation baserad på tillgänglig data, vilket bryter mot regeln om att prioritera handling och undvika spekulation.",
+        "output": "Hund ser att du fragar om fakturahantering. Det beror pa vilka system du anvander. Har du en specifik plattform som Excel, Fortnox, Visma eller liknande?"
+      }
+    ]
+  }
+}

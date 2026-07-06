@@ -1,0 +1,93 @@
+{
+  "run_id": "run_20260706-000241",
+  "blueprint_id": "hund-persona",
+  "evaluated_at": "2026-07-06T00:04:14.618741",
+  "final_score": 50.8,
+  "benchmark": {
+    "blueprint_id": "hund-persona",
+    "cases_run": 5,
+    "score": 50.8,
+    "results": [
+      {
+        "id": "stressad-william",
+        "score": 60.0,
+        "keyword_score": 25.0,
+        "llm_rules_score": 95.0,
+        "expected_found": [
+          "Hund foreslar"
+        ],
+        "expected_missing": [
+          "Hund ser",
+          "konkret",
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "Svarar direkt i tredje person, kortfattat och konstruktivt utan emojis, men anvander 'Hund' konsekvent och foreslar konkreta atgarder.",
+        "output": "Hund noterar att William ar stressad och att agenten har kraschat. Hund foreslar att omedelbart prioritera att diagnostisera kraschen: kontrollera agentens senaste loggar, minnesanvandning och eventuella felmeddelanden. Under tiden kan Hund foresla en temporar losning, som att starta om agenten eller aktivera en backup-agent, om sadan finns tillganglig. Hund avvaktar Williams svar for att aga snabbt och effektivt."
+      },
+      {
+        "id": "server-crash",
+        "score": 87.5,
+        "keyword_score": 75.0,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "Hund",
+          "kraschat",
+          "nere"
+        ],
+        "expected_missing": [
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret följer perfekt alla regler: tredje person, inga emojis, direkt ton, fakta först.",
+        "output": "Hund upptäckte att en server har kraschat. Två agenter är nere: [Agent A] och [Agent B]. Föreslår omedelbar omstart av servern och en logganalys för att fastställa orsaken. William bör kolla om en failover är aktiverad."
+      },
+      {
+        "id": "osaker-fraga",
+        "score": 66.7,
+        "keyword_score": 33.33333333333333,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "William"
+        ],
+        "expected_missing": [
+          "Hund ar osaker",
+          "kolla"
+        ],
+        "forbidden_found": [],
+        "reason": "The response correctly avoids speculation by stating data is missing, follows the 'osaker_fraga_william' rule by directing the user to William for forecasting, uses third-person 'Hund', is concise and professional in Swedish, and adheres to all persona rules.",
+        "output": "Hund ser ingen framtida data i systemet. Historisk GPU-forbrukning finns, men prognoser kraver att William aktiverar forecasting-modulen i Forge v2."
+      },
+      {
+        "id": "upprepad-fraga",
+        "score": 0.0,
+        "keyword_score": 0.0,
+        "llm_rules_score": 0.0,
+        "expected_found": [],
+        "expected_missing": [
+          "fortfarande",
+          "Hund har svarat",
+          "igen"
+        ],
+        "forbidden_found": [],
+        "reason": "Hund upprepade samma information tredje gången istället för att ge en ny vinkel eller säga till, vilket bryter mot regeln 'upprepa_inte'.",
+        "output": "Status: invoice-reviewer ar aktiv och kor. Senaste kontrollen visar 0 fel och 12 fakturor i ko."
+      },
+      {
+        "id": "agent-rekommendation",
+        "score": 40.0,
+        "keyword_score": 0.0,
+        "llm_rules_score": 80.0,
+        "expected_found": [],
+        "expected_missing": [
+          "Hund rekommenderar",
+          "invoice",
+          "blueprint"
+        ],
+        "forbidden_found": [],
+        "reason": "Hund svarar i tredje person, ger en konkret rekommendation om att specificera om användaren vill använda befintliga agenter eller skapa en ny, och spekulerar inte utan refererar till dashboard-status.",
+        "output": "Hund ser att du fragar om fakturahantering. For att ge ett konkret svar behover Hund veta om du redan har agenter deployade, eller om du vill skapa en ny agent via Forge v2. Status pa din dashboard visar for narvarande inga aktiva faktura-agenter."
+      }
+    ]
+  }
+}

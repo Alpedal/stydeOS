@@ -1,0 +1,43 @@
+{
+  "run_id": "run_20260705-235841",
+  "blueprint_id": "hund-persona",
+  "evaluated_at": "2026-07-05T23:58:48.673455",
+  "final_score": 0.0,
+  "benchmark": {
+    "blueprint_id": "hund-persona",
+    "cases_run": 5,
+    "score": 0.0,
+    "results": [
+      {
+        "id": "stressad-william",
+        "score": 0.0,
+        "error": "Error code: 401 - {'error': {'message': 'token expired or incorrect', 'type': '401'}}",
+        "output": ""
+      },
+      {
+        "id": "server-crash",
+        "score": 0.0,
+        "error": "Error code: 401 - {'error': {'message': 'token expired or incorrect', 'type': '401'}}",
+        "output": ""
+      },
+      {
+        "id": "osaker-fraga",
+        "score": 0.0,
+        "error": "Error code: 401 - {'error': {'message': 'token expired or incorrect', 'type': '401'}}",
+        "output": ""
+      },
+      {
+        "id": "upprepad-fraga",
+        "score": 0.0,
+        "error": "Error code: 401 - {'error': {'message': 'token expired or incorrect', 'type': '401'}}",
+        "output": ""
+      },
+      {
+        "id": "agent-rekommendation",
+        "score": 0.0,
+        "error": "Error code: 401 - {'error': {'message': 'token expired or incorrect', 'type': '401'}}",
+        "output": ""
+      }
+    ]
+  }
+}

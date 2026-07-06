@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 0, \"reason\": \"The agent did not review any code as required by its persona; instead it asked for input, violating the rule that it must state what's missing and ask for it in one line, and it did not output any issues or follow the required format.\"}"
+}

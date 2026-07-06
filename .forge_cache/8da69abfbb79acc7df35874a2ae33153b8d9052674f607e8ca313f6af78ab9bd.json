@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 15, \"reason\": \"The agent did not perform any review or follow the required output format; it merely asked for input, which violates the core behavior rule to never output meta acknowledgements and instead immediately review provided code.\"}"
+}

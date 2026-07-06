@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The output exactly follows the persona rule for missing code: it states what's missing and asks for it in one line, with no fluff or meta acknowledgement.\"}"
+}

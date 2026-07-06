@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 50, \"reason\": \"The agent acknowledges the task but does not actually complete it, as it only asks for more input without providing any substantive analysis or output.\"}"
+}

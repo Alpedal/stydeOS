@@ -78,3 +78,49 @@ def test_push_to_production_and_archive(tmp_path, monkeypatch):
     assert done_dir.exists()
     assert not bp_dir.exists()
     assert (done_dir / "blueprint.yaml").exists()
+
+
+def test_evaluation_halt_on_triple_100(tmp_path):
+    import time
+    from unittest.mock import patch
+    from forge.core.evaluator import run_evaluation
+    from forge.core.engine import init_manifest, create_run_dir, ForgeError
+    
+    init_manifest(tmp_path)
+    
+    # Create blueprint
+    bp_dir = tmp_path / "blueprints" / "internal" / "test-bp"
+    bp_dir.mkdir(parents=True)
+    (bp_dir / "blueprint.yaml").write_text("id: test-bp\nname: Test\n", encoding="utf-8")
+    (bp_dir / "persona.md").write_text("rules", encoding="utf-8")
+
+    # Run 1: gets 100.0 (passed)
+    run_dir1 = create_run_dir(tmp_path, "test-bp")
+    (run_dir1 / "output.md").write_text("output", encoding="utf-8")
+    
+    with patch("forge.core.evaluator._self_eval", return_value=100), \
+         patch("forge.core.evaluator._judge_eval", return_value=100):
+        # First 100.0 run - should pass
+        run_evaluation(tmp_path, run_dir1.name)
+
+    time.sleep(1.1)
+
+    # Run 2: gets 100.0 (passed)
+    run_dir2 = create_run_dir(tmp_path, "test-bp")
+    (run_dir2 / "output.md").write_text("output", encoding="utf-8")
+    
+    with patch("forge.core.evaluator._self_eval", return_value=100), \
+         patch("forge.core.evaluator._judge_eval", return_value=100):
+        # Second 100.0 run - should pass
+        run_evaluation(tmp_path, run_dir2.name)
+
+    time.sleep(1.1)
+
+    # Run 3: gets 100.0 (passed) -> should halt!
+    run_dir3 = create_run_dir(tmp_path, "test-bp")
+    (run_dir3 / "output.md").write_text("output", encoding="utf-8")
+    
+    with patch("forge.core.evaluator._self_eval", return_value=100), \
+         patch("forge.core.evaluator._judge_eval", return_value=100):
+        with pytest.raises(ForgeError, match="Suspicious evaluation pattern detected"):
+            run_evaluation(tmp_path, run_dir3.name)

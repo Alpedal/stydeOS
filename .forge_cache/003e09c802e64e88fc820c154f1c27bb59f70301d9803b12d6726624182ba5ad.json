@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 0, \"reason\": \"The agent output does not perform any review, instead it asks for code to be provided, violating the rule that if no code is given it should state what's missing and ask for it in one line, but the output is not a review at all and fails to follow the required output format.\"}"
+}

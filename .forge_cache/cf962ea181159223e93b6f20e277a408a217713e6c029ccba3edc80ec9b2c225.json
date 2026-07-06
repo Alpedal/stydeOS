@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 10, \"reason\": \"The agent failed to complete the task because it did not receive any code, blueprint, or configuration to review, and simply asked for the input instead of proceeding with the assigned task.\"}"
+}

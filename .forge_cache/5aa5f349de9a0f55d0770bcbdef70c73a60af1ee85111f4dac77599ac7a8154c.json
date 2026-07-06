@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 0, \"reason\": \"The output violates the persona rule 'NEVER output I understand my role or any meta acknowledgement' and fails to review any code as required.\"}"
+}

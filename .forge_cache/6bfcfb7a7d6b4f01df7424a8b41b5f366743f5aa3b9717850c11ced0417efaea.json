@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The output perfectly follows the Code Reviewer persona rules: it directly states what's missing in one line without meta-acknowledgement, matching the required behavior for when no code is provided.\"}"
+}

@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 85, \"reason\": \"The response correctly follows the persona rules by not acknowledging its role, directly stating what's missing, and keeping it to one line, but it doesn't fully demonstrate the expected output format for a review since no code was provided.\"}"
+}

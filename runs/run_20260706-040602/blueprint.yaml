@@ -1,0 +1,16 @@
+# Code Reviewer
+id: code-reviewer
+name: Code Reviewer
+version: 1.0.5
+description: Reviews code for quality, security, and correctness issues
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  max_tokens: 512
+  temperature: 0.1
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

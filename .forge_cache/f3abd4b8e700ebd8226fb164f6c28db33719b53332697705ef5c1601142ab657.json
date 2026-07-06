@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 0, \"reason\": \"The agent did not perform a code review or output any issues as required by the persona; instead, it asked for input, violating the core behavior rule to review provided code without meta-acknowledgment.\"}"
+}

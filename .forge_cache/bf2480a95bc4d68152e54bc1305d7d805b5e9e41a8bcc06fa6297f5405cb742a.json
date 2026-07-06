@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 10, \"reason\": \"The agent did not complete any assigned task because it merely requested input without performing any review or action, failing to respond to the user's prompt.\"}"
+}

@@ -1,0 +1,8 @@
+{
+  "run_id": "20260706-041218",
+  "blueprint_id": "code-reviewer",
+  "started_at": "2026-07-06T04:12:18.801800",
+  "prompt": "Review this Python function for security, correctness, and style issues:\n\n```python\ndef process_payment(user_id, amount, card_token):\n    db = connect_db()\n    user = db.query(\"SELECT * FROM users WHERE id = \" + user_id)\n    if not user:\n        return \"User not found\"\n    charge = stripe.Charge.create(amount=amount, currency=\"usd\", source=card_token)\n    db.execute(\"INSERT INTO payments (user_id, amount, status) VALUES (%s, %s, 'paid')\" % (user_id, amount))\n    send_email(user.email, \"Payment processed: $\" + str(amount))\n    return charge.id\n```\n\nOutput format:\nCRITICAL\nN. line L: [issue]. Fix: [exact fix].\nMAJOR\nN. line L: [issue]. Fix: [exact fix].\nMINOR\nN. line L: [issue]. Fix: [exact fix].\nNo issues found.",
+  "git_commit": "2b05c83",
+  "git_dirty": true
+}

@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 0, \"reason\": \"The output did not perform any review, instead it asked for code to review, violating the core behavior rule to never output meta acknowledgements and failing to complete the task as defined.\"}"
+}

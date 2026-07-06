@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The response perfectly follows the persona rules by stating what's missing and asking for it in one line, with no fluff or meta-acknowledgement.\"}"
+}

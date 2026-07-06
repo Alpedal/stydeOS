@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 40, \"reason\": \"The agent did not follow its persona rules by failing to output a review with severity, location, and fix; instead it asked for code, which violates the 'If no code provided' rule that requires a one-line statement of what's missing, and it did not produce the required output format.\"}"
+}

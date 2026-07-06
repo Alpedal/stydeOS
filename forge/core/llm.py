@@ -18,10 +18,13 @@ logger = logging.getLogger("forge.core.llm")
 # ponytail: global client cache — keyed by (provider, base_url, api_key_prefix)
 _client_cache: dict = {}
 
+# ponytail: per-call token tracking, latest call's usage stored here
+_last_token_usage: dict = {}
+
 
 def _load_hermes_env() -> None:
     """Load API keys from local hermes .env if they are missing in os.environ."""
-    if not os.environ.get("OPENAI_API_KEY") or not os.environ.get("ANTHROPIC_API_KEY") or not os.environ.get("DEEPSEEK_API_KEY"):
+    if not os.environ.get("OPENAI_API_KEY") or not os.environ.get("ANTHROPIC_API_KEY") or not os.environ.get("DEEPSEEK_API_KEY") or not os.environ.get("GEMINI_API_KEY") or not os.environ.get("GOOGLE_API_KEY"):
         env_path = Path("C:/Users/hund/AppData/Local/hermes/.env")
         if env_path.exists():
             try:
@@ -135,6 +138,11 @@ def call_llm(system_prompt: str, user_prompt: str,
     """
     _load_hermes_env()
 
+    _last_token_usage.clear()
+
+    if provider.lower() == "deepseek" and model == "deepseek-chat":
+        model = "deepseek-v4-flash"
+
     # Try retrieving from disk cache first
     from forge.core.llm_cache import get_cached_response, set_cached_response
     root = Path(__file__).resolve().parent.parent.parent
@@ -225,6 +233,7 @@ def _call_openai(system: str, user: str, model: str, api_key: Optional[str],
         try:
             resp = _client_cache[ck].chat.completions.create(**params)
             msg = resp.choices[0].message
+            _capture_usage(resp)
             if msg.tool_calls:
                 tc = msg.tool_calls[0]
                 return {"tool_call": {"name": tc.function.name, "arguments": json.loads(tc.function.arguments)}}
@@ -236,6 +245,7 @@ def _call_openai(system: str, user: str, model: str, api_key: Optional[str],
                 _client_cache[ck] = fallback
                 resp = fallback.chat.completions.create(**params)
                 msg = resp.choices[0].message
+                _capture_usage(resp)
                 if msg.tool_calls:
                     tc = msg.tool_calls[0]
                     return {"tool_call": {"name": tc.function.name, "arguments": json.loads(tc.function.arguments)}}
@@ -336,6 +346,7 @@ def _call_deepseek(system: str, user: str, model: str, api_key: Optional[str],
         try:
             resp = _client_cache[ck].chat.completions.create(**params)
             msg = resp.choices[0].message
+            _capture_usage(resp)
             if msg.tool_calls:
                 tc = msg.tool_calls[0]
                 return {"tool_call": {"name": tc.function.name, "arguments": json.loads(tc.function.arguments)}}
@@ -347,6 +358,7 @@ def _call_deepseek(system: str, user: str, model: str, api_key: Optional[str],
                 _client_cache[ck] = fallback
                 resp = fallback.chat.completions.create(**params)
                 msg = resp.choices[0].message
+                _capture_usage(resp)
                 if msg.tool_calls:
                     tc = msg.tool_calls[0]
                     return {"tool_call": {"name": tc.function.name, "arguments": json.loads(tc.function.arguments)}}
@@ -361,35 +373,169 @@ def _call_google(system: str, user: str, model: str, api_key: Optional[str],
                  temperature: Optional[float] = None,
                  max_tokens: Optional[int] = None,
                  top_p: Optional[float] = None) -> "str | dict":
-    import google.generativeai as genai
+    key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not key:
+        from forge.core.engine import ForgeError
+        raise ForgeError("No Gemini API key found (please set GEMINI_API_KEY or GOOGLE_API_KEY)")
 
-    genai.configure(api_key=api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"))
+    # Normalize model name
+    raw_model = model
+    if not raw_model.startswith("models/"):
+        raw_model = f"models/{raw_model}"
 
-    model_name = model if model.startswith("models/") else f"models/{model}"
-    ck = _cache_key("google", model_name, api_key)
+    try:
+        import google.generativeai as genai
+        # Try utilizing official SDK
+        genai.configure(api_key=key)
+        model_name = raw_model
+        ck = _cache_key("google", model_name, key)
+        if ck not in _client_cache:
+            _client_cache[ck] = genai.GenerativeModel(
+                model_name=model_name,
+                system_instruction=system
+            )
+        config_args = {}
+        if temperature is not None:
+            config_args["temperature"] = temperature
+        if max_tokens is not None:
+            config_args["max_output_tokens"] = max_tokens
+        if top_p is not None:
+            config_args["top_p"] = top_p
 
-    if ck not in _client_cache:
-        _client_cache[ck] = genai.GenerativeModel(
-            model_name=model_name,
-            system_instruction=system
-        )
+        def _do_sdk():
+            config = genai.types.GenerationConfig(**config_args) if config_args else None
+            resp = _client_cache[ck].generate_content(user, generation_config=config)
+            if not resp.candidates:
+                return ""
+            for part in resp.candidates[0].content.parts:
+                if hasattr(part, "function_call") and part.function_call:
+                    fc = part.function_call
+                    return {"tool_call": {"name": fc.name, "arguments": dict(fc.args)}}
+            return resp.text
 
-    config_args = {}
-    if temperature is not None:
-        config_args["temperature"] = temperature
-    if max_tokens is not None:
-        config_args["max_output_tokens"] = max_tokens
-    if top_p is not None:
-        config_args["top_p"] = top_p
+        return _llm_call_with_retry(_do_sdk)
 
-    def _do():
-        config = genai.types.GenerationConfig(**config_args) if config_args else None
-        resp = _client_cache[ck].generate_content(user, generation_config=config)
-        for part in resp.candidates[0].content.parts:
-            if hasattr(part, "function_call") and part.function_call:
-                fc = part.function_call
-                return {"tool_call": {"name": fc.name, "arguments": dict(fc.args)}}
-        return resp.text
+    except ImportError:
+        # Fallback to direct HTTP REST API calls using standard library
+        import urllib.request
+        import urllib.error
 
-    return _llm_call_with_retry(_do)
+        url = f"https://generativelanguage.googleapis.com/v1beta/{raw_model}:generateContent?key={key}"
+        
+        payload = {
+            "contents": [
+                {
+                    "parts": [{"text": user}]
+                }
+            ]
+        }
+        if system:
+            payload["systemInstruction"] = {
+                "parts": [{"text": system}]
+            }
+            
+        generation_config = {}
+        if temperature is not None:
+            generation_config["temperature"] = temperature
+        if max_tokens is not None:
+            generation_config["maxOutputTokens"] = max_tokens
+        if top_p is not None:
+            generation_config["topP"] = top_p
+            
+        if generation_config:
+            payload["generationConfig"] = generation_config
+
+        if tools:
+            gemini_tools = []
+            for t in tools:
+                props = {}
+                for param_name, param_type in t.get("parameters", {}).items():
+                    props[param_name] = {
+                        "type": "STRING",
+                        "description": param_type if isinstance(param_type, str) else ""
+                    }
+                gemini_tools.append({
+                    "functionDeclarations": [{
+                        "name": t["name"],
+                        "description": t.get("description", ""),
+                        "parameters": {
+                            "type": "OBJECT",
+                            "properties": props,
+                            "required": list(props.keys())
+                        }
+                    }]
+                })
+            payload["tools"] = gemini_tools
+
+        data_bytes = json.dumps(payload).encode("utf-8")
+        
+        def _do_http():
+            req = urllib.request.Request(
+                url,
+                data=data_bytes,
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+            try:
+                with urllib.request.urlopen(req, timeout=30) as response:
+                    resp_data = json.loads(response.read().decode("utf-8"))
+                
+                candidates = resp_data.get("candidates", [])
+                if not candidates:
+                    return ""
+                
+                parts = candidates[0].get("content", {}).get("parts", [])
+                if not parts:
+                    return ""
+                
+                for part in parts:
+                    if "functionCall" in part:
+                        fc = part["functionCall"]
+                        return {"tool_call": {"name": fc["name"], "arguments": fc.get("args", {})}}
+                    if "text" in part:
+                        return part["text"]
+                return ""
+            except urllib.error.HTTPError as e:
+                err_body = e.read().decode("utf-8")
+                raise RuntimeError(f"Gemini API returned error {e.code}: {err_body}")
+
+        return _llm_call_with_retry(_do_http)
+
+
+# --- Token tracking & cost estimation (ponytail: global state, simple) ---
+
+# ponytail: per-model pricing ($/1M tokens)
+_PRICES = {
+    "deepseek-chat":       (0.27, 1.10),
+    "deepseek-reasoner":   (0.55, 2.19),
+    "gpt-4o":              (2.50, 10.00),
+    "gpt-4o-mini":         (0.15, 0.60),
+    "claude-sonnet-4-20250514": (3.00, 15.00),
+    "claude-3-5-haiku":    (0.80, 4.00),
+    "gemini-2.5-flash":    (0.15, 0.60),
+    "gemini-2.5-pro":      (1.25, 10.00),
+}
+
+def _capture_usage(resp) -> None:
+    """Extract token usage from API response into _last_token_usage."""
+    try:
+        u = resp.usage
+        _last_token_usage["prompt_tokens"] = u.prompt_tokens
+        _last_token_usage["completion_tokens"] = u.completion_tokens
+    except Exception:
+        pass
+
+def get_last_token_usage() -> dict:
+    """Return token usage from the most recent API call."""
+    return dict(_last_token_usage)
+
+def estimate_cost(model: str, prompt_tokens: int, completion_tokens: int) -> float:
+    """Estimate USD cost based on model pricing."""
+    default = (2.50, 10.00)
+    input_price, output_price = _PRICES.get(model, default)
+    for key, (ip, op) in _PRICES.items():
+        if key in model:
+            input_price, output_price = ip, op
+            break
+    return round((prompt_tokens / 1_000_000) * input_price + (completion_tokens / 1_000_000) * output_price, 6)
 

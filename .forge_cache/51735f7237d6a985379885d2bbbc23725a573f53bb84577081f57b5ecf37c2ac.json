@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 10, \"reason\": \"The output fails to follow the persona rules by not performing a code review and instead asking for input, which violates the rule to never output meta acknowledgements or state what's missing.\"}"
+}

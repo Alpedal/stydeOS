@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "created_at": null
+  },
+  "response": "{\"score\": 20, \"reason\": \"The agent did not complete the task; it deflected by requesting an artifact that was not mentioned in the prompt.\"}"
+}

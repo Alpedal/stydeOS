@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 10, \"reason\": \"The agent did not complete any task or provide a meaningful response, merely asking for input.\"}"
+}

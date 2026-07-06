@@ -1381,6 +1381,126 @@
       "blueprint_id": "alert-engine",
       "score": 93.0,
       "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-040520",
+      "blueprint_id": "code-reviewer",
+      "score": 25.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040535",
+      "blueprint_id": "code-reviewer",
+      "score": 35.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040551",
+      "blueprint_id": "code-reviewer",
+      "score": 56.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040602",
+      "blueprint_id": "code-reviewer",
+      "score": 35.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040615",
+      "blueprint_id": "code-reviewer",
+      "score": 38.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040712",
+      "blueprint_id": "code-reviewer",
+      "score": 0.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040728",
+      "blueprint_id": "code-reviewer",
+      "score": 70.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040742",
+      "blueprint_id": "code-reviewer",
+      "score": 35.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040753",
+      "blueprint_id": "code-reviewer",
+      "score": 47.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040808",
+      "blueprint_id": "code-reviewer",
+      "score": 39.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040920",
+      "blueprint_id": "code-reviewer",
+      "score": 36.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040934",
+      "blueprint_id": "code-reviewer",
+      "score": 35.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-040950",
+      "blueprint_id": "code-reviewer",
+      "score": 37.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-041005",
+      "blueprint_id": "code-reviewer",
+      "score": 37.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-041016",
+      "blueprint_id": "code-reviewer",
+      "score": 35.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-041054",
+      "blueprint_id": "code-reviewer",
+      "score": 44.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-041133",
+      "blueprint_id": "code-reviewer",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-041218",
+      "blueprint_id": "code-reviewer",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-041332",
+      "blueprint_id": "code-reviewer",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-041457",
+      "blueprint_id": "code-reviewer",
+      "score": 99.1,
+      "status": "completed"
     }
   ]
 }

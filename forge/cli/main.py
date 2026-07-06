@@ -458,8 +458,8 @@ def cmd_history():
 
     # Header
     print(f"\n{BOLD}{CYAN}  Forge Run History{RESET}")
-    print(f"  {'Run ID':<26} {'Blueprint':<20} {'Score':>7}  {'Status':<18} {'Git':<10}")
-    print(f"  {'-'*26} {'-'*20} {'-'*7}  {'-'*18} {'-'*10}")
+    print(f"  {'Run ID':<26} {'Blueprint':<20} {'Score':>7}  {'Status':<18} {'Tokens':>12} {'Cost':>10}")
+    print(f"  {'-'*26} {'-'*20} {'-'*7}  {'-'*18} {'-'*12} {'-'*10}")
 
     for r in runs:
         run_id      = r.get("run_id", "?")
@@ -468,8 +468,13 @@ def cmd_history():
         status      = r.get("status", "unknown")
         git_commit  = r.get("git_commit", "-")
         git_dirty   = r.get("git_dirty")
+        pt          = r.get("prompt_tokens", 0) or 0
+        ct          = r.get("completion_tokens", 0) or 0
+        cost        = r.get("estimated_usd_cost")
 
         score_str = f"{score:6.1f}/100" if score is not None else "     -/100"
+        tokens_str = f"{pt + ct:>6}" if (pt or ct) else "     -"
+        cost_str = f"${cost:>8.4f}" if cost is not None else "        -"
 
         if status == "completed":
             status_col = f"{GREEN}{status:<18}{RESET}"
@@ -569,6 +574,182 @@ def cmd_play(blueprint_id: str):
             print(f"\nError: {e}")
 
 
+def cmd_status():
+    """Show all blueprints, their directory locations, and latest training score/status."""
+    from forge.core.engine import load_manifest, load_blueprint
+    
+    # 1. Load manifest runs
+    latest_runs = {}
+    try:
+        manifest = load_manifest(ROOT)
+        for run in manifest.get("runs", []):
+            bp_id = run["blueprint_id"]
+            # Save the latest run info (relying on chronological order in forge.json)
+            latest_runs[bp_id] = {
+                "score": run.get("score"),
+                "status": run.get("status"),
+                "run_id": run.get("run_id")
+            }
+    except Exception:
+        pass
+
+    # 2. Walk directories
+    refinery_bps = []
+    done_bps = []
+    original_bps = []
+
+    # refinery/
+    refinery_dir = ROOT / "refinery"
+    if refinery_dir.is_dir():
+        for item in refinery_dir.iterdir():
+            if item.is_dir() and (item / "blueprint.yaml").exists():
+                refinery_bps.append(item.name)
+
+    # done-blueprints/
+    done_dir = ROOT / "done-blueprints"
+    if done_dir.is_dir():
+        for item in done_dir.iterdir():
+            if item.is_dir() and (item / "blueprint.yaml").exists():
+                done_bps.append(item.name)
+
+    # blueprints/internal & customer
+    bp_root = ROOT / "blueprints"
+    if bp_root.is_dir():
+        for sub in ["internal", "customer"]:
+            sub_dir = bp_root / sub
+            if sub_dir.is_dir():
+                for item in sub_dir.iterdir():
+                    if item.is_dir() and (item / "blueprint.yaml").exists():
+                        name = item.name
+                        # Only count as original if not active in refinery or done
+                        if name not in refinery_bps and name not in done_bps and name not in original_bps:
+                            original_bps.append(name)
+
+    # Print output
+    print("\n  +--------------------------------------------------+")
+    print("  |         Forge Blueprint Lifecycle Status         |")
+    print("  +--------------------------------------------------+")
+
+    # Print Refinery Section
+    print("\n  [ Refinery (Active Training) ]")
+    if not refinery_bps:
+        print("    (no active blueprints in refinery)")
+    else:
+        for bp_id in sorted(refinery_bps):
+            version = "-"
+            try:
+                bp = load_blueprint(ROOT, bp_id)
+                version = bp.get("version", "-")
+            except Exception:
+                pass
+            run_info = latest_runs.get(bp_id)
+            if run_info:
+                score_str = f"{run_info['score']}/100" if run_info['score'] is not None else "-"
+                status_str = f"({run_info['status']})"
+            else:
+                score_str = "-"
+                status_str = "(unstarted)"
+            print(f"    - {bp_id} (v{version})")
+            print(f"      Latest: {score_str} {status_str}")
+
+    # Print Done Section
+    print("\n  [ Done (Production Ready Archived) ]")
+    if not done_bps:
+        print("    (no blueprints archived as done)")
+    else:
+        for bp_id in sorted(done_bps):
+            version = "-"
+            try:
+                bp = load_blueprint(ROOT, bp_id)
+                version = bp.get("version", "-")
+            except Exception:
+                pass
+            run_info = latest_runs.get(bp_id)
+            if run_info:
+                score_str = f"{run_info['score']}/100" if run_info['score'] is not None else "-"
+                status_str = f"({run_info['status']})"
+            else:
+                score_str = "-"
+                status_str = "(passed)"
+            print(f"    - {bp_id} (v{version})")
+            print(f"      Latest: {score_str} {status_str}")
+
+    # Print Originals Section
+    print("\n  [ Original Blueprints ]")
+    if not original_bps:
+        print("    (no original blueprints left)")
+    else:
+        for bp_id in sorted(original_bps):
+            version = "-"
+            try:
+                bp = load_blueprint(ROOT, bp_id)
+                version = bp.get("version", "-")
+            except Exception:
+                pass
+            print(f"    - {bp_id} (v{version})")
+            print("      Status: unstarted")
+    print("\n  +--------------------------------------------------+\n")
+
+
+def cmd_stage(blueprint_id: str):
+    """Manually stage a blueprint to the refinery/ folder."""
+    from forge.core.blueprint import find_blueprint_dir
+    bp_dir = find_blueprint_dir(ROOT, blueprint_id)
+    if not bp_dir:
+        print(f"Error: Blueprint '{blueprint_id}' not found in any staging/blueprint folder.")
+        sys.exit(1)
+    
+    if bp_dir.parent.name == "refinery":
+        print(f"Blueprint '{blueprint_id}' is already in refinery/ staging directory.")
+        return
+
+    _stage_blueprint_to_refinery(blueprint_id)
+    print(f"Successfully staged '{blueprint_id}' to refinery/.")
+
+
+def cmd_archive(blueprint_id: str, run_id: str):
+    """Manually deploy outputs and archive blueprint to done-blueprints/."""
+    from forge.core.blueprint import find_blueprint_dir
+    bp_dir = find_blueprint_dir(ROOT, blueprint_id)
+    if not bp_dir:
+        print(f"Error: Blueprint '{blueprint_id}' not found.")
+        sys.exit(1)
+
+    run_dir = ROOT / "runs" / run_id
+    if not run_dir.exists():
+        print(f"Error: Run directory not found: {run_id}")
+        sys.exit(1)
+
+    _push_to_production_and_archive(blueprint_id, run_id)
+    print(f"Successfully archived '{blueprint_id}' using run outputs from {run_id}.")
+
+
+def cmd_cache_stats():
+    """Show analytics and disk usage for cached LLM queries."""
+    cache_dir = ROOT / ".forge_cache"
+    if not cache_dir.exists():
+        print("Cache stats: .forge_cache directory does not exist yet.")
+        return
+    files = list(cache_dir.glob("*.json"))
+    total_size = sum(f.stat().st_size for f in files)
+    print("\n  +--------------------------------------------------+")
+    print("  |         Forge Cache Analytics                    |")
+    print("  +--------------------------------------------------+")
+    print(f"    Total Cached Queries:  {len(files)}")
+    print(f"    Total Cache Size:      {total_size / 1024:.1f} KB ({total_size / 1024 / 1024:.2f} MB)")
+    print(f"    Cache Directory:       {cache_dir}")
+    print("    To clear all cached items, run: forge cache clean")
+    print("  +--------------------------------------------------+\n")
+
+
+def cmd_cache(action: str):
+    """Dispatch cache actions (stats or clean)."""
+    if action == "stats":
+        cmd_cache_stats()
+    elif action == "clean":
+        cmd_cache_clean()
+
+
 def cmd_report(run_id: str):
     """Generate a standalone HTML report for a run."""
     from forge.core.report import generate_report
@@ -584,6 +765,171 @@ def cmd_cache_clean():
     from forge.core.llm_cache import clear_cache
     count = clear_cache(ROOT)
     print(f"Cache cleared: {count} entry/entries removed.")
+
+
+# --- Doctor ---
+
+def cmd_doctor():
+    """Scan all blueprints for health issues."""
+    from datetime import datetime, timezone
+    import yaml
+    
+    issues_critical = []
+    issues_warning = []
+    healthy = []
+    
+    # Collect all blueprint dirs
+    bp_dirs = []
+    for search in ["refinery", "done-blueprints", "blueprints/internal", "blueprints/customer"]:
+        d = ROOT / search
+        if d.is_dir():
+            for item in d.iterdir():
+                if item.is_dir() and (item / "blueprint.yaml").exists():
+                    bp_dirs.append(item)
+    
+    if not bp_dirs:
+        print("No blueprints found.")
+        return
+    
+    # Load run history for stale checks
+    run_bp_ids = set()
+    try:
+        manifest = load_manifest(ROOT)
+        cutoff = datetime.now(timezone.utc).timestamp() - 7 * 86400
+        for r in manifest.get("runs", []):
+            try:
+                ts = datetime.strptime(r["run_id"].removeprefix("run_"), "%Y%m%d-%H%M%S")
+                ts = ts.replace(tzinfo=timezone.utc).timestamp()
+                if ts >= cutoff:
+                    run_bp_ids.add(r.get("blueprint_id", ""))
+            except Exception:
+                run_bp_ids.add(r.get("blueprint_id", ""))
+    except Exception:
+        pass
+    
+    for bp_dir in bp_dirs:
+        bp_id = bp_dir.name
+        bp_yaml = bp_dir / "blueprint.yaml"
+        persona_md = bp_dir / "persona.md"
+        
+        # Check persona.md
+        if not persona_md.exists():
+            issues_critical.append(f"{bp_id}: missing persona.md")
+            continue
+        ps = persona_md.stat().st_size
+        if ps == 0:
+            issues_critical.append(f"{bp_id}: persona.md is empty")
+        elif ps < 50:
+            issues_warning.append(f"{bp_id}: persona.md is very short ({ps} bytes)")
+        
+        # Check blueprint.yaml
+        if not bp_yaml.exists():
+            issues_critical.append(f"{bp_id}: missing blueprint.yaml")
+            continue
+        
+        try:
+            bp = yaml.safe_load(bp_yaml.read_text())
+        except Exception as e:
+            issues_critical.append(f"{bp_id}: blueprint.yaml YAML error: {e}")
+            continue
+        
+        if not isinstance(bp, dict):
+            issues_critical.append(f"{bp_id}: blueprint.yaml is not a dict")
+            continue
+        
+        for field in ["id", "name", "threshold", "model"]:
+            if field not in bp:
+                issues_warning.append(f"{bp_id}: missing field '{field}' in blueprint.yaml")
+        
+        # Stale check
+        if bp_id not in run_bp_ids:
+            issues_warning.append(f"{bp_id}: no runs in last 7 days (stale)")
+        
+        if bp_id not in [c.split(":")[0] for c in issues_critical + issues_warning]:
+            healthy.append(bp_id)
+    
+    # Print report
+    print()
+    print("  +--------------------------------------------------+")
+    print("  |              Forge Blueprint Doctor              |")
+    print("  +--------------------------------------------------+")
+    
+    if healthy:
+        print(f"\n  Healthy ({len(healthy)}):")
+        for h in sorted(healthy):
+            print(f"    [OK] {h}")
+    
+    if issues_warning:
+        print(f"\n  Warnings ({len(issues_warning)}):")
+        for w in sorted(issues_warning):
+            print(f"    [!]  {w}")
+    
+    if issues_critical:
+        print(f"\n  Critical ({len(issues_critical)}):")
+        for c in sorted(issues_critical):
+            print(f"    [X]  {c}")
+    
+    total = len(healthy) + len(issues_warning) + len(issues_critical)
+    print(f"\n  Total: {total} blueprints scanned.")
+    print("  +--------------------------------------------------+\n")
+
+
+# --- Checkpoint ---
+
+def cmd_checkpoint(name: str, list_flag: bool):
+    """Save or list forge.json checkpoints."""
+    ckpt_dir = ROOT / ".forge_checkpoints"
+    
+    if list_flag:
+        if not ckpt_dir.is_dir():
+            print("No checkpoints found.")
+            return
+        files = sorted(ckpt_dir.glob("checkpoint_*.json"))
+        if not files:
+            print("No checkpoints found.")
+            return
+        print(f"\n  Checkpoints ({len(files)}):")
+        for f in files:
+            s = f.stat()
+            cname = f.stem.removeprefix("checkpoint_")
+            print(f"    {cname}  |  {s.st_size:>6} bytes  |  {datetime.fromtimestamp(s.st_mtime).strftime('%Y-%m-%d %H:%M')}")
+        print()
+        return
+    
+    if not name:
+        print("Usage: forge checkpoint <name>  or  forge checkpoint --list")
+        return
+    
+    ckpt_dir.mkdir(parents=True, exist_ok=True)
+    forge_path = ROOT / "forge.json"
+    if not forge_path.exists():
+        print("No forge.json to checkpoint.")
+        return
+    
+    import shutil
+    dest = ckpt_dir / f"checkpoint_{name}.json"
+    shutil.copy2(forge_path, dest)
+    print(f"Checkpoint saved: {dest}")
+
+
+def cmd_recover(name: str):
+    """Restore forge.json from a checkpoint."""
+    ckpt_dir = ROOT / ".forge_checkpoints"
+    src = ckpt_dir / f"checkpoint_{name}.json"
+    if not src.exists():
+        print(f"Checkpoint '{name}' not found. Use --list to see available checkpoints.")
+        return
+    
+    forge_path = ROOT / "forge.json"
+    import shutil
+    # Backup current
+    if forge_path.exists():
+        bak = ROOT / "forge.json.bak"
+        shutil.copy2(forge_path, bak)
+        print(f"Backup saved: {bak}")
+    
+    shutil.copy2(src, forge_path)
+    print(f"Restored forge.json from checkpoint '{name}'.")
 
 
 # --- Main parser ---
@@ -625,6 +971,36 @@ def main():
 
     sub.add_parser("cache-clean", help="Clear all disk-cached LLM responses")
 
+    # refinery status
+    sub.add_parser("status", help="Show all blueprints, refinery, done, and original list")
+
+    # manual stage
+    p = sub.add_parser("stage", help="Stage a blueprint manually to refinery/")
+    p.add_argument("blueprint_id", help="Blueprint ID to stage")
+
+    # manual archive
+    p = sub.add_parser("archive", help="Manually deploy output and archive blueprint to done-blueprints/")
+    p.add_argument("blueprint_id", help="Blueprint ID to archive")
+    p.add_argument("run_id", help="Run ID to pull output from")
+
+    # cache commands
+    p = sub.add_parser("cache", help="Manage LLM cache")
+    cache_sub = p.add_subparsers(dest="cache_command", required=True)
+    cache_sub.add_parser("stats", help="Show cache disk size and query count stats")
+    cache_sub.add_parser("clean", help="Clear all disk-cached LLM responses")
+
+    # doctor
+    sub.add_parser("doctor", help="Scan all blueprints for health issues")
+
+    # checkpoint
+    p = sub.add_parser("checkpoint", help="Save/restore forge.json checkpoints")
+    p.add_argument("name", nargs="?", help="Checkpoint name (or --list)")
+    p.add_argument("--list", action="store_true", help="List all checkpoints")
+
+    # recover
+    p = sub.add_parser("recover", help="Restore forge.json from a checkpoint")
+    p.add_argument("name", help="Checkpoint name to restore")
+
     args = parser.parse_args()
 
     commands = {
@@ -639,6 +1015,13 @@ def main():
         "play": lambda: cmd_play(args.blueprint_id),
         "report": lambda: cmd_report(args.run_id),
         "cache-clean": cmd_cache_clean,
+        "status": cmd_status,
+        "stage": lambda: cmd_stage(args.blueprint_id),
+        "archive": lambda: cmd_archive(args.blueprint_id, args.run_id),
+        "cache": lambda: cmd_cache(args.cache_command),
+        "doctor": cmd_doctor,
+        "checkpoint": lambda: cmd_checkpoint(args.name, args.list),
+        "recover": lambda: cmd_recover(args.name),
     }
     commands[args.command]()
 

@@ -72,11 +72,26 @@ def create_run_dir(root: Path, blueprint_id: str) -> Path:
 
     git_info = _get_git_info(root)
 
+    # Load task_prompt from blueprint if available, else default
+    prompt = "Complete your assigned task based on your persona definition."
+    try:
+        from forge.core.blueprint import find_blueprint_dir
+        import yaml
+        bp_dir = find_blueprint_dir(root, blueprint_id)
+        if bp_dir:
+            bp_yaml = bp_dir / "blueprint.yaml"
+            if bp_yaml.exists():
+                bp_data = yaml.safe_load(bp_yaml.read_text(encoding="utf-8"))
+                if bp_data.get("task_prompt"):
+                    prompt = bp_data["task_prompt"]
+    except Exception:
+        pass
+
     skeleton = {
         "run_id": run_id,
         "blueprint_id": blueprint_id,
         "started_at": datetime.utcnow().isoformat(),
-        "prompt": "Complete your assigned task based on your persona definition.",
+        "prompt": prompt,
         **git_info,
     }
     with open(run_dir / "input.json", "w", encoding="utf-8") as f:
@@ -124,7 +139,10 @@ def add_run_to_manifest(root: Path, run_id: str, blueprint_id: str,
                         score: Optional[float] = None,
                         status: str = "running",
                         git_commit: Optional[str] = None,
-                        git_dirty: Optional[bool] = None) -> None:
+                        git_dirty: Optional[bool] = None,
+                        prompt_tokens: Optional[int] = None,
+                        completion_tokens: Optional[int] = None,
+                        estimated_usd_cost: Optional[float] = None) -> None:
     """Append or update a run entry in forge.json."""
     manifest = load_manifest(root)
     runs = manifest.setdefault("runs", [])
@@ -139,6 +157,12 @@ def add_run_to_manifest(root: Path, run_id: str, blueprint_id: str,
         entry["git_commit"] = git_commit
     if git_dirty is not None:
         entry["git_dirty"] = git_dirty
+    if prompt_tokens is not None:
+        entry["prompt_tokens"] = prompt_tokens
+    if completion_tokens is not None:
+        entry["completion_tokens"] = completion_tokens
+    if estimated_usd_cost is not None:
+        entry["estimated_usd_cost"] = estimated_usd_cost
 
     for r in runs:
         if r["run_id"] == run_id:

@@ -118,7 +118,33 @@ def run_evaluation(root: Path, run_id: str,
     # Update manifest
     threshold = bp.get("threshold", 85) if bp else 85
     status = "completed" if final_score >= threshold else "needs_improvement"
-    add_run_to_manifest(root, run_id, blueprint_id, score=final_score, status=status)
+    # ponytail: capture token usage from last LLM call
+    from forge.core.llm import get_last_token_usage, estimate_cost
+    usage = get_last_token_usage()
+    model_used = bp.get("model", {}).get("model", "unknown") if bp else "unknown"
+    token_cost = estimate_cost(model_used, usage.get("prompt_tokens", 0), usage.get("completion_tokens", 0))
+    add_run_to_manifest(root, run_id, blueprint_id, score=final_score, status=status,
+                        prompt_tokens=usage.get("prompt_tokens"),
+                        completion_tokens=usage.get("completion_tokens"),
+                        estimated_usd_cost=token_cost)
+
+    # Safety check: if a blueprint receives 100 points three times, halt to inspect for bugs/biases.
+    try:
+        from forge.core.engine import load_manifest
+        manifest = load_manifest(root)
+        runs_100_count = sum(
+            1 for r in manifest.get("runs", [])
+            if r.get("blueprint_id") == blueprint_id and r.get("score") == 100.0
+        )
+        if runs_100_count >= 3:
+            raise ForgeError(
+                f"Suspicious evaluation pattern detected: blueprint '{blueprint_id}' has received "
+                f"a score of 100.0 three times. Halting execution to inspect for bugs or model biases."
+            )
+    except ForgeError:
+        raise
+    except Exception:
+        pass
 
     return eval_result
 

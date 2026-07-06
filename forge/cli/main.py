@@ -492,7 +492,7 @@ def cmd_history():
         dirty_marker = f"{RED}*{RESET}" if git_dirty else " "
         git_str = f"{git_commit}{dirty_marker}" if git_commit != "-" else DIM + "-" + RESET
 
-        print(f"  {run_id:<26} {blueprint:<20} {score_col}  {status_col} {git_str}")
+        print(f"  {run_id:<26} {blueprint:<20} {score_col}  {status_col} {tokens_str:>12} {cost_str:>10}")
 
     print(f"  {DIM}(* = uncommitted changes at run time){RESET}\n")
 

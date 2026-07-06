@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 65, \"reason\": \"The response correctly uses 'Hund ser', 'konkret atgard', and 'agenten har kraschat', but it uses 'Hund foreslar' with Swedish characters 'föreslår' instead of the required ASCII 'foreslar', and includes an emoji-dash-like symbol, violating the 'inga_emojis' and 'kortfattat' rules.\"}"
+}

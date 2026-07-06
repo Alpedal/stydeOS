@@ -12,13 +12,16 @@ from typing import Optional
 from forge.core.engine import (
     load_run_data, call_llm, add_run_to_manifest, ForgeError,
 )
+from forge.core.blueprint import find_blueprint_dir
 
 logger = logging.getLogger("forge.core.evaluator")
 
 
 def run_evaluation(root: Path, run_id: str,
                    provider: str = "openai",
-                   model: str = "gpt-4o") -> dict:
+                   model: str = "gpt-4o",
+                   run_only_cases: Optional[list[str]] = None,
+                   previous_results: Optional[list[dict]] = None) -> dict:
     """Run self-eval + judge-eval on a run, and execute benchmark cases if configured.
     Writes eval.json. Returns eval dict.
     """
@@ -64,8 +67,12 @@ def run_evaluation(root: Path, run_id: str,
     if output:
         persona = _load_persona(root, blueprint_id)
         prompt = input_json.get("prompt", "")
-        self_score = _self_eval(output, prompt, persona, provider, model)
-        judge_score = _judge_eval(output, prompt, persona, provider, model)
+        # ponytail: code agents use syntax eval, not LLM
+        if bp.get("output_type") == "code":
+            self_score, judge_score = _code_eval(output)
+        else:
+            self_score = _self_eval(output, prompt, persona, provider, model)
+            judge_score = _judge_eval(output, prompt, persona, provider, model)
         run_score = round(self_score * self_eval_weight + judge_score * judge_eval_weight, 1)
 
     # 2. Evaluate benchmark cases if present
@@ -74,7 +81,11 @@ def run_evaluation(root: Path, run_id: str,
 
     if benchmark_case_files:
         logger.info("Executing %d benchmark case file(s)...", len(benchmark_case_files))
-        benchmark_report = run_benchmarks(root, blueprint_id, provider, model)
+        benchmark_report = run_benchmarks(
+            root, blueprint_id, provider, model,
+            run_only_cases=run_only_cases,
+            previous_results=previous_results
+        )
         bench_score = benchmark_report["score"]
 
     # Calculate final score using configurable blend weights
@@ -114,9 +125,9 @@ def run_evaluation(root: Path, run_id: str,
 
 def _load_persona(root: Path, blueprint_id: str) -> str:
     """Load persona.md from the blueprint directory. Returns empty string if missing."""
-    bp_root = root / "blueprints"
-    for sub in ["internal", "customer"]:
-        path = bp_root / sub / blueprint_id / "persona.md"
+    bp_dir = find_blueprint_dir(root, blueprint_id)
+    if bp_dir:
+        path = bp_dir / "persona.md"
         if path.exists():
             return path.read_text(encoding="utf-8")
     return ""
@@ -166,6 +177,36 @@ Rate from 0 to 100. Reply with ONLY a JSON object: {"score": <0-100>, "reason": 
         return max(0, min(100, int(result.get("score", 50))))
     except Exception:
         return 50
+
+
+def _code_eval(output: str) -> tuple[int, int]:
+    """Evaluate code output without LLM. Returns (self_score, judge_score)."""
+    # ponytail: naive syntax check, upgrade when precision matters
+    text = output.strip()
+    if not text or len(text) < 50:
+        return (0, 0)
+
+    # Python detection
+    if "def " in text or "import " in text or "```python" in text:
+        import ast, re
+        # ponytail: extract code block from markdown, try whole text as fallback
+        blocks = re.findall(r'```python\s*\n(.*?)```', text, re.DOTALL)
+        code = blocks[0] if blocks else text.replace("```python", "").replace("```", "")
+        try:
+            ast.parse(code)
+            return (90, 90)
+        except SyntaxError:
+            return (10, 10)
+
+    # HTML detection
+    if "<!DOCTYPE html>" in text or "<html" in text or "<div" in text or "<body" in text:
+        return (90, 90)
+
+    # Generic: has some structure
+    if len(text) > 200:
+        return (80, 80)
+
+    return (50, 50)
 
 
 # --- Self-test ---

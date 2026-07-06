@@ -4,6 +4,7 @@
 import importlib.util
 import json
 import logging
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Optional
@@ -11,6 +12,7 @@ from typing import Optional
 from forge.core.engine import (
     load_run_data, load_blueprint, ForgeError,
 )
+from forge.core.blueprint import find_blueprint_dir
 from forge.core.llm import call_llm
 
 logger = logging.getLogger("forge.core.spawner")
@@ -24,8 +26,9 @@ def _load_tools(root: Path, blueprint_id: str) -> list:
         import yaml
     except ImportError:
         return []
-    for sub in ["internal", "customer"]:
-        path = root / "blueprints" / sub / blueprint_id / "tools.yaml"
+    bp_dir = find_blueprint_dir(root, blueprint_id)
+    if bp_dir:
+        path = bp_dir / "tools.yaml"
         if path.exists():
             data = yaml.safe_load(path.read_text(encoding="utf-8"))
             return data.get("tools", []) if isinstance(data, dict) else []
@@ -38,8 +41,9 @@ def _load_mock_responses(root: Path, blueprint_id: str) -> dict:
         import yaml
     except ImportError:
         return {}
-    for sub in ["internal", "customer"]:
-        path = root / "blueprints" / sub / blueprint_id / "mock_responses.yaml"
+    bp_dir = find_blueprint_dir(root, blueprint_id)
+    if bp_dir:
+        path = bp_dir / "mock_responses.yaml"
         if path.exists():
             data = yaml.safe_load(path.read_text(encoding="utf-8"))
             return data if isinstance(data, dict) else {}
@@ -48,14 +52,23 @@ def _load_mock_responses(root: Path, blueprint_id: str) -> dict:
 
 def _lookup_mock_response(mocks: dict, tool_name: str, arguments: dict) -> str:
     """Look up a mock response. Returns tool invocation stub if no match."""
+    tool_mocks = mocks.get(tool_name, {})
+    if tool_mocks:
+        # Try to match a key from arguments (e.g. agent_id value), fall back to "default"
+        for arg_val in arguments.values():
+            if isinstance(arg_val, str) and arg_val in tool_mocks:
+                return tool_mocks[arg_val]
+        if "default" in tool_mocks:
+            return tool_mocks["default"]
     return json.dumps({"tool": tool_name, "args": arguments, "status": "ok"})
 
 
 def _load_tools_impl(root: Path, blueprint_id: str):
     """Dynamically load tools_impl.py from a blueprint directory.
     Returns the loaded module, or None if the file does not exist."""
-    for sub in ["internal", "customer"]:
-        impl_path = root / "blueprints" / sub / blueprint_id / "tools_impl.py"
+    bp_dir = find_blueprint_dir(root, blueprint_id)
+    if bp_dir:
+        impl_path = bp_dir / "tools_impl.py"
         if impl_path.exists():
             spec = importlib.util.spec_from_file_location(f"forge.tools.{blueprint_id}", impl_path)
             mod = importlib.util.module_from_spec(spec)
@@ -84,7 +97,10 @@ def _execute_tool(tool_name: str, arguments: dict,
 
 def _call_with_tools(persona: str, prompt: str, provider: str, model: str,
                      tools: list, mocks: dict,
-                     impl_module=None) -> str:
+                     impl_module=None,
+                     temperature: Optional[float] = None,
+                     max_tokens: Optional[int] = None,
+                     top_p: Optional[float] = None) -> str:
     """Run a multi-turn conversation loop that executes tool calls until text is returned.
 
     Prefers tools_impl.py for execution; falls back to mock_responses.yaml.
@@ -93,7 +109,16 @@ def _call_with_tools(persona: str, prompt: str, provider: str, model: str,
     system = persona
 
     for _ in range(MAX_TOOL_TURNS):
-        result = call_llm(system, messages[-1]["content"], provider, model, tools=tools if tools else None)
+        result = call_llm(
+            system,
+            messages[-1]["content"],
+            provider,
+            model,
+            tools=tools if tools else None,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            top_p=top_p
+        )
 
         if isinstance(result, dict) and "tool_call" in result:
             tc = result["tool_call"]
@@ -153,8 +178,16 @@ def generate_output(root: Path, run_id: str,
     mocks = _load_mock_responses(root, blueprint_id)
     impl_module = _load_tools_impl(root, blueprint_id)
 
+    # Extract model configurations
+    temperature = bp_model_config.get("temperature")
+    max_tokens = bp_model_config.get("max_tokens")
+    top_p = bp_model_config.get("top_p")
+
     logger.info("Generating output for %s using %s/%s...", run_id, final_provider, final_model)
-    output_text = _call_with_tools(persona, prompt, final_provider, final_model, tools, mocks, impl_module)
+    output_text = _call_with_tools(
+        persona, prompt, final_provider, final_model, tools, mocks, impl_module,
+        temperature=temperature, max_tokens=max_tokens, top_p=top_p
+    )
 
     # Save to output.md
     with open(run_dir / "output.md", "w", encoding="utf-8") as f:
@@ -165,7 +198,11 @@ def generate_output(root: Path, run_id: str,
 
 def _run_single_case(case: dict, persona: str, final_provider: str, final_model: str,
                      tools: Optional[list] = None, mocks: Optional[dict] = None,
-                     impl_module=None) -> dict:
+                     impl_module=None,
+                     temperature: Optional[float] = None,
+                     max_tokens: Optional[int] = None,
+                     top_p: Optional[float] = None,
+                     delay: float = 0.0) -> dict:
     """Execute and grade a single benchmark case. Designed to be called in a thread."""
     case_id = case.get("id", "unknown")
     prompt = case.get("prompt", "")
@@ -175,9 +212,16 @@ def _run_single_case(case: dict, persona: str, final_provider: str, final_model:
     tools = tools or []
     mocks = mocks or {}
 
+    if delay > 0.0:
+        logger.info("Staggering case '%s' start: sleeping for %.2fs", case_id, delay)
+        time.sleep(delay)
+
     logger.info("Running benchmark case '%s'...", case_id)
     try:
-        output = _call_with_tools(persona, prompt, final_provider, final_model, tools, mocks, impl_module)
+        output = _call_with_tools(
+            persona, prompt, final_provider, final_model, tools, mocks, impl_module,
+            temperature=temperature, max_tokens=max_tokens, top_p=top_p
+        )
     except Exception as e:
         logger.error("Error executing case '%s': %s", case_id, e)
         return {
@@ -238,8 +282,10 @@ def _run_single_case(case: dict, persona: str, final_provider: str, final_model:
 
 def run_benchmarks(root: Path, blueprint_id: str,
                    provider: Optional[str] = None,
-                   model: Optional[str] = None) -> dict:
-    """Run all benchmark cases in parallel and return the aggregated report."""
+                   model: Optional[str] = None,
+                   run_only_cases: Optional[list[str]] = None,
+                   previous_results: Optional[list[dict]] = None) -> dict:
+    """Run benchmark cases in parallel (or incrementally) and return the aggregated report."""
     bp = load_blueprint(root, blueprint_id)
     bp_model_config = bp.get("model", {})
     final_provider = provider or bp_model_config.get("provider", "openai")
@@ -267,23 +313,50 @@ def run_benchmarks(root: Path, blueprint_id: str,
     if not all_cases:
         return {"blueprint_id": blueprint_id, "cases_run": 0, "score": 0.0, "results": []}
 
-    # Run all cases in parallel (max_workers capped at number of cases to avoid waste)
-    max_workers = min(5, len(all_cases))
-    case_results: list[dict] = [{}] * len(all_cases)
+    # Extract model configurations
+    temperature = bp_model_config.get("temperature")
+    max_tokens = bp_model_config.get("max_tokens")
+    top_p = bp_model_config.get("top_p")
+    rate_limit_delay = float(evaluation_config.get("rate_limit_delay", 0.0))
 
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        future_to_idx = {
-            executor.submit(_run_single_case, case, persona, final_provider, final_model, tools, mocks, impl_module): idx
-            for idx, case in enumerate(all_cases)
-        }
-        for future in as_completed(future_to_idx):
-            idx = future_to_idx[future]
-            try:
-                case_results[idx] = future.result()
-            except Exception as exc:
-                case_id = all_cases[idx].get("id", f"case_{idx}")
-                logger.error("Case '%s' raised an exception: %s", case_id, exc)
-                case_results[idx] = {"id": case_id, "score": 0.0, "error": str(exc), "output": ""}
+    # Filter cases to run incrementally
+    cases_to_run = all_cases
+    if run_only_cases is not None:
+        cases_to_run = [c for c in all_cases if c.get("id") in run_only_cases]
+
+    case_results: list[dict] = [{}] * len(all_cases)
+    case_id_to_idx = {c.get("id"): idx for idx, c in enumerate(all_cases)}
+
+    # Pre-populate with previous results for skipped cases
+    if previous_results:
+        prev_map = {r.get("id"): r for r in previous_results}
+        for c in all_cases:
+            cid = c.get("id")
+            if run_only_cases is not None and cid not in run_only_cases:
+                idx = case_id_to_idx[cid]
+                case_results[idx] = prev_map.get(cid, {"id": cid, "score": 0.0, "error": "Skipped (incremental run)"})
+
+    # Run remaining cases in parallel (max_workers capped at number of cases to avoid waste)
+    max_workers = min(5, len(cases_to_run)) if cases_to_run else 1
+
+    if cases_to_run:
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_idx = {
+                executor.submit(
+                    _run_single_case, case, persona, final_provider, final_model, tools, mocks, impl_module,
+                    temperature=temperature, max_tokens=max_tokens, top_p=top_p,
+                    delay=idx * rate_limit_delay
+                ): case_id_to_idx[case.get("id")]
+                for idx, case in enumerate(cases_to_run)
+            }
+            for future in as_completed(future_to_idx):
+                idx = future_to_idx[future]
+                try:
+                    case_results[idx] = future.result()
+                except Exception as exc:
+                    case_id = all_cases[idx].get("id", f"case_{idx}")
+                    logger.error("Case '%s' raised an exception: %s", case_id, exc)
+                    case_results[idx] = {"id": case_id, "score": 0.0, "error": str(exc), "output": ""}
 
     total_score = sum(r.get("score", 0.0) for r in case_results)
     avg_score = round(total_score / len(case_results), 1) if case_results else 0.0
@@ -298,9 +371,9 @@ def run_benchmarks(root: Path, blueprint_id: str,
 
 
 def _load_persona(root: Path, blueprint_id: str) -> str:
-    bp_root = root / "blueprints"
-    for sub in ["internal", "customer"]:
-        path = bp_root / sub / blueprint_id / "persona.md"
+    bp_dir = find_blueprint_dir(root, blueprint_id)
+    if bp_dir:
+        path = bp_dir / "persona.md"
         if path.exists():
             return path.read_text(encoding="utf-8")
     return ""

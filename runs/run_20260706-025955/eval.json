@@ -1,0 +1,92 @@
+{
+  "run_id": "run_20260706-025955",
+  "blueprint_id": "hund-persona",
+  "evaluated_at": "2026-07-06T03:00:01.575856",
+  "final_score": 52.0,
+  "benchmark": {
+    "blueprint_id": "hund-persona",
+    "cases_run": 5,
+    "score": 52.0,
+    "results": [
+      {
+        "id": "stressad-william",
+        "score": 57.5,
+        "keyword_score": 50.0,
+        "llm_rules_score": 65.0,
+        "expected_found": [
+          "Hund ser",
+          "konkret"
+        ],
+        "expected_missing": [
+          "Hund foreslar",
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "The response correctly uses 'Hund ser', 'konkret atgard', and 'agenten har kraschat', but it uses 'Hund foreslar' with Swedish characters 'föreslår' instead of the required ASCII 'foreslar', and includes an emoji-dash-like symbol, violating the 'inga_emojis' and 'kortfattat' rules.",
+        "output": "Hund ser att agenten har kraschat. Senaste krasch 2026-07-05 14:32 med felkod SIGTERM. Agenten har varit inaktiv sedan dess. Hund föreslår konkret åtgärd: starta om agenten via Forge v2 och kontrollera loggarna för SIGTERM — det kan bero på en timeout eller resursbrist."
+      },
+      {
+        "id": "server-crash",
+        "score": 77.5,
+        "keyword_score": 75.0,
+        "llm_rules_score": 80.0,
+        "expected_found": [
+          "Hund",
+          "kraschat",
+          "nere"
+        ],
+        "expected_missing": [
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "The response correctly uses 'Hund ser', 'kraschat', 'nere', and 'atgard' but uses Swedish characters 'föreslår' and 'åtgärd' instead of the required ASCII forms 'foreslar' and 'atgard'.",
+        "output": "Hund ser att servern har kraschat. Två agenter är nere. Hund föreslår konkret åtgärd: starta om servern och verifiera agenternas status i Forge v2."
+      },
+      {
+        "id": "osaker-fraga",
+        "score": 0.0,
+        "keyword_score": 0.0,
+        "llm_rules_score": 0.0,
+        "expected_found": [],
+        "expected_missing": [
+          "Hund ar osaker",
+          "William",
+          "kolla"
+        ],
+        "forbidden_found": [],
+        "reason": "Hund svarade inte alls pa anvandarens fraga och bröt mot reglerna om att inte spekulera och att anvanda exakt fras 'Hund ar osaker — William bor kolla pa detta' vid osakerhet.",
+        "output": "(Error: max tool turns reached without final text response)"
+      },
+      {
+        "id": "upprepad-fraga",
+        "score": 30.0,
+        "keyword_score": 0.0,
+        "llm_rules_score": 60.0,
+        "expected_found": [],
+        "expected_missing": [
+          "fortfarande",
+          "Hund har svarat",
+          "igen"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret uppfyller kraven för osäkerhet med exakt fras men misslyckas med att markera upprepning; det saknar orden 'fortfarande', 'igen' och inleds inte med 'Hund har svarat'.",
+        "output": "Hund ser att agenten 'invoice-reviewer' har okand status. Ingen information finns tillganglig just nu.\n\nHund ar osaker — William bor kolla pa detta."
+      },
+      {
+        "id": "agent-rekommendation",
+        "score": 95.0,
+        "keyword_score": 100.0,
+        "llm_rules_score": 90.0,
+        "expected_found": [
+          "Hund rekommenderar",
+          "invoice",
+          "blueprint"
+        ],
+        "expected_missing": [],
+        "forbidden_found": [],
+        "reason": "The response follows the persona rules well by using third person, providing a concrete recommendation with the required keywords 'invoice' and 'blueprint', and avoiding speculation.",
+        "output": "Hund rekommenderar **Invoice Agent** for fakturahantering. Den ar designad for att automatisera hela flodet — från mottagande till betalning.\n\nHund foreslar att du anvander **invoice blueprint** i Forge v2 for att snabbt konfigurera agenten efter dina specifika behov.\n\nVill du att Hund startar en installation?"
+      }
+    ]
+  }
+}

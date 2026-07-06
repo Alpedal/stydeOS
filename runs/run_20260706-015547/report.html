@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge Run Report - run_20260706-015547</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #090b11;
+            --surface: #131722;
+            --surface-glass: rgba(19, 23, 34, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.15);
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.15);
+            --warning: #f59e0b;
+            --warning-glow: rgba(245, 158, 11, 0.15);
+            --danger: #ef4444;
+            --danger-glow: rgba(239, 68, 68, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Card */
+        header {
+            background: var(--surface-glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .header-left h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-left p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .badge-completed {
+            background: var(--success-glow);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .badge-failed {
+            background: var(--danger-glow);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .badge-running {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        /* Dashboard Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Score Gauge */
+        .score-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+
+        .gauge-svg {
+            width: 140px;
+            height: 140px;
+            transform: rotate(-90deg);
+        }
+
+        .gauge-bg {
+            fill: none;
+            stroke: #1f2937;
+            stroke-width: 12;
+        }
+
+        .gauge-fill {
+            fill: none;
+            stroke-width: 12;
+            stroke-linecap: round;
+            transition: stroke-dasharray 1s ease;
+        }
+
+        .gauge-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-top: -95px;
+            margin-bottom: 40px;
+        }
+
+        /* Metadata lists */
+        .meta-list {
+            list-style: none;
+        }
+
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .meta-item:last-child {
+            border-bottom: none;
+        }
+
+        .meta-label {
+            color: var(--text-secondary);
+        }
+
+        .meta-val {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .meta-val-mono {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        /* Sections */
+        .section-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        /* Accordion / Expandables */
+        .accordion-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            background: rgba(255, 255, 255, 0.01);
+            transition: background 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        .arrow-icon {
+            transition: transform 0.2s ease;
+        }
+
+        .accordion-item.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Code & Text Area Display */
+        .code-block {
+            background: #06080d;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        /* Benchmark Case detail card */
+        .case-card {
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .case-score {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .case-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .kw-tag {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            margin-right: 0.25rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .kw-found {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .kw-missing {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-left">
+                <h1>Forge Run Report</h1>
+                <p>Run ID: <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #a5b4fc;">run_20260706-015547</span></p>
+            </div>
+            <div>
+                <span class="badge badge-completed">completed</span>
+            </div>
+        </header>
+
+        <!-- Dashboard Widgets -->
+        <div class="grid">
+            <!-- Score Card -->
+            <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="card-title">Training Score</div>
+                <div class="score-container">
+                    <svg class="gauge-svg" viewBox="0 0 100 100">
+                        <circle class="gauge-bg" cx="50" cy="50" r="40" />
+                        <circle class="gauge-fill" cx="50" cy="50" r="40" 
+                                stroke="var(--success)" 
+                                stroke-dasharray="233.3648 251.2" />
+                    </svg>
+                    <div class="gauge-text" style="color: var(--success);">92.9%</div>
+                </div>
+            </div>
+
+            <!-- Metadata Card -->
+            <div class="card">
+                <div class="card-title">Run Details</div>
+                <ul class="meta-list">
+                    <li class="meta-item">
+                        <span class="meta-label">Blueprint ID</span>
+                        <span class="meta-val">dashboard-architect</span>
+                    </li>
+                    <li class="meta-item">
+                        <span class="meta-label">Git Commit</span>
+                        <span class="meta-val-mono">490b052</span>
+                    </li>
+                    <li class="meta-item">
+                        <span class="meta-label">Workspace Clean</span>
+                        <span class="meta-val" style="color: var(--danger);">Yes</span>
+                    </li>
+                    <li class="meta-item">
+                        <span class="meta-label">Evaluated At</span>
+                        <span class="meta-val" style="font-size: 0.9rem;">2026-07-06T01:56:47.468216</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- LLM Evaluator Judges -->
+            <div class="card">
+                <div class="card-title">Impartial Judges</div>
+                <ul class="meta-list">
+                    <li class="meta-item">
+                        <span class="meta-label">Self Evaluation Score</span>
+                        <span class="meta-val">95/100</span>
+                    </li>
+                    <li class="meta-item">
+                        <span class="meta-label">Impartial Judge Score</span>
+                        <span class="meta-val">92/100</span>
+                    </li>
+                    <li class="meta-item">
+                        <span class="meta-label">Benchmark Test Score</span>
+                        <span class="meta-val">-/100</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Detail Expanders -->
+        <div class="section-header">Evaluation Logs & Output</div>
+
+        <!-- 1. Agent Generated Output -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Agent Generated Output (output.md)</span>
+                <span class="arrow-icon">&#9662;</span>
+            </div>
+            <div class="accordion-content">
+                <div class="code-block" style="white-space: pre-wrap; font-family: inherit; font-size: 0.95rem; line-height: 1.7; background: #0b0d14;">Jag skisserar arkitekturen i tre komponenter, med motivering för varje val.
+
+**Övergripande plan**  
+All data hämtas från Forge v2 API via en lättviktig pipeline som pollar med 5-sekunders intervall. Data lagras i en in-memory cache (ingen databas) för att minimera komplexitet. Realtidsflödet sker via Server-Sent Events (SSE) – enklare än WebSocket och tillräckligt för envägsuppdateringar. Ett REST API serverar både statisk data och SSE, och UI prenumererar på strömmen.
+
+---
+
+**Datapipeline**  
+Varför polling? Forge v2 API har rate limits, 5-sekunders intervall är säkert och ger nära-realtid.  
+In-memory cache håller koll på senaste runs, blueprint-status och aggregerad statistik. Servern uppdaterar den vid varje poll och pushar förändringar via SSE.
+
+*Delegering* till **dashboard-data agent**:  
+"Skapa en Node.js-tjänst som pollar Forge v2 API (`/runs`, `/blueprints`) var 5:e sekund. Normalisera svaren till en enhetlig datamodell (runs: id, status, blueprint, starttid, duration; blueprints: id, status, senaste run). Lagra i ett enkelt JavaScript-objekt. Exponera metoder för åtkomst: `getRuns()`, `getBlueprints()`, `getStats()`. Starta en Express SSE-server på port 4000 med endpoint `/events` som sänder ut diff-uppdateringar (nya runs, statusändringar) varje pollingcykel."
+
+---
+
+**API**  
+Varför REST + SSE? Ger både direkt åtkomst till nuvarande data och ett push-meddelandesystem för UI.
+
+*Delegering* till **dashboard-api agent**:  
+"Bygg ett Express.js API som använder datapipelinen ovan. Implementera följande endpoints:  
+- `GET /runs` – returnerar lista med alla runs  
+- `GET /blueprints` – returnerar alla blueprints med status  
+- `GET /stats` – returnerar aggregerad statistik (antal runs per status, genomsnittlig duration)  
+- `GET /events` – SSE-endpoint som skickar uppdateringar från pipelinen  
+Koppla ihop med dashboard-data genom att importera dess cache-objekt och lyssna på uppdateringar. Kör på port 3000."
+
+---
+
+**UI**  
+Varför React? Vanligast, enkelt att integrera med SSE via `EventSource`.  
+Enkel layout: en tabell över runs (sorterbar), en statusruta för blueprints, och en KPI-panel med statistik. Uppdateras per automatik när SSE-meddelanden anländer.
+
+*Delegering* till **dashboard-ui agent**:  
+"Skapa en React-app med Create React App eller Vite. Huvudkomponenter:  
+- `Dashboard` – sammanhållande komponent som ansluter till `/api/events` med EventSource.  
+- `RunsTable` – visar senaste runs, uppdateras vid SSE-meddelanden.  
+- `BlueprintStatus` – visar varje blueprint och dess senaste run-status.  
+- `StatsPanel` – visar totalt antal runs, lyckade/misslyckade, genomsnittstid.  
+Använd hårdkodad mockdata i utvecklingsfasen, byt ut mot API-anrop innan färdigställande. Styla med enkel CSS (inga tunga ramverk). Kör på port 5173."</div>
+            </div>
+        </div>
+
+        <!-- 2. Benchmark Case Results -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Benchmark Case Breakdown</span>
+                <span class="arrow-icon">&#9662;</span>
+            </div>
+            <div class="accordion-content">
+                <div style="color: var(--text-muted);">No benchmark cases executed.</div>
+            </div>
+        </div>
+
+        <!-- 3. Teacher Feedback -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Teacher Feedback & Improvements</span>
+                <span class="arrow-icon">&#9662;</span>
+            </div>
+            <div class="accordion-content">
+                <div class="code-block" style="white-space: pre-wrap; font-family: inherit; font-size: 0.95rem; line-height: 1.7; background: #0b0d14;">(No feedback available)</div>
+            </div>
+        </div>
+
+        <!-- 4. Execution Logs -->
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Console & API Execution Logs (forge.log)</span>
+                <span class="arrow-icon">&#9662;</span>
+            </div>
+            <div class="accordion-content">
+                <pre class="code-block" style="max-height: 400px; overflow-y: auto;">(No logs recorded)</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

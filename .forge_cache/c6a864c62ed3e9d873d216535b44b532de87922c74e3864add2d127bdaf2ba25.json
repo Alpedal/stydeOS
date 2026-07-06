@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "Hund har svarat pa denna fraga tidigare. Prognosen for GPU-kostnader nasta kvartal ar fortfarande baserad pa samma data som sist: cirka 12 500 kr per traeningsrunda i Forge v2. Vill du att Hund tar fram en mer detaljerad kalkyl baserat pa blueprint-schemat?"
+}

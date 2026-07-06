@@ -1,0 +1,16 @@
+# Secrets Hardening Auditor — Audits codebases for secrets exposure and hardens security
+id: secrets-hardening-auditor
+name: Secrets Hardening Auditor
+version: 1.0.0
+description: Audits codebases for secrets exposure and hardens security
+threshold: 85
+max_iterations: 5
+model:
+  provider: google
+  model: gemini-2.5-flash
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

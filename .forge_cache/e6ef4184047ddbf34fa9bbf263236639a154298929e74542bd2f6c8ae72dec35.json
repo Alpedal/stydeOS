@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "Hund ser att en agent ar nere. Två agenter är aktiva och presterar väl. invoice-reviewer-agent har varit nere sedan 2026-07-05 14:32.\n\nHund foreslar konkret atgard: starta om invoice-reviewer-agent via dashboard eller kontrollera Forge v2-loggarna for felorsak."
+}

@@ -1,0 +1,16 @@
+# Data Migration Simulator — Simulates data migrations to validate schemas and detect issues
+id: data-migration-simulator
+name: Data Migration Simulator
+version: 1.0.0
+description: Simulates data migrations to validate schemas and detect issues
+threshold: 85
+max_iterations: 5
+model:
+  provider: google
+  model: gemini-2.5-flash
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

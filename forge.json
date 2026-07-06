@@ -8,6 +8,615 @@
       "version": "1.0.0",
       "last_score": null,
       "status": "development"
+    },
+    {
+      "id": "3d-data-terrain-explorer",
+      "path": "blueprints/internal/3d-data-terrain-explorer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "ab-testing-statistician",
+      "path": "blueprints/internal/ab-testing-statistician",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "activity-feed-designer",
+      "path": "blueprints/internal/activity-feed-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "adaptive-metric-layout",
+      "path": "blueprints/internal/adaptive-metric-layout",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "aesthetic-style-composer",
+      "path": "blueprints/internal/aesthetic-style-composer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "agent-promotion-evaluator",
+      "path": "blueprints/internal/agent-promotion-evaluator",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "agent-status-panel-designer",
+      "path": "blueprints/internal/agent-status-panel-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "alert-engine",
+      "path": "blueprints/internal/alert-engine",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "algo-execution-engine",
+      "path": "blueprints/internal/algo-execution-engine",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "ambient-particle-system",
+      "path": "blueprints/internal/ambient-particle-system",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "animation-design-engineer",
+      "path": "blueprints/internal/animation-design-engineer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "api-gateway-designer",
+      "path": "blueprints/internal/api-gateway-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "api-warden",
+      "path": "blueprints/internal/api-warden",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "app-analytics-architect",
+      "path": "blueprints/internal/app-analytics-architect",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "app-store-optimizer",
+      "path": "blueprints/internal/app-store-optimizer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "backtesting-framework",
+      "path": "blueprints/internal/backtesting-framework",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "bento-grid-dashboard-architect",
+      "path": "blueprints/internal/bento-grid-dashboard-architect",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "bundle-optimizer",
+      "path": "blueprints/internal/bundle-optimizer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "business-intelligence-analyst",
+      "path": "blueprints/internal/business-intelligence-analyst",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "caching-strategist",
+      "path": "blueprints/internal/caching-strategist",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "calendar-assistant",
+      "path": "blueprints/internal/calendar-assistant",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "caveman-mode-enforcer",
+      "path": "blueprints/internal/caveman-mode-enforcer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "code-reviewer",
+      "path": "blueprints/internal/code-reviewer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "color-palette-originator",
+      "path": "blueprints/internal/color-palette-originator",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "color-system-designer",
+      "path": "blueprints/internal/color-system-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "command-palette-extender",
+      "path": "blueprints/internal/command-palette-extender",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "container-orchestrator",
+      "path": "blueprints/internal/container-orchestrator",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "cross-chain-bridge-architect",
+      "path": "blueprints/internal/cross-chain-bridge-architect",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "css-stylist",
+      "path": "blueprints/internal/css-stylist",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dao-governance-designer",
+      "path": "blueprints/internal/dao-governance-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dark-mode-architect",
+      "path": "blueprints/internal/dark-mode-architect",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dashboard-export-pilot",
+      "path": "blueprints/internal/dashboard-export-pilot",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dashboard-layout-architect",
+      "path": "blueprints/internal/dashboard-layout-architect",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dashboard-system-overview-specialist",
+      "path": "blueprints/internal/dashboard-system-overview-specialist",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dashboard-themer",
+      "path": "blueprints/internal/dashboard-themer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "data-dense-ops-center-designer",
+      "path": "blueprints/internal/data-dense-ops-center-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "data-migration-simulator",
+      "path": "blueprints/internal/data-migration-simulator",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "data-warehouse-designer",
+      "path": "blueprints/internal/data-warehouse-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "database-reliability-engineer",
+      "path": "blueprints/internal/database-reliability-engineer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dependency-mapper",
+      "path": "blueprints/internal/dependency-mapper",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "design-review-critic",
+      "path": "blueprints/internal/design-review-critic",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "editorial-minimal-dashboard-designer",
+      "path": "blueprints/internal/editorial-minimal-dashboard-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "frontend-component-builder",
+      "path": "blueprints/internal/frontend-component-builder",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "fullstack-feature-builder",
+      "path": "blueprints/internal/fullstack-feature-builder",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "git-hygiene-specialist",
+      "path": "blueprints/internal/git-hygiene-specialist",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "gpu-monitor-visualizer",
+      "path": "blueprints/internal/gpu-monitor-visualizer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "landing-page-builder",
+      "path": "blueprints/internal/landing-page-builder",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "logging-monitoring-architect",
+      "path": "blueprints/internal/logging-monitoring-architect",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "magazine-cover-dashboard-designer",
+      "path": "blueprints/internal/magazine-cover-dashboard-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-brand-story",
+      "path": "blueprints/internal/meta-ads-brand-story",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-bundle-offer",
+      "path": "blueprints/internal/meta-ads-bundle-offer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-carousel-hoodie",
+      "path": "blueprints/internal/meta-ads-carousel-hoodie",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-collection-showcase",
+      "path": "blueprints/internal/meta-ads-collection-showcase",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-dynamic-catalog",
+      "path": "blueprints/internal/meta-ads-dynamic-catalog",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-flash-sale",
+      "path": "blueprints/internal/meta-ads-flash-sale",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-influencer-collab",
+      "path": "blueprints/internal/meta-ads-influencer-collab",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-limited-edition",
+      "path": "blueprints/internal/meta-ads-limited-edition",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-lookalike-premium",
+      "path": "blueprints/internal/meta-ads-lookalike-premium",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-retargeting-cart",
+      "path": "blueprints/internal/meta-ads-retargeting-cart",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-seasonal-drop",
+      "path": "blueprints/internal/meta-ads-seasonal-drop",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-size-inclusive",
+      "path": "blueprints/internal/meta-ads-size-inclusive",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-social-proof",
+      "path": "blueprints/internal/meta-ads-social-proof",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-street-style",
+      "path": "blueprints/internal/meta-ads-street-style",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "meta-ads-video-t-shirt",
+      "path": "blueprints/internal/meta-ads-video-t-shirt",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "mockup-comparison-curator",
+      "path": "blueprints/internal/mockup-comparison-curator",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "mockup-diversity-enforcer",
+      "path": "blueprints/internal/mockup-diversity-enforcer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "motion-design-spec-writer",
+      "path": "blueprints/internal/motion-design-spec-writer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "neo-brutalist-dashboard-designer",
+      "path": "blueprints/internal/neo-brutalist-dashboard-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "organic-fluid-dashboard-designer",
+      "path": "blueprints/internal/organic-fluid-dashboard-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "performance-optimizer",
+      "path": "blueprints/internal/performance-optimizer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "rate-limiting-engineer",
+      "path": "blueprints/internal/rate-limiting-engineer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "real-time-slo-dashboard",
+      "path": "blueprints/internal/real-time-slo-dashboard",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "remix-route-architect",
+      "path": "blueprints/internal/remix-route-architect",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "responsive-layout-specialist",
+      "path": "blueprints/internal/responsive-layout-specialist",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "secrets-hardening-auditor",
+      "path": "blueprints/internal/secrets-hardening-auditor",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "social-media-writer",
+      "path": "blueprints/internal/social-media-writer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "sql-query-generator",
+      "path": "blueprints/internal/sql-query-generator",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "styde-se-site-integrator",
+      "path": "blueprints/internal/styde-se-site-integrator",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "swiftui-architect",
+      "path": "blueprints/internal/swiftui-architect",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "tauri-window-composer",
+      "path": "blueprints/internal/tauri-window-composer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "typographic-rhythm-engine",
+      "path": "blueprints/internal/typographic-rhythm-engine",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "typography-systems-designer",
+      "path": "blueprints/internal/typography-systems-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "visual-brand-designer",
+      "path": "blueprints/internal/visual-brand-designer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "wcag-accessibility-engineer",
+      "path": "blueprints/internal/wcag-accessibility-engineer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "web-font-optimizer",
+      "path": "blueprints/internal/web-font-optimizer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "web-mockup-artist",
+      "path": "blueprints/internal/web-mockup-artist",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "web-security-engineer",
+      "path": "blueprints/internal/web-security-engineer",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
     }
   ],
   "runs": [
@@ -196,6 +805,456 @@
       "blueprint_id": "dashboard-ui",
       "score": 14.0,
       "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-020251",
+      "blueprint_id": "dashboard-ui",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-020458",
+      "blueprint_id": "dashboard-ui",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-020542",
+      "blueprint_id": "dashboard-architect",
+      "score": 94.1,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-020629",
+      "blueprint_id": "dashboard-api",
+      "score": 20.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-020857",
+      "blueprint_id": "dashboard-api",
+      "score": 25.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-021030",
+      "blueprint_id": "dashboard-api",
+      "score": 43.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-021203",
+      "blueprint_id": "dashboard-ui",
+      "score": 31.1,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-021406",
+      "blueprint_id": "dashboard-ui",
+      "score": 23.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-021612",
+      "blueprint_id": "dashboard-ui",
+      "score": 66.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-021741",
+      "blueprint_id": "dashboard-data",
+      "score": 28.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-022000",
+      "blueprint_id": "dashboard-data",
+      "score": 27.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-022233",
+      "blueprint_id": "dashboard-data",
+      "score": 37.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-022438",
+      "blueprint_id": "dashboard-tester",
+      "score": 68.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-022640",
+      "blueprint_id": "dashboard-tester",
+      "score": 95.6,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-024154",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-024326",
+      "blueprint_id": "dashboard-api",
+      "score": 26.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-024440",
+      "blueprint_id": "dashboard-api",
+      "score": 28.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-024651",
+      "blueprint_id": "dashboard-ui",
+      "score": 60.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-025008",
+      "blueprint_id": "dashboard-ui",
+      "score": 8.5,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-025240",
+      "blueprint_id": "dashboard-ui",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-025457",
+      "blueprint_id": "dashboard-data",
+      "score": 20.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-025655",
+      "blueprint_id": "dashboard-data",
+      "score": 30.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-025832",
+      "blueprint_id": "hund-persona",
+      "score": 68.6,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-025857",
+      "blueprint_id": "dashboard-data",
+      "score": 46.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-025936",
+      "blueprint_id": "hund-persona",
+      "score": 68.6,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-025955",
+      "blueprint_id": "hund-persona",
+      "score": 52.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030011",
+      "blueprint_id": "hund-persona",
+      "score": 88.2,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-030224",
+      "blueprint_id": "dashboard-api",
+      "score": null,
+      "status": "spawned"
+    },
+    {
+      "run_id": "run_20260706-030307",
+      "blueprint_id": "dashboard-ui",
+      "score": null,
+      "status": "spawned"
+    },
+    {
+      "run_id": "run_20260706-030337",
+      "blueprint_id": "dashboard-data",
+      "score": null,
+      "status": "spawned"
+    },
+    {
+      "run_id": "run_20260706-030615",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030616",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030617",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030618",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030619",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030620",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030621",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030622",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030623",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030624",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030625",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030626",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030627",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030628",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030629",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030630",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030631",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030632",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030633",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030634",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030635",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030636",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030637",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030638",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030639",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030640",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030641",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030642",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030643",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030644",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030645",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030646",
+      "blueprint_id": "dashboard-api",
+      "score": 10.0,
+      "status": "needs_improvement"
+    },
+    {
+      "run_id": "run_20260706-030725",
+      "blueprint_id": "dashboard-ui",
+      "score": 90.0,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-030726",
+      "blueprint_id": "dashboard-data",
+      "score": 90.0,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-030727",
+      "blueprint_id": "dashboard-data",
+      "score": 90.0,
+      "status": "completed"
+    },
+    {
+      "run_id": "run_20260706-034853",
+      "blueprint_id": "alert-engine",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-034854",
+      "blueprint_id": "code-reviewer",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-034855",
+      "blueprint_id": "meta-ads-brand-story",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-034856",
+      "blueprint_id": "caching-strategist",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-034858",
+      "blueprint_id": "animation-design-engineer",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-034945",
+      "blueprint_id": "alert-engine",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-034946",
+      "blueprint_id": "code-reviewer",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-034947",
+      "blueprint_id": "meta-ads-brand-story",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-034948",
+      "blueprint_id": "caching-strategist",
+      "score": null,
+      "status": "running"
+    },
+    {
+      "run_id": "run_20260706-034949",
+      "blueprint_id": "animation-design-engineer",
+      "score": null,
+      "status": "running"
     }
   ]
 }

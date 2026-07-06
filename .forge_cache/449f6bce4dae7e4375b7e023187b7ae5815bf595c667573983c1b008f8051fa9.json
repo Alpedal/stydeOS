@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"Svaret använder korrekt 'Hund har svarat', 'fortfarande', 'igen' för upprepning, 'Hund foreslar' och 'atgard', samt håller tredje person, kortfattat och utan emojis.\"}"
+}

@@ -1,0 +1,8 @@
+{
+  "run_id": "20260706-021203",
+  "blueprint_id": "dashboard-ui",
+  "started_at": "2026-07-06T02:12:04.123633",
+  "git_commit": "f7115a8",
+  "git_dirty": true,
+  "prompt": "Bygg ett m\u00f6rkt HTML/CSS/JS-dashboard som pollar API:et var 5:e sekund och visar: aktiva runs, score-historik per blueprint, och agent-status. Inga externa beroenden."
+}

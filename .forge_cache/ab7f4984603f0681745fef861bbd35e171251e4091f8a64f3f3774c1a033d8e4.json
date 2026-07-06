@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 60, \"reason\": \"Svaret uppfyller kraven för osäkerhet med exakt fras men misslyckas med att markera upprepning; det saknar orden 'fortfarande', 'igen' och inleds inte med 'Hund har svarat'.\"}"
+}

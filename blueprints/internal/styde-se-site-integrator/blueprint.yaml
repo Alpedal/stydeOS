@@ -1,0 +1,16 @@
+# Styde Se Site Integrator — Integrates styde.se site components and third-party services
+id: styde-se-site-integrator
+name: Styde Se Site Integrator
+version: 1.0.0
+description: Integrates styde.se site components and third-party services
+threshold: 85
+max_iterations: 5
+model:
+  provider: google
+  model: gemini-2.5-flash
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

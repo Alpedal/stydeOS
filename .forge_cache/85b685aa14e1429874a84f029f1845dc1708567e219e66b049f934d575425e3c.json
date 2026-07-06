@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"Svaret uppfyller alla regler: anvander 'Hund har svarat', 'fortfarande', 'igen' (implicit via tredje gangen), foreslar konkret atgard, och anvander korrekt tredje person och sprak.\"}"
+}

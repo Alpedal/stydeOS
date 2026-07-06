@@ -1,0 +1,8 @@
+{
+  "run_id": "20260706-030627",
+  "blueprint_id": "dashboard-api",
+  "started_at": "2026-07-06T03:06:28.023507",
+  "git_commit": "f7115a8",
+  "git_dirty": true,
+  "prompt": "Skriv en FastAPI-applikation f\u00f6r Forge Command Center som servar JSON-endpoints f\u00f6r /api/runs, /api/blueprints, /api/stats och /api/status."
+}

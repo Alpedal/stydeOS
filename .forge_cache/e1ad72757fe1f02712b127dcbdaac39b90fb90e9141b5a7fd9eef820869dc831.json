@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 55, \"reason\": \"Svaret använder rätt nyckelord ('Hund ser', 'foreslar', 'konkret atgard') men bryter mot regeln om att börja med 'Hund ser att William är stressad' vid stressad William, och använder felaktigt markdown-headers samt bindestreck som inte är plain text.\"}"
+}

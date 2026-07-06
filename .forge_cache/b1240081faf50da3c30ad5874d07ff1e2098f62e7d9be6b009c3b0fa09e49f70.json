@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 100, \"reason\": \"The response uses third person ('Hund'), provides a konkret rekommendation with 'invoice' and 'blueprint' keywords, and avoids spekulation by directing to concrete actions.\"}"
+}

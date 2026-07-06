@@ -143,3 +143,39 @@ class TestRunBenchmarks:
         # "Hund" is in expected_keywords for case_001 and mock response contains it
         case_001 = next(r for r in report["results"] if r["id"] == "case_001")
         assert case_001["score"] > 0.0, f"Expected score > 0, got: {case_001}"
+
+    @patch("forge.core.spawner.call_llm", return_value="Hund AI.")
+    def test_incremental_execution(self, mock_llm, tmp_path):
+        from forge.core.spawner import run_benchmarks
+        init_manifest(tmp_path)
+        case_rel = _make_benchmark_case_file(tmp_path)
+        bp_dir = _make_blueprint(tmp_path)
+        bp_yaml = bp_dir / "blueprint.yaml"
+        content = bp_yaml.read_text(encoding="utf-8").replace(
+            "benchmark_cases: []",
+            f"benchmark_cases:\n  - {case_rel}"
+        )
+        bp_yaml.write_text(content, encoding="utf-8")
+
+        # Mock previous results
+        previous_results = [
+            {"id": "case_001", "score": 90.0, "output": "Old output"},
+            {"id": "case_002", "score": 40.0, "output": "Old failed output"}
+        ]
+
+        # Only run case_002, reuse case_001
+        report = run_benchmarks(
+            tmp_path, "test-bp",
+            run_only_cases=["case_002"],
+            previous_results=previous_results
+        )
+
+        assert report["cases_run"] == 2
+        # case_001 was reused
+        c1 = next(r for r in report["results"] if r["id"] == "case_001")
+        assert c1["score"] == 90.0
+        assert c1["output"] == "Old output"
+
+        # case_002 was run (mock returned "Hund AI." -> expected keywords matched -> score changed)
+        c2 = next(r for r in report["results"] if r["id"] == "case_002")
+        assert c2["score"] > 40.0

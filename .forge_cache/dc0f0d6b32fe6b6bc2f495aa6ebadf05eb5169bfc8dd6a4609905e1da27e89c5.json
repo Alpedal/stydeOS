@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "Hund ser att servern har kraschat. Två agenter är nere. Hund föreslår konkret åtgärd: starta om servern och verifiera agenternas status i Forge v2."
+}

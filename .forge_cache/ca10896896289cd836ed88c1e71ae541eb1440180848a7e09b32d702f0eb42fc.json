@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 53, \"reason\": \"Bra upprepningsmarkering med 'Hund har svarat' och 'fortfarande', men bryter mot 'Ingen spekulation' genom att ge en siffra (12 500 kr) istället för att säga att data saknas.\"}"
+}

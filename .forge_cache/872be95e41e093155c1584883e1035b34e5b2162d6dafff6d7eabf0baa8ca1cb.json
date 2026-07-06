@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 90, \"reason\": \"Svaret använder korrekt 'Hund ser', 'kraschat', 'nere', och 'atgard' men har svenska tecken i 'Två' och 'föreslår' istället för ASCII-nyckelorden 'Tva' och 'foreslar'.\"}"
+}

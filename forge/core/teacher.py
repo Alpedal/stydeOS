@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Optional
 
 from forge.core.engine import load_run_data, call_llm, ForgeError
+from forge.core.blueprint import find_blueprint_dir
 
 logger = logging.getLogger("forge.core.teacher")
 
@@ -75,8 +76,9 @@ def propose_improvements(root: Path, run_id: str,
 
 
 def _load_persona(root: Path, blueprint_id: str) -> str:
-    for sub in ["internal", "customer"]:
-        path = root / "blueprints" / sub / blueprint_id / "persona.md"
+    bp_dir = find_blueprint_dir(root, blueprint_id)
+    if bp_dir:
+        path = bp_dir / "persona.md"
         if path.exists():
             return path.read_text(encoding="utf-8")
     return ""
@@ -131,6 +133,8 @@ If there is a 'benchmark' key in the evaluation results:
 - Carefully inspect all benchmark case results.
 - Focus heavily on failed cases, looking at 'expected_missing' keywords, 'forbidden_found' keywords, and the 'reason' from the judge.
 - Propose specific updates to the persona.md behavior or output format rules to ensure future runs include expected keywords, avoid forbidden keywords, and satisfy all rules.
+- If you suspect the failures are caused by hyperparameter issues (e.g., high temperature causing hallucinations/formatting errors, or low max_tokens causing truncations):
+  Suggest new values in the format `[PARAM_UPDATE] parameter_name: value` under a "## Parameter Updates" section. Valid parameters: temperature, max_tokens, top_p.
 
 Output format (markdown):
 
@@ -142,6 +146,9 @@ Output format (markdown):
 
 ## Proposed Fixes
 - Concrete changes to persona.md to fix these failures (e.g. 'Add a rule to section X to state...'). Propose the exact wording to append or modify.
+
+## Parameter Updates
+- Any hyperparameter suggestions (using `[PARAM_UPDATE] name: value` syntax).
 
 ## Version Bump
 - Suggest new version number (patch bump: x.y.z -> x.y.z+1)"""
@@ -181,6 +188,48 @@ def _bump_version(version_str: str) -> str:
     return f"{prefix}{int(patch) + 1}{suffix}"
 
 
+def _update_yaml_model_param(content: str, param: str, value_str: str) -> str:
+    """Update or insert a parameter inside the model: block in a YAML-like string while preserving comments."""
+    lines = content.splitlines()
+    model_idx = -1
+    for idx, line in enumerate(lines):
+        if line.strip().startswith("model:"):
+            model_idx = idx
+            break
+    if model_idx == -1:
+        return content
+
+    param_idx = -1
+    for idx in range(model_idx + 1, len(lines)):
+        line = lines[idx]
+        if not line.strip():
+            continue
+        indent = len(line) - len(line.lstrip())
+        if indent == 0:
+            break
+        if line.strip().startswith(f"{param}:"):
+            param_idx = idx
+            break
+
+    if param_idx != -1:
+        line = lines[param_idx]
+        indent = len(line) - len(line.lstrip())
+        comment = ""
+        if "#" in line:
+            comment = " " + line[line.find("#"):]
+        lines[param_idx] = " " * indent + f"{param}: {value_str}{comment}"
+    else:
+        indent = 2
+        for idx in range(model_idx + 1, len(lines)):
+            line = lines[idx]
+            if line.strip():
+                indent = len(line) - len(line.lstrip())
+                break
+        lines.insert(model_idx + 1, " " * indent + f"{param}: {value_str}")
+
+    return "\n".join(lines) + "\n"
+
+
 def _apply_blueprint_patches(root: Path, blueprint_id: str, feedback: str) -> list[str]:
     """Attempt to extract and apply version bumps + content patches from feedback.
     ponytail: naive extraction — full auto-patch is dangerous, keep it simple.
@@ -188,42 +237,50 @@ def _apply_blueprint_patches(root: Path, blueprint_id: str, feedback: str) -> li
     """
     patches = []
 
-    for sub in ["internal", "customer"]:
-        bp_yaml = root / "blueprints" / sub / blueprint_id / "blueprint.yaml"
-        if not bp_yaml.exists():
-            continue
+    bp_dir = find_blueprint_dir(root, blueprint_id)
+    if bp_dir:
+        bp_yaml = bp_dir / "blueprint.yaml"
+        if bp_yaml.exists():
+            # Bump version in a comment-preserving way using regex
+            content = bp_yaml.read_text(encoding="utf-8")
+            match = re.search(
+                r'^(version:\s*["\']?)(\d+\.\d+\.\d+[^"\'\s]*?)(["\']?\s*)$',
+                content,
+                re.MULTILINE
+            )
+            if match:
+                version = match.group(2)
+                try:
+                    new_version = _bump_version(version)
+                    old_line = match.group(0)
+                    new_line = match.group(1) + new_version + match.group(3)
+                    content = content.replace(old_line, new_line, 1)
+                    patches.append(f"Bumped {blueprint_id} version: {version} -> {new_version}")
+                    logger.info("Bumped %s version: %s -> %s", blueprint_id, version, new_version)
+                except ValueError as e:
+                    logger.warning("Could not bump version for %s: %s", blueprint_id, e)
 
-        # Bump version in a comment-preserving way using regex
-        content = bp_yaml.read_text(encoding="utf-8")
-        # Match version line — handles optional quotes and any pre-release suffix
-        match = re.search(
-            r'^(version:\s*["\']?)(\d+\.\d+\.\d+[^"\'\s]*?)(["\']?\s*)$',
-            content,
-            re.MULTILINE
-        )
-        if match:
-            version = match.group(2)
-            try:
-                new_version = _bump_version(version)
-                old_line = match.group(0)
-                new_line = match.group(1) + new_version + match.group(3)
-                content = content.replace(old_line, new_line, 1)
-                bp_yaml.write_text(content, encoding="utf-8")
-                patches.append(f"Bumped {blueprint_id} version: {version} -> {new_version}")
-                logger.info("Bumped %s version: %s -> %s", blueprint_id, version, new_version)
-            except ValueError as e:
-                logger.warning("Could not bump version for %s: %s", blueprint_id, e)
+            # Look for [PARAM_UPDATE] in feedback
+            param_matches = re.findall(
+                r'\[PARAM_UPDATE\]\s*(temperature|max_tokens|top_p):\s*([0-9.]+)',
+                feedback,
+                re.IGNORECASE
+            )
+            for param, val in param_matches:
+                param = param.lower()
+                content = _update_yaml_model_param(content, param, val)
+                patches.append(f"Updated {blueprint_id} parameter '{param}' to {val}")
 
-        # Append feedback reference to persona.md
-        persona_md = bp_yaml.parent / "persona.md"
-        if persona_md.exists() and feedback:
-            timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M")
-            note = f"\n\n<!-- Teacher feedback {timestamp} (run included in forge.json) -->\n"
-            with open(persona_md, "a", encoding="utf-8") as f:
-                f.write(note)
-            patches.append("Annotated persona.md with feedback timestamp")
+            bp_yaml.write_text(content, encoding="utf-8")
 
-        break  # ponytail: first match only
+            # Append feedback reference to persona.md
+            persona_md = bp_dir / "persona.md"
+            if persona_md.exists() and feedback:
+                timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M")
+                note = f"\n\n<!-- Teacher feedback {timestamp} (run included in forge.json) -->\n"
+                with open(persona_md, "a", encoding="utf-8") as f:
+                    f.write(note)
+                patches.append("Annotated persona.md with feedback timestamp")
 
     return patches
 

@@ -13,14 +13,24 @@ logger = logging.getLogger("forge.core.blueprint")
 
 
 def find_blueprint_dir(root: Path, blueprint_id: str) -> Optional[Path]:
-    """Walk blueprints/{internal,customer}/ for a matching directory name."""
+    """Search refinery/, done-blueprints/, and blueprints/{internal,customer}/ directories."""
+    # 1. Search in refinery/ at the root
+    refinery_cand = root / "refinery" / blueprint_id
+    if refinery_cand.is_dir():
+        return refinery_cand
+
+    # 2. Search in done-blueprints/ at the root
+    done_cand = root / "done-blueprints" / blueprint_id
+    if done_cand.is_dir():
+        return done_cand
+
+    # 3. Search in blueprints/internal/ or customer/
     bp_root = root / "blueprints"
-    if not bp_root.exists():
-        return None
-    for sub in ["internal", "customer"]:  # ponytail: skip templates
-        candidate = bp_root / sub / blueprint_id
-        if candidate.is_dir():
-            return candidate
+    if bp_root.exists():
+        for sub in ["internal", "customer"]:
+            candidate = bp_root / sub / blueprint_id
+            if candidate.is_dir():
+                return candidate
     return None
 
 

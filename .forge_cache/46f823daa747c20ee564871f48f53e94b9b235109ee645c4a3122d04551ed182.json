@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "Hund ser att en agent ar nere. Två agenter är aktiva.\n\n- **invoice-reviewer-agent**: nere sedan 2026-07-05 14:32\n- **data-processor-agent**: aktiv, 99.2% framgang\n- **customer-support-agent**: aktiv, 4.8/5 kundnojdhet\n\nHund foreslar konkret atgard: starta om invoice-reviewer-agenten eller kontrollera loggar for felorsak."
+}

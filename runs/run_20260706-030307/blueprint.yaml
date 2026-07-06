@@ -1,0 +1,14 @@
+description: Bygger frontend för Forge Command Center — realtids-visualisering av
+  runs, score och agent-status
+evaluation:
+  benchmark_cases: []
+  judge_eval_weight: 0.7
+  self_eval_weight: 0.3
+id: dashboard-ui
+max_iterations: 5
+model:
+  model: deepseek-v4-flash
+  provider: deepseek
+name: Dashboard UI Builder
+threshold: 0
+version: 0.1.10

@@ -1,0 +1,16 @@
+# Meta Ads Brand Story — Creates Meta ad content for brand storytelling campaigns
+id: meta-ads-brand-story
+name: Meta Ads Brand Story
+version: 1.0.0
+description: Creates Meta ad content for brand storytelling campaigns
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

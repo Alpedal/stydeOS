@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 95, \"reason\": \"The response correctly uses the required 'Hund ar osaker — William bor kolla pa detta.' phrase to indicate uncertainty without speculating, and follows the persona rules for language, tone, and format.\"}"
+}

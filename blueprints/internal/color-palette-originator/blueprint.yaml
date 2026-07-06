@@ -1,0 +1,16 @@
+# Color Palette Originator — Creates original color palettes and design token systems
+id: color-palette-originator
+name: Color Palette Originator
+version: 1.0.0
+description: Creates original color palettes and design token systems
+threshold: 85
+max_iterations: 5
+model:
+  provider: google
+  model: gemini-2.5-flash
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

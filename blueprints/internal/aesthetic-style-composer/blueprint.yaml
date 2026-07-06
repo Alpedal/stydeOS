@@ -1,0 +1,16 @@
+# Aesthetic Style Composer — Composes aesthetic visual styles and design systems
+id: aesthetic-style-composer
+name: Aesthetic Style Composer
+version: 1.0.0
+description: Composes aesthetic visual styles and design systems
+threshold: 85
+max_iterations: 5
+model:
+  provider: google
+  model: gemini-2.5-flash
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

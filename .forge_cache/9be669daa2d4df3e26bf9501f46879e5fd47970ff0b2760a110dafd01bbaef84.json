@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": {
+    "tool_call": {
+      "name": "search_knowledge_base",
+      "arguments": {
+        "query": "GPU kostnader prognos nasta kvartal",
+        "scope": "all"
+      }
+    }
+  }
+}

@@ -67,10 +67,21 @@ def create_run_dir(root: Path, blueprint_id: str) -> Path:
         "run_id": run_id,
         "blueprint_id": blueprint_id,
         "started_at": datetime.utcnow().isoformat(),
+        "prompt": "Complete your assigned task based on your persona definition.",
         **git_info,
     }
     with open(run_dir / "input.json", "w", encoding="utf-8") as f:
         json.dump(skeleton, f, indent=2)
+
+    # Copy persona.md and blueprint.yaml if they exist for historical record and diffing
+    from forge.core.blueprint import find_blueprint_dir
+    bp_dir = find_blueprint_dir(root, blueprint_id)
+    if bp_dir:
+        import shutil
+        for name in ["persona.md", "blueprint.yaml"]:
+            src = bp_dir / name
+            if src.exists():
+                shutil.copy2(src, run_dir / name)
 
     return run_dir
 

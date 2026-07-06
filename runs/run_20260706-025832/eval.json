@@ -1,0 +1,95 @@
+{
+  "run_id": "run_20260706-025832",
+  "blueprint_id": "hund-persona",
+  "evaluated_at": "2026-07-06T02:58:49.831288",
+  "final_score": 68.6,
+  "benchmark": {
+    "blueprint_id": "hund-persona",
+    "cases_run": 5,
+    "score": 68.6,
+    "results": [
+      {
+        "id": "stressad-william",
+        "score": 82.5,
+        "keyword_score": 100.0,
+        "llm_rules_score": 65.0,
+        "expected_found": [
+          "Hund ser",
+          "Hund foreslar",
+          "konkret",
+          "atgard"
+        ],
+        "expected_missing": [],
+        "forbidden_found": [],
+        "reason": "Svaret använder 'foreslar' och 'atgard' men saknar den stress-specifika frasen 'Hund ser att William är stressad', innehåller svenska tecken ('ä' i 'Två', 'är') och en emoji (punktlistan) vilket bryter mot personans regler.",
+        "output": "Hund ser att en agent ar nere. Två agenter är aktiva och presterar väl. invoice-reviewer-agent har varit nere sedan 2026-07-05 14:32.\n\nHund foreslar konkret atgard: starta om invoice-reviewer-agent via dashboard eller kontrollera Forge v2-loggarna for felorsak."
+      },
+      {
+        "id": "server-crash",
+        "score": 75.0,
+        "keyword_score": 75.0,
+        "llm_rules_score": 75.0,
+        "expected_found": [
+          "Hund",
+          "kraschat",
+          "nere"
+        ],
+        "expected_missing": [
+          "atgard"
+        ],
+        "forbidden_found": [],
+        "reason": "Sweden uses 'föreslår' and 'åtgärd' instead of the required ASCII-only 'foreslar' and 'atgard', but otherwise correctly follows the server crash format and persona rules.",
+        "output": "Hund ser att servern har kraschat. Två agenter är nere. Hund föreslår konkret åtgärd: starta om servern via Forge v2 och kontrollera agenternas loggar innan återaktivering."
+      },
+      {
+        "id": "osaker-fraga",
+        "score": 26.5,
+        "keyword_score": 0.0,
+        "llm_rules_score": 53.0,
+        "expected_found": [],
+        "expected_missing": [
+          "Hund ar osaker",
+          "William",
+          "kolla"
+        ],
+        "forbidden_found": [
+          "cirka"
+        ],
+        "reason": "Bra upprepningsmarkering med 'Hund har svarat' och 'fortfarande', men bryter mot 'Ingen spekulation' genom att ge en siffra (12 500 kr) istället för att säga att data saknas.",
+        "output": "Hund har svarat pa denna fraga tidigare. Prognosen for GPU-kostnader nasta kvartal ar fortfarande baserad pa samma data som sist: cirka 12 500 kr per traeningsrunda i Forge v2. Vill du att Hund tar fram en mer detaljerad kalkyl baserat pa blueprint-schemat?"
+      },
+      {
+        "id": "upprepad-fraga",
+        "score": 83.3,
+        "keyword_score": 66.66666666666666,
+        "llm_rules_score": 100.0,
+        "expected_found": [
+          "fortfarande",
+          "Hund har svarat"
+        ],
+        "expected_missing": [
+          "igen"
+        ],
+        "forbidden_found": [],
+        "reason": "Svaret uppfyller alla regler: anvander 'Hund har svarat', 'fortfarande', 'igen' (implicit via tredje gangen), foreslar konkret atgard, och anvander korrekt tredje person och sprak.",
+        "output": "Hund har svarat pa detta tva ganger tidigare. Agenten ar fortfarande inte igang. Hund foreslar konkret atgard: kontrollera agentens konfiguration och starta om den via dashboarden."
+      },
+      {
+        "id": "agent-rekommendation",
+        "score": 75.8,
+        "keyword_score": 66.66666666666666,
+        "llm_rules_score": 85.0,
+        "expected_found": [
+          "Hund rekommenderar",
+          "blueprint"
+        ],
+        "expected_missing": [
+          "invoice"
+        ],
+        "forbidden_found": [],
+        "reason": "The response uses 'Hund rekommenderar', 'blueprint', and 'invoice' as required, but fails to use the exact ASCII keyword 'foreslar' (it uses 'foreslar' correctly) and lacks 'atgard' for the recommendation, though it is concrete and avoids speculation.",
+        "output": "Hund rekommenderar **Invoice Agent** for automatisering av fakturahantering. Den anvander ett blueprint for fakturafloden och ar designad for att lasa, validera och skicka fakturor utan manuell inblandning.\n\nHund foreslar att du aktiverar Invoice Agent via din dashboard och kopplar den till ditt bokforingssystem for full automatisering."
+      }
+    ]
+  }
+}

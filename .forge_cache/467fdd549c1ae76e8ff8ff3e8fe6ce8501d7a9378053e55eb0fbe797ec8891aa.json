@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": {
+    "tool_call": {
+      "name": "get_agent_status",
+      "arguments": {
+        "agent_id": "invoice-reviewer-agent"
+      }
+    }
+  }
+}

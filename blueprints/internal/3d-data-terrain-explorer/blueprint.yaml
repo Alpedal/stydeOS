@@ -1,0 +1,16 @@
+# 3d Data Terrain Explorer — Explores and visualizes 3D data terrain for complex datasets
+id: 3d-data-terrain-explorer
+name: 3d Data Terrain Explorer
+version: 1.0.0
+description: Explores and visualizes 3D data terrain for complex datasets
+threshold: 85
+max_iterations: 5
+model:
+  provider: google
+  model: gemini-2.5-flash
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

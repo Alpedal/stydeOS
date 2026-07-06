@@ -1,0 +1,8 @@
+{
+  "run_id": "20260706-020629",
+  "blueprint_id": "dashboard-api",
+  "started_at": "2026-07-06T02:06:29.879625",
+  "git_commit": "f7115a8",
+  "git_dirty": true,
+  "prompt": "Skriv en FastAPI-applikation som l\u00e4ser forge.json och alla run-mappar och servar JSON-endpoints f\u00f6r /api/runs, /api/blueprints, /api/stats och /api/status."
+}

@@ -1,0 +1,16 @@
+# Api Warden — Guards APIs with security validation, rate limiting, and threat detection
+id: api-warden
+name: Api Warden
+version: 1.0.0
+description: Guards APIs with security validation, rate limiting, and threat detection
+threshold: 85
+max_iterations: 5
+model:
+  provider: google
+  model: gemini-2.5-flash
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

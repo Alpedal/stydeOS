@@ -1,0 +1,16 @@
+# Alert Engine — Monitors telemetry against configurable alert rules with real-time notifications
+id: alert-engine
+name: Alert Engine
+version: 1.0.0
+description: Monitors telemetry against configurable alert rules with real-time notifications
+threshold: 85
+max_iterations: 5
+model:
+  provider: anthropic
+  model: claude-sonnet-4-20250514
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

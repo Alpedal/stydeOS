@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 80, \"reason\": \"The response correctly uses 'Hund ser', 'kraschat', 'nere', and 'atgard' but uses Swedish characters 'föreslår' and 'åtgärd' instead of the required ASCII forms 'foreslar' and 'atgard'.\"}"
+}

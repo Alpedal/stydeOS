@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 75, \"reason\": \"Sweden uses 'föreslår' and 'åtgärd' instead of the required ASCII-only 'foreslar' and 'atgard', but otherwise correctly follows the server crash format and persona rules.\"}"
+}

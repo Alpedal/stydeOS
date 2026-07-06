@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "Hund har svarat pa detta tva ganger tidigare. Agenten ar fortfarande inte igang. Hund foreslar konkret atgard: kontrollera agentens konfiguration och starta om den via dashboarden."
+}

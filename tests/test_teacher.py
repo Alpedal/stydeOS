@@ -74,6 +74,23 @@ class TestApplyBlueprintPatches:
         content = (tmp_path / "blueprints" / "internal" / "test-bp" / "blueprint.yaml").read_text()
         assert "1.0.1-beta" in content
 
+    def test_parameters_updated(self, tmp_path):
+        bp_dir = tmp_path / "blueprints" / "internal" / "test-bp"
+        bp_dir.mkdir(parents=True)
+        (bp_dir / "blueprint.yaml").write_text(
+            "id: test-bp\nversion: 1.0.0\nmodel:\n  provider: openai\n  model: gpt-4o\n",
+            encoding="utf-8"
+        )
+        (bp_dir / "persona.md").write_text("Persona content.", encoding="utf-8")
+        
+        feedback = "## Parameter Updates\n[PARAM_UPDATE] temperature: 0.2\n[PARAM_UPDATE] max_tokens: 1000\n"
+        patches = _apply_blueprint_patches(tmp_path, "test-bp", feedback)
+        
+        content = (bp_dir / "blueprint.yaml").read_text(encoding="utf-8")
+        assert "temperature: 0.2" in content
+        assert "max_tokens: 1000" in content
+        assert any("Updated" in p for p in patches)
+
 
 class TestProposeImprovements:
     @patch("forge.core.teacher.call_llm", return_value="## What Went Wrong\n- test issue")

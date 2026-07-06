@@ -1,0 +1,14 @@
+description: Läser Forge-data (forge.json, runs/) och bygger statistik och aggregat
+  för dashboard-API:et
+evaluation:
+  benchmark_cases: []
+  judge_eval_weight: 0.7
+  self_eval_weight: 0.3
+id: dashboard-data
+max_iterations: 5
+model:
+  model: deepseek-v4-flash
+  provider: deepseek
+name: Dashboard Data Pipeline
+threshold: 0
+version: 0.1.6

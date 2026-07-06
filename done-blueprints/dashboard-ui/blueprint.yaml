@@ -1,0 +1,17 @@
+id: "dashboard-ui"
+name: "Dashboard UI Builder"
+version: "0.1.10"
+description: "Bygger frontend för Forge Command Center"
+output_type: code
+
+threshold: 85
+max_iterations: 3
+
+model:
+  provider: "deepseek"
+  model: "deepseek-v4-flash"
+
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

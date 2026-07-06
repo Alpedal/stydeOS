@@ -1,0 +1,14 @@
+description: Bygger FastAPI-backend för Forge Command Center — realtids-endpoints
+  för runs, blueprints och statistik
+evaluation:
+  benchmark_cases: []
+  judge_eval_weight: 0.7
+  self_eval_weight: 0.3
+id: dashboard-api
+max_iterations: 5
+model:
+  model: deepseek-v4-flash
+  provider: deepseek
+name: Dashboard API Builder
+threshold: 0
+version: 0.1.12

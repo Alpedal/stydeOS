@@ -1,0 +1,14 @@
+description: Testar att API + UI + Data fungerar tillsammans. Validerar endpoints,
+  UI-rendering och dataflöde
+evaluation:
+  benchmark_cases: []
+  judge_eval_weight: 0.7
+  self_eval_weight: 0.3
+id: dashboard-tester
+max_iterations: 5
+model:
+  model: deepseek-v4-flash
+  provider: deepseek
+name: Dashboard Integration Tester
+threshold: 85
+version: 0.1.1

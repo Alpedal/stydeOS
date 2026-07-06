@@ -1,0 +1,17 @@
+id: "dashboard-data"
+name: "Dashboard Data Pipeline"
+version: "0.1.6"
+description: "Läser Forge-data och bygger statistik"
+output_type: code
+
+threshold: 85
+max_iterations: 3
+
+model:
+  provider: "deepseek"
+  model: "deepseek-v4-flash"
+
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

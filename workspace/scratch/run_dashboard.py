@@ -93,7 +93,13 @@ def run_one(bp_id: str, max_iter: int = 3) -> dict:
         print(f"    Self: {eval_result['self_eval']}  Judge: {eval_result['judge_eval']}  Final: {score}/100")
 
         if score >= 85:
-            print(f"    ✓ PASSED ({score}/100)")
+            # ponytail: push to production/
+            import shutil
+            dest = ROOT / "production" / bp_id
+            dest.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(run_dir / "output.md", dest / "output.md")
+            shutil.copy2(run_dir / "eval.json", dest / "eval.json")
+            print(f"    ✓ PASSED ({score}/100) → production/{bp_id}/")
             return {"blueprint": bp_id, "iterations": i, "score": score, "status": "passed"}
 
         # Improve

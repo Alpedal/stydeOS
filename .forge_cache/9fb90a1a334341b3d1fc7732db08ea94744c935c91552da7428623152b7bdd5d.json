@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 65, \"reason\": \"Svaret använder 'foreslar' och 'atgard' men saknar den stress-specifika frasen 'Hund ser att William är stressad', innehåller svenska tecken ('ä' i 'Två', 'är') och en emoji (punktlistan) vilket bryter mot personans regler.\"}"
+}

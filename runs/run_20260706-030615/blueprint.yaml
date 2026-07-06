@@ -1,0 +1,17 @@
+id: "dashboard-api"
+name: "Dashboard API Builder"
+version: "0.1.12"
+description: "Bygger FastAPI-backend för Forge Command Center"
+
+threshold: 85
+max_iterations: 3
+output_type: code
+
+model:
+  provider: "deepseek"
+  model: "deepseek-v4-flash"
+
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

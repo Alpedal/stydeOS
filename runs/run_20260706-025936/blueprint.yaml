@@ -1,0 +1,18 @@
+# Hund AI — internal persona agent for styde.ai
+id: "hund-persona"
+name: "Hund AI"
+version: "1.0.11"
+description: "Vakthund och co-pilot for styde.ai-plattformen. Hjalper anvandare forsta och styra sina agenter."
+
+threshold: 85
+max_iterations: 5
+
+model:
+  provider: "deepseek"
+  model: "deepseek-chat"
+
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases:
+    - "benchmarks/cases/hund-consistency.json"

@@ -120,11 +120,14 @@ def _tools_to_anthropic_schema(tools: list) -> list:
 def call_llm(system_prompt: str, user_prompt: str,
              provider: str = "openai", model: str = "gpt-4o",
              api_key: Optional[str] = None,
-             tools: Optional[list] = None) -> "str | dict":
+             tools: Optional[list] = None,
+             temperature: Optional[float] = None,
+             max_tokens: Optional[int] = None,
+             top_p: Optional[float] = None) -> "str | dict":
     """Call an LLM and return the response text (or a tool-call dict).
 
     Provider: 'openai', 'anthropic', 'deepseek', or 'google' / 'gemini'.
-    Includes exponential backoff on transient errors (429, 5xx).
+    Includes exponential backoff on transient errors (429, 5xx) and disk-based caching.
 
     If tools is provided and the model returns a tool call, returns:
       {"tool_call": {"name": ..., "arguments": {...}}}
@@ -132,24 +135,59 @@ def call_llm(system_prompt: str, user_prompt: str,
     """
     _load_hermes_env()
 
+    # Try retrieving from disk cache first
+    from forge.core.llm_cache import get_cached_response, set_cached_response
+    root = Path(__file__).resolve().parent.parent.parent
+    cached = get_cached_response(
+        root=root,
+        provider=provider,
+        model=model,
+        system_prompt=system_prompt,
+        user_prompt=user_prompt,
+        tools=tools,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        top_p=top_p
+    )
+    if cached is not None:
+        return cached
+
     prov = provider.lower()
     if prov == "openai":
-        return _call_openai(system_prompt, user_prompt, model, api_key, tools)
+        res = _call_openai(system_prompt, user_prompt, model, api_key, tools, temperature, max_tokens, top_p)
     elif prov == "anthropic":
-        return _call_anthropic(system_prompt, user_prompt, model, api_key, tools)
+        res = _call_anthropic(system_prompt, user_prompt, model, api_key, tools, temperature, max_tokens, top_p)
     elif prov == "deepseek":
-        return _call_deepseek(system_prompt, user_prompt, model, api_key, tools)
+        res = _call_deepseek(system_prompt, user_prompt, model, api_key, tools, temperature, max_tokens, top_p)
     elif prov in ("google", "gemini"):
-        return _call_google(system_prompt, user_prompt, model, api_key, tools)
+        res = _call_google(system_prompt, user_prompt, model, api_key, tools, temperature, max_tokens, top_p)
     else:
         from forge.core.engine import ForgeError
         raise ForgeError(f"Unknown provider: {provider}")
+
+    # Save to disk cache
+    set_cached_response(
+        root=root,
+        provider=provider,
+        model=model,
+        system_prompt=system_prompt,
+        user_prompt=user_prompt,
+        response=res,
+        tools=tools,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        top_p=top_p
+    )
+    return res
 
 
 # --- Provider implementations ---
 
 def _call_openai(system: str, user: str, model: str, api_key: Optional[str],
-                 tools: Optional[list] = None) -> "str | dict":
+                 tools: Optional[list] = None,
+                 temperature: Optional[float] = None,
+                 max_tokens: Optional[int] = None,
+                 top_p: Optional[float] = None) -> "str | dict":
     import openai
 
     key = api_key or os.environ.get("OPENAI_API_KEY")
@@ -166,8 +204,19 @@ def _call_openai(system: str, user: str, model: str, api_key: Optional[str],
             {"role": "user", "content": user},
         ],
     }
-    if not _is_reasoning_model(model):
-        params["temperature"] = 0.7
+
+    # Configuration params (strip unsupported ones for reasoning models)
+    is_reasoning = _is_reasoning_model(model)
+    if not is_reasoning:
+        params["temperature"] = temperature if temperature is not None else 0.7
+        if top_p is not None:
+            params["top_p"] = top_p
+    if max_tokens is not None:
+        if is_reasoning:
+            params["max_completion_tokens"] = max_tokens
+        else:
+            params["max_tokens"] = max_tokens
+
     if tools:
         params["tools"] = _tools_to_openai_schema(tools)
         params["tool_choice"] = "auto"
@@ -197,7 +246,10 @@ def _call_openai(system: str, user: str, model: str, api_key: Optional[str],
 
 
 def _call_anthropic(system: str, user: str, model: str, api_key: Optional[str],
-                    tools: Optional[list] = None) -> "str | dict":
+                    tools: Optional[list] = None,
+                    temperature: Optional[float] = None,
+                    max_tokens: Optional[int] = None,
+                    top_p: Optional[float] = None) -> "str | dict":
     import anthropic
 
     key = api_key or os.environ.get("ANTHROPIC_API_KEY")
@@ -209,10 +261,14 @@ def _call_anthropic(system: str, user: str, model: str, api_key: Optional[str],
 
     create_kwargs: dict = {
         "model": model,
-        "max_tokens": 4096,
+        "max_tokens": max_tokens if max_tokens is not None else 4096,
         "system": system,
         "messages": [{"role": "user", "content": user}],
     }
+    if temperature is not None:
+        create_kwargs["temperature"] = temperature
+    if top_p is not None:
+        create_kwargs["top_p"] = top_p
     if tools:
         create_kwargs["tools"] = _tools_to_anthropic_schema(tools)
 
@@ -239,7 +295,10 @@ def _call_anthropic(system: str, user: str, model: str, api_key: Optional[str],
 
 
 def _call_deepseek(system: str, user: str, model: str, api_key: Optional[str],
-                   tools: Optional[list] = None) -> "str | dict":
+                   tools: Optional[list] = None,
+                   temperature: Optional[float] = None,
+                   max_tokens: Optional[int] = None,
+                   top_p: Optional[float] = None) -> "str | dict":
     import openai
 
     key = api_key or os.environ.get("DEEPSEEK_API_KEY")
@@ -256,8 +315,19 @@ def _call_deepseek(system: str, user: str, model: str, api_key: Optional[str],
             {"role": "user", "content": user},
         ],
     }
-    if not _is_reasoning_model(model):
-        params["temperature"] = 0.7
+
+    # Configuration params (strip unsupported ones for reasoning models)
+    is_reasoning = _is_reasoning_model(model)
+    if not is_reasoning:
+        params["temperature"] = temperature if temperature is not None else 0.7
+        if top_p is not None:
+            params["top_p"] = top_p
+    if max_tokens is not None:
+        if is_reasoning:
+            params["max_completion_tokens"] = max_tokens
+        else:
+            params["max_tokens"] = max_tokens
+
     if tools:
         params["tools"] = _tools_to_openai_schema(tools)
         params["tool_choice"] = "auto"
@@ -287,7 +357,10 @@ def _call_deepseek(system: str, user: str, model: str, api_key: Optional[str],
 
 
 def _call_google(system: str, user: str, model: str, api_key: Optional[str],
-                 tools: Optional[list] = None) -> "str | dict":
+                 tools: Optional[list] = None,
+                 temperature: Optional[float] = None,
+                 max_tokens: Optional[int] = None,
+                 top_p: Optional[float] = None) -> "str | dict":
     import google.generativeai as genai
 
     genai.configure(api_key=api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"))
@@ -301,8 +374,17 @@ def _call_google(system: str, user: str, model: str, api_key: Optional[str],
             system_instruction=system
         )
 
+    config_args = {}
+    if temperature is not None:
+        config_args["temperature"] = temperature
+    if max_tokens is not None:
+        config_args["max_output_tokens"] = max_tokens
+    if top_p is not None:
+        config_args["top_p"] = top_p
+
     def _do():
-        resp = _client_cache[ck].generate_content(user)
+        config = genai.types.GenerationConfig(**config_args) if config_args else None
+        resp = _client_cache[ck].generate_content(user, generation_config=config)
         for part in resp.candidates[0].content.parts:
             if hasattr(part, "function_call") and part.function_call:
                 fc = part.function_call
@@ -310,3 +392,4 @@ def _call_google(system: str, user: str, model: str, api_key: Optional[str],
         return resp.text
 
     return _llm_call_with_retry(_do)
+

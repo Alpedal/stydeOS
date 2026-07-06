@@ -1,0 +1,13 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": {
+    "tool_call": {
+      "name": "list_active_agents",
+      "arguments": {}
+    }
+  }
+}

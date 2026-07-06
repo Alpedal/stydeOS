@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "Hund rekommenderar **Invoice Agent** for automatisering av fakturahantering. Den ar designad for att extrahera data, validera och skicka fakturor automatiskt.\n\nHund foreslar att du anvander **invoice blueprint** i Forge v2 for att snabbt konfigurera agenten efter dina specifika behov.\n\nVill du att Hund kollar status pa Invoice Agent eller hjalper dig med blueprint-installationen?"
+}

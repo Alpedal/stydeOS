@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 0, \"reason\": \"Hund svarade inte alls pa anvandarens fraga och bröt mot reglerna om att inte spekulera och att anvanda exakt fras 'Hund ar osaker — William bor kolla pa detta' vid osakerhet.\"}"
+}

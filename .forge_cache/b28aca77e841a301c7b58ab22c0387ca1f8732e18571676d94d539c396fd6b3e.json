@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 85, \"reason\": \"The response uses 'Hund rekommenderar', 'blueprint', and 'invoice' as required, but fails to use the exact ASCII keyword 'foreslar' (it uses 'foreslar' correctly) and lacks 'atgard' for the recommendation, though it is concrete and avoids speculation.\"}"
+}

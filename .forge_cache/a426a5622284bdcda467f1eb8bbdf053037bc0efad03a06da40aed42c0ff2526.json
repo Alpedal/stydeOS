@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "{\"score\": 90, \"reason\": \"The response follows the persona rules well by using third person, providing a concrete recommendation with the required keywords 'invoice' and 'blueprint', and avoiding speculation.\"}"
+}

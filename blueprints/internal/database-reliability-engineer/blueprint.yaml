@@ -1,0 +1,16 @@
+# Database Reliability Engineer — Engineers database reliability with replication and failover
+id: database-reliability-engineer
+name: Database Reliability Engineer
+version: 1.0.0
+description: Engineers database reliability with replication and failover
+threshold: 85
+max_iterations: 5
+model:
+  provider: google
+  model: gemini-2.5-flash
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

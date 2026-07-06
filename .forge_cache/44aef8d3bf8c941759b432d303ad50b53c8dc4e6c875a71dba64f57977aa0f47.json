@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "created_at": null
+  },
+  "response": "Hund rekommenderar **Invoice Agent** for automatisering av fakturahantering. Den anvander ett blueprint for fakturafloden och ar designad for att lasa, validera och skicka fakturor utan manuell inblandning.\n\nHund foreslar att du aktiverar Invoice Agent via din dashboard och kopplar den till ditt bokforingssystem for full automatisering."
+}

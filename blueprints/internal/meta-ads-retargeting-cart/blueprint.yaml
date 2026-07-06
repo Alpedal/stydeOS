@@ -1,0 +1,16 @@
+# Meta Ads Retargeting Cart — Creates Meta retargeting ads for abandoned cart recovery
+id: meta-ads-retargeting-cart
+name: Meta Ads Retargeting Cart
+version: 1.0.0
+description: Creates Meta retargeting ads for abandoned cart recovery
+threshold: 85
+max_iterations: 5
+model:
+  provider: google
+  model: gemini-2.5-flash
+  max_tokens: 512
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []

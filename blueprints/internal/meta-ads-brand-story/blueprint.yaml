@@ -1,0 +1,30 @@
+# Meta Ads Brand Story
+id: meta-ads-brand-story
+name: Meta Ads Brand Story
+version: 1.0.0
+description: Creates Meta/Facebook ad copy for brand storytelling campaigns
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Create a Meta ad for Oteck premium streetwear. The ad should focus on
+  brand story — controlled chaos, precision over volume.
+
+
+  Format:
+
+  Headline: [40 chars max]
+
+  Primary text: [125 chars max]
+
+  CTA: [one of: Shop Now, Learn More, Sign Up]
+
+  Visual description: [what the image/video should show]
+
+  Targeting: [audience description]'

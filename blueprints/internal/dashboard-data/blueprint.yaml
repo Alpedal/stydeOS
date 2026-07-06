@@ -1,0 +1,27 @@
+# Dashboard Data
+id: dashboard-data
+name: Dashboard Data
+version: 1.0.0
+description: Data pipeline reading Forge state into frontend-ready JSON
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Build a Python data pipeline (dashboard.py) that reads forge.json, runs/,
+  blueprints/, and eval.json files. Output:
+
+  1. Aggregated run statistics (total, passed, failed, avg score)
+
+  2. Per-blueprint stats (run count, best/latest score, status)
+
+  3. Alert summary (active alerts, severity counts)
+
+  4. Timeline data for score progression charts
+
+  Return as a single dict for the frontend to consume.'

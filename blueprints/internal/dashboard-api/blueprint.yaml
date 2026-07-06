@@ -1,0 +1,27 @@
+# Dashboard Api
+id: dashboard-api
+name: Dashboard Api
+version: 1.0.0
+description: FastAPI backend serving Forge data via REST endpoints
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Build a FastAPI app (app.py) that reads forge.json, runs/, and blueprints/
+  from FORGE_ROOT env var. Serve these JSON endpoints:
+
+  1. GET /api/v1/status — blueprint count, run count, latest scores
+
+  2. GET /api/v1/blueprints — list all blueprints with status
+
+  3. GET /api/v1/runs — list recent runs with scores
+
+  4. GET /api/v1/alerts — active alert count
+
+  Include CORS middleware, error handling, and health check endpoint.'

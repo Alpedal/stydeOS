@@ -1,0 +1,31 @@
+# Dashboard Ui
+id: dashboard-ui
+name: Dashboard Ui
+version: 1.0.0
+description: Builds Forge Command Center frontend in vanilla HTML/CSS/JS
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Build a single HTML file dashboard for Forge Command Center. Include:
+
+  1. Dark theme with sidebar navigation
+
+  2. Status cards (total runs, pass rate, active alerts)
+
+  3. Run history table (sortable by score, date, status)
+
+  4. Blueprint list with status badges
+
+  5. Score progression chart (ASCII or simple canvas)
+
+  6. Alert notification area
+
+  Use vanilla HTML/CSS/JS. Fetch data from a mock JSON object (no backend required).
+  Bone white #E3E3E4, never pure #FFFFFF.'

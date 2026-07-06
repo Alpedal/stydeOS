@@ -1,0 +1,27 @@
+# Dashboard Architect
+id: dashboard-architect
+name: Dashboard Architect
+version: 1.0.0
+description: Architects Forge Command Center — real-time dashboard design
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Design architecture for Forge Command Center dashboard. Output a plan
+  with:
+
+  1. Component tree (sidebar, main grid, status bar)
+
+  2. Data flow (forge.json → API → frontend)
+
+  3. Tech stack decisions (FastAPI backend, vanilla HTML/CSS/JS frontend)
+
+  4. Real-time update strategy (polling vs WebSocket)
+
+  5. Delegate tasks to: dashboard-api, dashboard-ui, dashboard-data agents'

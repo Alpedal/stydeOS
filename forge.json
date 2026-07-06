@@ -577,20 +577,6 @@
       "status": "development"
     },
     {
-      "id": "meta-ads-brand-story",
-      "path": "blueprints/internal/meta-ads-brand-story",
-      "version": "1.0.0",
-      "last_score": null,
-      "status": "development"
-    },
-    {
-      "id": "code-reviewer",
-      "path": "blueprints/internal/code-reviewer",
-      "version": "1.0.0",
-      "last_score": null,
-      "status": "development"
-    },
-    {
       "id": "alert-engine",
       "path": "blueprints/internal/alert-engine",
       "version": "1.0.0",
@@ -607,6 +593,41 @@
     {
       "id": "caching-strategist",
       "path": "blueprints/internal/caching-strategist",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dashboard-api",
+      "path": "blueprints/internal/dashboard-api",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dashboard-architect",
+      "path": "blueprints/internal/dashboard-architect",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dashboard-data",
+      "path": "blueprints/internal/dashboard-data",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dashboard-tester",
+      "path": "blueprints/internal/dashboard-tester",
+      "version": "1.0.0",
+      "last_score": null,
+      "status": "development"
+    },
+    {
+      "id": "dashboard-ui",
+      "path": "blueprints/internal/dashboard-ui",
       "version": "1.0.0",
       "last_score": null,
       "status": "development"

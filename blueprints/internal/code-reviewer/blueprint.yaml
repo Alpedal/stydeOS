@@ -1,0 +1,22 @@
+# Code Reviewer
+id: code-reviewer
+name: Code Reviewer
+version: 1.0.2
+description: Reviews code for quality, security, and correctness issues
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.1
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: "Review this Python function for security, correctness, and style issues:\n\
+  \n```python\ndef process_payment(user_id, amount, card_token):\n    db = connect_db()\n\
+  \    user = db.query(\"SELECT * FROM users WHERE id = \" + user_id)\n    if not\
+  \ user:\n        return \"User not found\"\n    charge = stripe.Charge.create(amount=amount,\
+  \ currency=\"usd\", source=card_token)\n    db.execute(\"INSERT INTO payments (user_id,\
+  \ amount, status) VALUES (%s, %s, 'paid')\" % (user_id, amount))\n    send_email(user.email,\
+  \ \"Payment processed: $\" + str(amount))\n    return charge.id\n```"

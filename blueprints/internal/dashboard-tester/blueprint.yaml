@@ -1,0 +1,26 @@
+# Dashboard Tester
+id: dashboard-tester
+name: Dashboard Tester
+version: 1.0.0
+description: Tests Forge Command Center components
+threshold: 85
+max_iterations: 5
+model:
+  provider: deepseek
+  model: deepseek-chat
+  temperature: 0.2
+evaluation:
+  self_eval_weight: 0.3
+  judge_eval_weight: 0.7
+  benchmark_cases: []
+task_prompt: 'Write test cases for Forge Command Center. Test:
+
+  1. API endpoints return valid JSON with expected keys
+
+  2. Data pipeline handles missing forge.json, empty runs/, corrupt eval.json
+
+  3. UI renders correctly with mock data (no JS errors, valid HTML)
+
+  4. Alerts display correctly with different severity levels
+
+  Output each test case as: name, steps, expected result, PASS/FAIL status.'
